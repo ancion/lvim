@@ -8,7 +8,7 @@ M.config = function()
       folders = 1,
       files = 1,
       folder_arrows = 1,
-      tree_width = 30,
+      tree_width = 33,
     },
     ignore = { ".git", "node_modules", ".cache" },
     auto_open = 1,
@@ -16,6 +16,7 @@ M.config = function()
     quit_on_open = 0,
     follow = 1,
     hide_dotfiles = 1,
+    indent_markers = 1,
     git_hl = 1,
     root_folder_modifier = ":t",
     tab_open = 0,
@@ -27,7 +28,7 @@ M.config = function()
       symlink = "",
       git = {
         unstaged = "",
-        staged = "S",
+        staged = "",
         unmerged = "",
         renamed = "➜",
         deleted = "",
@@ -79,7 +80,7 @@ M.toggle_tree = function()
   else
     if package.loaded["bufferline.state"] and lvim.builtin.nvimtree.side == "left" then
       -- require'bufferline.state'.set_offset(31, 'File Explorer')
-      require("bufferline.state").set_offset(31, "")
+      require("bufferline.state").set_offset(32, "     File Explorer")
     end
     require("nvim-tree").toggle()
   end

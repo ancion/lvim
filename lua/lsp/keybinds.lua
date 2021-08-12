@@ -14,7 +14,7 @@ function M.setup()
     )
 
     vim.cmd "nnoremap <silent> gp <cmd>lua require'lsp.utils'.PeekDefinition()<CR>"
-    vim.cmd "nnoremap <silent> K :lua vim.lsp.buf.hover()<CR>"
+    vim.cmd "nnoremap <silent> M :lua vim.lsp.buf.hover()<CR>"
     vim.cmd "nnoremap <silent> <C-p> :lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = lvim.lsp.popup_border}})<CR>"
     vim.cmd "nnoremap <silent> <C-n> :lua vim.lsp.diagnostic.goto_next({popup_opts = {border = lvim.lsp.popup_border}})<CR>"
     -- vim.cmd "nnoremap <silent> gs <cmd>lua vim.lsp.buf.signature_help()<CR>"

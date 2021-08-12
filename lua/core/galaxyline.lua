@@ -43,10 +43,10 @@ table.insert(gls.left, {
         t = colors.blue,
       }
       vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color[vim.fn.mode()])
-      return "▊"
+      return '    ⟦ '.. vim.fn.mode() ..' ⟧ '
     end,
     separator_highlight = { "NONE", colors.alt_bg },
-    highlight = { "NONE", colors.alt_bg },
+    highlight = {colors.red, colors.alt_bg}
   },
 })
 -- print(vim.fn.getbufvar(0, 'ts'))
@@ -55,7 +55,7 @@ vim.fn.getbufvar(0, "ts")
 table.insert(gls.left, {
   GitIcon = {
     provider = function()
-      return "  "
+      return ' '
     end,
     condition = condition.check_git_workspace,
     separator = " ",
@@ -78,7 +78,7 @@ table.insert(gls.left, {
   DiffAdd = {
     provider = "DiffAdd",
     condition = condition.hide_in_width,
-    icon = "  ",
+    icon = '  ',
     highlight = { colors.green, colors.alt_bg },
   },
 })
@@ -87,7 +87,7 @@ table.insert(gls.left, {
   DiffModified = {
     provider = "DiffModified",
     condition = condition.hide_in_width,
-    icon = " 柳",
+    icon = ' 奈 ',
     highlight = { colors.blue, colors.alt_bg },
   },
 })
@@ -96,7 +96,7 @@ table.insert(gls.left, {
   DiffRemove = {
     provider = "DiffRemove",
     condition = condition.hide_in_width,
-    icon = "  ",
+    icon = '  ',
     highlight = { colors.red, colors.alt_bg },
   },
 })
@@ -190,13 +190,13 @@ table.insert(gls.right, {
   TreesitterIcon = {
     provider = function()
       if next(vim.treesitter.highlighter.active) ~= nil then
-        return "  "
+        return "  "
       end
       return ""
     end,
     separator = " ",
-    separator_highlight = { "NONE", colors.alt_bg },
-    highlight = { colors.green, colors.alt_bg },
+    separator_highlight = { colors.alt_bg, colors.alt_bg },
+    highlight = {colors.cyan, colors.alt_bg}
   },
 })
 
@@ -217,7 +217,7 @@ local function get_attached_provider_name(msg)
       table.insert(buf_client_names, client.name)
     end
   end
-  return table.concat(buf_client_names, ", ")
+  return table.concat(buf_client_names, ":")
 end
 
 table.insert(gls.right, {
@@ -230,7 +230,7 @@ table.insert(gls.right, {
       end
       return true
     end,
-    icon = " ",
+    icon = " :",
     highlight = { colors.grey, colors.alt_bg },
   },
 })
@@ -238,8 +238,8 @@ table.insert(gls.right, {
 table.insert(gls.right, {
   LineInfo = {
     provider = "LineColumn",
-    separator = "  ",
-    separator_highlight = { "NONE", colors.alt_bg },
+    separator = " | ",
+    separator_highlight = { colors.cyan, colors.alt_bg },
     highlight = { colors.grey, colors.alt_bg },
   },
 })
@@ -247,8 +247,8 @@ table.insert(gls.right, {
 table.insert(gls.right, {
   PerCent = {
     provider = "LinePercent",
-    separator = " ",
-    separator_highlight = { "NONE", colors.alt_bg },
+    separator = ' §:',
+    separator_highlight = { colors.orange, colors.alt_bg },
     highlight = { colors.grey, colors.alt_bg },
   },
 })
@@ -256,26 +256,27 @@ table.insert(gls.right, {
 table.insert(gls.right, {
   Tabstop = {
     provider = function()
-      local label = "Spaces: "
+      local label = ""
       if not vim.api.nvim_buf_get_option(0, "expandtab") then
-        label = "Tab size: "
+        label = ""
       end
       return label .. vim.api.nvim_buf_get_option(0, "shiftwidth") .. " "
     end,
     condition = condition.hide_in_width,
-    separator = " ",
-    separator_highlight = { "NONE", colors.alt_bg },
+    separator = " ﲹ: ",
+    separator_highlight = { colors.purple, colors.alt_bg },
     highlight = { colors.grey, colors.alt_bg },
   },
 })
 
 table.insert(gls.right, {
   BufferType = {
-    provider = "FileTypeName",
+    -- provider = "FileTypeName",
+    provider = 'FileIcon',
     condition = condition.hide_in_width,
-    separator = " ",
-    separator_highlight = { "NONE", colors.alt_bg },
-    highlight = { colors.grey, colors.alt_bg },
+    separator = "| ",
+    separator_highlight = { colors.purple, colors.alt_bg },
+    highlight = { colors.cyan, colors.alt_bg },
   },
 })
 
@@ -283,8 +284,8 @@ table.insert(gls.right, {
   FileEncode = {
     provider = "FileEncode",
     condition = condition.hide_in_width,
-    separator = " ",
-    separator_highlight = { "NONE", colors.alt_bg },
+    separator = "|",
+    separator_highlight = { colors.yellow, colors.alt_bg },
     highlight = { colors.grey, colors.alt_bg },
   },
 })
@@ -292,17 +293,18 @@ table.insert(gls.right, {
 table.insert(gls.right, {
   Space = {
     provider = function()
-      return " "
+      return ""
     end,
     separator = " ",
     separator_highlight = { "NONE", colors.alt_bg },
-    highlight = { colors.grey, colors.alt_bg },
+    highlight = { colors.cyan, colors.alt_bg },
   },
 })
 
 table.insert(gls.short_line_left, {
   BufferType = {
-    provider = "FileTypeName",
+    -- provider = "FileTypeName",
+    provider = "FileIcon",
     separator = " ",
     separator_highlight = { "NONE", colors.alt_bg },
     highlight = { colors.alt_bg, colors.alt_bg },
@@ -313,6 +315,7 @@ table.insert(gls.short_line_left, {
   SFileName = {
     provider = "SFileName",
     condition = condition.buffer_not_empty,
+    separator_highlight = {"NONE", colors.alt_bg},
     highlight = { colors.alt_bg, colors.alt_bg },
   },
 })

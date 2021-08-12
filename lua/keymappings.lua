@@ -14,6 +14,7 @@ local default_keys = {
     { "jk", "<ESC>" },
     { "kj", "<ESC>" },
     { "jj", "<ESC>" },
+    { "<c-j>", "<ESC>o"}, 
     -- Move current line / block with Alt-j/k ala vscode.
     { "<A-j>", "<Esc>:m .+1<CR>==gi" },
     { "<A-k>", "<Esc>:m .-2<CR>==gi" },
@@ -38,17 +39,22 @@ local default_keys = {
     { "<C-Right>", ":vertical resize +2<CR>" },
 
     -- Tab switch buffer
-    -- { "<TAB>", ":bnext<CR>" },
-    -- { "<S-TAB>", ":bprevious<CR>" },
+    { "<TAB>", ":bnext<CR>" },
+    { "<S-TAB>", ":bprevious<CR>" },
 
     -- Move current line / block with Alt-j/k a la vscode.
     { "<A-j>", ":m .+1<CR>==" },
     { "<A-k>", ":m .-2<CR>==" },
-
+    -- Move selected line / block of text in visual mode
+    { "K", "5k" },
+    { "J", "5j" },
+    -- fast write and quit 
+    { "Q", ":q<CR>" },
+    { "S", ":w<CR>" },
     -- QuickFix
     { "]q", ":cnext<CR>" },
     { "[q", ":cprev<CR>" },
-    { "<C-q>", ":call QuickFixToggle()<CR>" },
+    { "<C-1>", ":call QuickFixToggle()<CR>" },
 
     -- {'<C-TAB>', 'compe#complete()', {noremap = true, silent = true, expr = true}},
   },
@@ -71,9 +77,6 @@ local default_keys = {
   },
 
   visual_block_mode = {
-    -- Move selected line / block of text in visual mode
-    { "K", ":move '<-2<CR>gv-gv" },
-    { "J", ":move '>+1<CR>gv-gv" },
 
     -- Move current line / block with Alt-j/k ala vscode.
     { "<A-j>", ":m '>+1<CR>gv-gv" },

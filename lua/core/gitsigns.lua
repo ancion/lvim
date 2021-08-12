@@ -10,7 +10,7 @@ M.config = function()
       },
       change = {
         hl = "GitSignsChange",
-        text = "▎",
+        text = "░",
         numhl = "GitSignsChangeNr",
         linehl = "GitSignsChangeLn",
       },
@@ -28,7 +28,7 @@ M.config = function()
       },
       changedelete = {
         hl = "GitSignsChange",
-        text = "▎",
+        text = "░",
         numhl = "GitSignsChangeNr",
         linehl = "GitSignsChangeLn",
       },

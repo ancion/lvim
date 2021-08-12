@@ -27,7 +27,8 @@ require "keymappings"
 local plugins = require "plugins"
 local plugin_loader = require("plugin-loader").init()
 plugin_loader:load { plugins, lvim.plugins }
-vim.g.colors_name = lvim.colorscheme -- Colorscheme must get called after plugins are loaded or it will break new installs.
+-- Colorscheme must get called after plugins are loaded or it will break new installs.
+vim.g.colors_name = lvim.colorscheme 
 vim.cmd("colorscheme " .. lvim.colorscheme)
 
 local utils = require "utils"

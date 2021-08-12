@@ -6,7 +6,7 @@ M.load_options = function()
   local default_options = {
     backup = false, -- creates a backup file
     clipboard = "unnamedplus", -- allows neovim to access the system clipboard
-    cmdheight = 2, -- more space in the neovim command line for displaying messages
+    cmdheight = 1, -- more space in the neovim command line for displaying messages
     colorcolumn = "99999", -- fixes indentline for now
     completeopt = { "menuone", "noselect" },
     conceallevel = 0, -- so that `` is visible in markdown files
@@ -45,9 +45,9 @@ M.load_options = function()
     wrap = false, -- display lines as one long line
     spell = false,
     spelllang = "en",
-    scrolloff = 8, -- is one of my fav
+    scrolloff = 8,          -- page content scrolled when cursor distance to top or bottom
     sidescrolloff = 8,
-  } ---  VIM ONLY COMMANDS  ---cmd "filetype plugin on"cmd('let &titleold="' .. TERMINAL .. '"')cmd "set inccommand=split"cmd "set iskeyword+=-"
+  } ---  VIM ONLY COMMANDS  -- cmd "filetype plugin on"cmd('let &titleold="' .. TERMINAL .. '"')cmd "set inccommand=split"cmd "set iskeyword+=-"
 
   ---  SETTINGS  ---
 

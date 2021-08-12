@@ -26,28 +26,34 @@ M.config = function()
 
     custom_section = {
       a = {
-        description = { "  Find File          " },
-        command = "Telescope find_files",
+          description = {'  Find File             '},
+          command = 'Telescope find_files'
       },
       b = {
-        description = { "  Recently Used Files" },
-        command = "Telescope oldfiles",
+          description = {'  Recently Used Files   '},
+          command = 'Telescope oldfiles'
       },
-      -- c = {
-      --   description = { "  Load Last Session  " },
-      --   command = "SessionLoad",
-      -- },
       c = {
-        description = { "  Find Word          " },
-        command = "Telescope live_grep",
+          description = {'  Load Last Session     '},
+          command = 'SessionLoad'
       },
       d = {
-        description = { "  Settings           " },
-        -- command = ":e " .. CONFIG_PATH .. "/lv-config.lua",
-        command = ":e ~/.config/lvim/lv-config.lua",
+          description = {'  Find Word             '},
+          command = 'Telescope live_grep'
       },
+      e = {
+          description = {'  luavim Custom Settings'},
+          command = ':e ~/.config/lvim/lv-config.lua'
+      },
+      f = {
+          description = {'  Neovim Config Files   '},
+          command = "Telescope find_files cwd=" .. '~/.local/share/lunarvim/lvim',
+      },
+      g = {
+          description = {'  Choose New Colorscheme'},
+          command = 'Telescope colorscheme'
+      }
     },
-
     footer = { "chrisatmachine.com" },
   }
 end
