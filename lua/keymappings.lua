@@ -14,7 +14,7 @@ local default_keys = {
     { "jk", "<ESC>" },
     { "kj", "<ESC>" },
     { "jj", "<ESC>" },
-    { "<c-j>", "<ESC>o"}, 
+    { "<c-o>", "<ESC>o" },
     -- Move current line / block with Alt-j/k ala vscode.
     { "<A-j>", "<Esc>:m .+1<CR>==gi" },
     { "<A-k>", "<Esc>:m .-2<CR>==gi" },
@@ -48,7 +48,7 @@ local default_keys = {
     -- Move selected line / block of text in visual mode
     { "K", "5k" },
     { "J", "5j" },
-    -- fast write and quit 
+    -- fast write and quit
     { "Q", ":q<CR>" },
     { "S", ":w<CR>" },
     -- QuickFix
