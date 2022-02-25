@@ -1,7 +1,7 @@
 return {
   leader = "space",
   colorscheme = "onedarker",
-  transparent_window = false,
+  transparency = true,
   format_on_save = {
     ---@usage pattern string pattern used for the autocommand (Default: '*')
     pattern = "*",

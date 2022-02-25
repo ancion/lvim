@@ -30,15 +30,15 @@ local defaults = {
     ["kj"] = "<ESC>",
     -- 'jj' for quitting insert mode
     ["jj"] = "<ESC>",
-    -- Move current line / block with Alt-j/k ala vscode.
-    ["<A-j>"] = "<Esc>:m .+1<CR>==gi",
-    -- Move current line / block with Alt-j/k ala vscode.
-    ["<A-k>"] = "<Esc>:m .-2<CR>==gi",
+    -- quick move to next line
+    ["<c-j"] = "<ESC>o",
     -- navigation
     ["<A-Up>"] = "<C-\\><C-N><C-w>k",
     ["<A-Down>"] = "<C-\\><C-N><C-w>j",
     ["<A-Left>"] = "<C-\\><C-N><C-w>h",
     ["<A-Right>"] = "<C-\\><C-N><C-w>l",
+
+    ["Tab"] ="copilot()."
   },
 
   ---@usage change or add keymappings for normal mode
@@ -56,17 +56,27 @@ local defaults = {
     ["<C-Right>"] = ":vertical resize +2<CR>",
 
     -- Tab switch buffer
-    ["<S-l>"] = ":BufferLineCycleNext<CR>",
-    ["<S-h>"] = ":BufferLineCyclePrev<CR>",
+    ["<A-l>"] = ":BufferLineCycleNext<CR>",
+    ["<A-h>"] = ":BufferLineCyclePrev<CR>",
 
     -- Move current line / block with Alt-j/k a la vscode.
     ["<A-j>"] = ":m .+1<CR>==",
     ["<A-k>"] = ":m .-2<CR>==",
 
+    -- quick move
+    ["K"] = "5k",
+    ["J"] = "5j",
+    ["H"] = "0",
+    ["L"] = "$",
+
+    ["S"] = ":w<CR>",
+    ["Q"] = ":q<CR>",
+
     -- QuickFix
-    ["]q"] = ":cnext<CR>",
-    ["[q"] = ":cprev<CR>",
-    ["<C-q>"] = ":call QuickFixToggle()<CR>",
+    ["<leader>="] = ":cnext<CR>",
+    ["<leader>-"] = ":cprev<CR>",
+    ["<C-1>"] = ":call QuickFixToggle()<CR>",
+    ["<F22>"] = ":call CompilerAndRun()<CR>",
   },
 
   ---@usage change or add keymappings for terminal mode
@@ -109,36 +119,36 @@ local defaults = {
 }
 
 if vim.fn.has "mac" == 1 then
-  defaults.normal_mode["<A-Up>"] = defaults.normal_mode["<C-Up>"]
-  defaults.normal_mode["<A-Down>"] = defaults.normal_mode["<C-Down>"]
-  defaults.normal_mode["<A-Left>"] = defaults.normal_mode["<C-Left>"]
-  defaults.normal_mode["<A-Right>"] = defaults.normal_mode["<C-Right>"]
-  Log:debug "Activated mac keymappings"
+    defaults.normal_mode["<A-Up>"] = defaults.normal_mode["<C-Up>"]
+    defaults.normal_mode["<A-Down>"] = defaults.normal_mode["<C-Down>"]
+    defaults.normal_mode["<A-Left>"] = defaults.normal_mode["<C-Left>"]
+    defaults.normal_mode["<A-Right>"] = defaults.normal_mode["<C-Right>"]
+    Log:debug "Activated mac keymappings"
 end
 
 -- Append key mappings to lunarvim's defaults for a given mode
 -- @param keymaps The table of key mappings containing a list per mode (normal_mode, insert_mode, ..)
 function M.append_to_defaults(keymaps)
-  for mode, mappings in pairs(keymaps) do
-    for k, v in pairs(mappings) do
-      defaults[mode][k] = v
+    for mode, mappings in pairs(keymaps) do
+        for k, v in pairs(mappings) do
+            defaults[mode][k] = v
+        end
     end
-  end
 end
 
 -- Unsets all keybindings defined in keymaps
 -- @param keymaps The table of key mappings containing a list per mode (normal_mode, insert_mode, ..)
 function M.clear(keymaps)
-  local default = M.get_defaults()
-  for mode, mappings in pairs(keymaps) do
-    local translated_mode = mode_adapters[mode] or mode
-    for key, _ in pairs(mappings) do
-      -- some plugins may override default bindings that the user hasn't manually overridden
-      if default[mode][key] ~= nil or (default[translated_mode] ~= nil and default[translated_mode][key] ~= nil) then
-        pcall(vim.api.nvim_del_keymap, translated_mode, key)
-      end
+    local default = M.get_defaults()
+    for mode, mappings in pairs(keymaps) do
+        local translated_mode = mode_adapters[mode] or mode
+        for key, _ in pairs(mappings) do
+            -- some plugins may override default bindings that the user hasn't manually overridden
+            if default[mode][key] ~= nil or (default[translated_mode] ~= nil and default[translated_mode][key] ~= nil) then
+                pcall(vim.api.nvim_del_keymap, translated_mode, key)
+            end
+        end
     end
-  end
 end
 
 -- Set key mappings individually
@@ -146,49 +156,49 @@ end
 -- @param key The key of keymap
 -- @param val Can be form as a mapping or tuple of mapping and user defined opt
 function M.set_keymaps(mode, key, val)
-  local opt = generic_opts[mode] or generic_opts_any
-  if type(val) == "table" then
-    opt = val[2]
-    val = val[1]
-  end
-  if val then
-    vim.api.nvim_set_keymap(mode, key, val, opt)
-  else
-    pcall(vim.api.nvim_del_keymap, mode, key)
-  end
+    local opt = generic_opts[mode] or generic_opts_any
+    if type(val) == "table" then
+        opt = val[2]
+        val = val[1]
+    end
+    if val then
+        vim.api.nvim_set_keymap(mode, key, val, opt)
+    else
+        pcall(vim.api.nvim_del_keymap, mode, key)
+    end
 end
 
 -- Load key mappings for a given mode
 -- @param mode The keymap mode, can be one of the keys of mode_adapters
 -- @param keymaps The list of key mappings
 function M.load_mode(mode, keymaps)
-  mode = mode_adapters[mode] or mode
-  for k, v in pairs(keymaps) do
-    M.set_keymaps(mode, k, v)
-  end
+    mode = mode_adapters[mode] or mode
+    for k, v in pairs(keymaps) do
+        M.set_keymaps(mode, k, v)
+    end
 end
 
 -- Load key mappings for all provided modes
 -- @param keymaps A list of key mappings for each mode
 function M.load(keymaps)
-  keymaps = keymaps or {}
-  for mode, mapping in pairs(keymaps) do
-    M.load_mode(mode, mapping)
-  end
+    keymaps = keymaps or {}
+    for mode, mapping in pairs(keymaps) do
+        M.load_mode(mode, mapping)
+    end
 end
 
 -- Load the default keymappings
 function M.load_defaults()
-  M.load(M.get_defaults())
-  lvim.keys = {}
-  for idx, _ in pairs(defaults) do
-    lvim.keys[idx] = {}
-  end
+    M.load(M.get_defaults())
+    lvim.keys = {}
+    for idx, _ in pairs(defaults) do
+        lvim.keys[idx] = {}
+    end
 end
 
 -- Get the default keymappings
 function M.get_defaults()
-  return defaults
+    return defaults
 end
 
 return M

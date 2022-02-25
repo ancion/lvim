@@ -25,10 +25,10 @@ function M.config()
       diagnostics = {
         enable = true,
         icons = {
-          hint = "",
-          info = "",
-          warning = "",
-          error = "",
+          hint = "",
+          info = "",
+          warning = "",
+          error = "",
         },
       },
       update_focused_file = {
@@ -61,7 +61,16 @@ function M.config()
       },
       filters = {
         dotfiles = false,
-        custom = { "node_modules", ".cache" },
+        custom = {
+          ".idea",
+          ".git",
+          ".vim",
+          ".tmp",
+          ".gradle",
+          ".mvn",
+          ".metadata",
+          ".settings"
+        },
       },
       trash = {
         cmd = "trash",
@@ -77,6 +86,7 @@ function M.config()
     },
     quit_on_open = 0,
     git_hl = 1,
+    indent_markers=1,
     disable_window_picker = 0,
     root_folder_modifier = ":t",
     icons = {
@@ -84,7 +94,7 @@ function M.config()
       symlink = "",
       git = {
         unstaged = "",
-        staged = "S",
+        staged = "",
         unmerged = "",
         renamed = "➜",
         deleted = "",

@@ -4,10 +4,10 @@ return {
     signs = {
       active = true,
       values = {
-        { name = "DiagnosticSignError", text = "" },
-        { name = "DiagnosticSignWarn", text = "" },
-        { name = "DiagnosticSignHint", text = "" },
-        { name = "DiagnosticSignInfo", text = "" },
+        { name = "DiagnosticSignError", text = "" },
+        { name = "DiagnosticSignWarn", text = "" },
+        { name = "DiagnosticSignHint", text = " " },
+        { name = "DiagnosticSignInfo", text = " " },
       },
     },
     virtual_text = true,
@@ -43,7 +43,7 @@ return {
   automatic_servers_installation = true,
   buffer_mappings = {
     normal_mode = {
-      ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover" },
+      ["M"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover" },
       ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
       ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
       ["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "Goto references" },
