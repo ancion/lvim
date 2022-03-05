@@ -97,7 +97,6 @@ lvim.builtin.treesitter.ensure_installed = {
   "java",
   "yaml",
   "dart",
-
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -186,7 +185,14 @@ lvim.plugins = {
       end
     },
     {
-      "ray-x/lsp_signature.nvim"
+      'github/copilot.vim'
+    },
+    {
+      "ray-x/lsp_signature.nvim",
+      config = function()
+        require("lsp_signature").on_attach()
+      end,
+      event = "InsertEnter"
     },
     {
       "ray-x/guihua.lua",
