@@ -53,6 +53,7 @@ M.load_default_options = function()
   ---  SETTINGS  ---
   vim.opt.shortmess:append "c"
   vim.opt.whichwrap:append "<,>,[,],h,l"
+  vim.g.copilot_no_tab_map = true
 
   for k, v in pairs(default_options) do
     vim.opt[k] = v

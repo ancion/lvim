@@ -181,7 +181,7 @@ lvim.plugins = {
     {
       'norcalli/nvim-colorizer.lua',
       config = function()
-        require("nvim-colorizer").setup()
+        require("colorizer").setup()
       end
     },
     {
