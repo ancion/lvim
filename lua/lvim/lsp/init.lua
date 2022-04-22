@@ -144,7 +144,15 @@ function M.setup()
     require("lvim.lsp.templates").generate_templates()
   end
 
-  bootstrap_nlsp { config_home = utils.join_paths(get_config_dir(), "lsp-settings") }
+  bootstrap_nlsp {
+    config_home = utils.join_paths(get_config_dir(), "lsp-settings"),
+    append_default_schemas = true,
+  }
+
+  require("nvim-lsp-installer").settings {
+    -- use the default nvim_data_dir, since the server binaries are independent
+    install_root_dir = utils.join_paths(vim.call("stdpath", "data"), "lsp_servers"),
+  }
 
   require("lvim.lsp.null-ls").setup()
 

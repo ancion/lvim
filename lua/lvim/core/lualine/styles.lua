@@ -10,6 +10,7 @@ local styles = {
 styles.none = {
   style = "none",
   options = {
+    theme = "auto",
     icons_enabled = true,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
@@ -38,6 +39,7 @@ styles.none = {
 styles.default = {
   style = "default",
   options = {
+    theme = "auto",
     icons_enabled = true,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
@@ -66,12 +68,14 @@ styles.default = {
 styles.lvim = {
   style = "lvim",
   options = {
+    theme = "auto",
     icons_enabled = true,
+    --component_separators = { left = "", right = "" },
+    --section_separators = { left = "", right = "" },
     component_separators = { left = "·", right = "·" },
     section_separators = { left = "", right = "" },
-    -- component_separators = { left = "", right = "" },
-    -- section_separators = { left = "", right = "" },
-    disabled_filetypes = { "dashboard", "NvimTree", "Outline" },
+
+    disabled_filetypes = { "alpha", "NvimTree", "Outline", "dashboard" },
   },
   sections = {
     lualine_a = {
@@ -113,29 +117,26 @@ styles.lvim = {
 }
 
 function M.get_style(style)
-    local style_keys = vim.tbl_keys(styles)
-    if not vim.tbl_contains(style_keys, style) then
-        local Log = require "lvim.core.log"
-        Log:error(
-        "Invalid lualine style",
-            string.format('"%s"', style),
-            "options are: ",
-            string.format('"%s"', table.concat(style_keys, '", "'))
-        )
-        Log:debug '"lvim" style is applied.'
-        style = "lvim"
-    end
+  local style_keys = vim.tbl_keys(styles)
+  if not vim.tbl_contains(style_keys, style) then
+    local Log = require "lvim.core.log"
+    Log:error(
+      "Invalid lualine style"
+        .. string.format('"%s"', style)
+        .. "options are: "
+        .. string.format('"%s"', table.concat(style_keys, '", "'))
+    )
+    Log:debug '"lvim" style is applied.'
+    style = "lvim"
+  end
 
-    return vim.deepcopy(styles[style])
+  return vim.deepcopy(styles[style])
 end
 
 function M.update()
-    local style = M.get_style(lvim.builtin.lualine.style)
-    if lvim.builtin.lualine.options.theme == nil then
-        lvim.builtin.lualine.options.theme = lvim.colorscheme
-    end
-
-    lvim.builtin.lualine = vim.tbl_deep_extend("keep", lvim.builtin.lualine, style)
+  local style = M.get_style(lvim.builtin.lualine.style)
+  -- TODO
+  lvim.builtin.lualine = vim.tbl_deep_extend("keep", lvim.builtin.lualine, style)
 end
 
 return M

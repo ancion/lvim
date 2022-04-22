@@ -1,12 +1,29 @@
 --[[
-lvim is the global options object
-
-Linters should be
-filled in as strings with either
-a global executable or a path to
-an executable
+ THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
+ `lvim` is the global options object
 ]]
--- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
+
+-- Enable powershell as your default shell
+vim.opt.shell = "pwsh.exe -NoLogo"
+vim.opt.shellcmdflag =
+  "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+vim.cmd [[
+		let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+		let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+		set shellquote= shellxquote=
+  ]]
+
+-- Set a compatible clipboard manager
+vim.g.clipboard = {
+  copy = {
+    ["+"] = "win32yank.exe -i --crlf",
+    ["*"] = "win32yank.exe -i --crlf",
+  },
+  paste = {
+    ["+"] = "win32yank.exe -o --lf",
+    ["*"] = "win32yank.exe -o --lf",
+  },
+}
 
 -- general
 lvim.log.level = "warn"
@@ -49,32 +66,30 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 --   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
 --   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
 --   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
+--   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
 -- }
 
--- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 lvim.builtin.notify.active = true
-lvim.builtin.terminal.active = true
+lvim.builtin.terminal.active = false
+-- lvim.builtin.terminal.shell = "pwsh.exe -NoLogo"
+
+-- nvim-tree has some performance issues on windows, see kyazdani42/nvim-tree.lua#549
+lvim.builtin.nvimtree.setup.diagnostics.enable = false
+lvim.builtin.nvimtree.setup.filters.custom = false
+lvim.builtin.nvimtree.setup.git.enable = false
+lvim.builtin.nvimtree.setup.update_cwd = false
+lvim.builtin.nvimtree.setup.update_focused_file.update_cwd = false
 lvim.builtin.nvimtree.setup.view.side = "left"
+lvim.builtin.nvimtree.git_hl = false
 lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
-  "bash",
   "c",
-  "javascript",
-  "json",
   "lua",
-  "python",
-  "typescript",
-  "tsx",
-  "css",
-  "rust",
-  "java",
-  "yaml",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -142,13 +157,13 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- }
 
 -- Additional Plugins
-lvim.plugins = {
-    {"folke/tokyonight.nvim"},
+-- lvim.plugins = {
+--     {"folke/tokyonight.nvim"},
 --     {
 --       "folke/trouble.nvim",
 --       cmd = "TroubleToggle",
 --     },
-}
+-- }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
