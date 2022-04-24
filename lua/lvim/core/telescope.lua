@@ -72,6 +72,7 @@ function M.config()
       set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
       pickers = {
         find_files = {
+          previewer = false,
           find_command = { "fd", "--type=file", "--hidden", "--smart-case" },
         },
         live_grep = {
@@ -87,6 +88,11 @@ function M.config()
         override_file_sorter = true, -- override the file sorter
         case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       },
+      -- ['ui-select'] = {
+      --   require('telescope.themes').get_dropdown {
+      --     bg = nil,
+      --   }
+      -- },
     },
   })
 end
@@ -99,8 +105,6 @@ function M.code_actions()
       width = 80,
       height = 12,
     },
-    borderchars = lvim.builtin.telescope.defaults.borderchars,
-    border = {},
     previewer = false,
     shorten_path = false,
   }
@@ -157,6 +161,8 @@ function M.setup()
       require("telescope").load_extension "fzf"
     end)
   end
+  -- require("telescope").load_extension "ui-select"
+
 end
 
 return M

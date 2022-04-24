@@ -66,6 +66,19 @@ function M.config()
         relativenumber = false,
         signcolumn = "yes",
       },
+      renderer = {
+        indent_markers = {
+          enable = true,
+          icons = {
+            corner = "└ ",
+            edge = "│ ",
+            none = "  ",
+          },
+        },
+        icons = {
+          webdev_colors = true,
+        },
+      },
       filters = {
         dotfiles = false,
         custom = {
@@ -105,8 +118,6 @@ function M.config()
       folder_arrows = 1,
     },
     git_hl = 1,
-    indent_markers=1,
-    disable_window_picker = 0,
     root_folder_modifier = ":t",
     icons = {
       default = "",
@@ -153,6 +164,7 @@ function M.setup()
   local function telescope_find_files(_)
     require("lvim.core.nvimtree").start_telescope "find_files"
   end
+
   local function telescope_live_grep(_)
     require("lvim.core.nvimtree").start_telescope "live_grep"
   end

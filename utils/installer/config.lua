@@ -1,4 +1,3 @@
-
 ----------------------------------------------------------------------------------------------------
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 ----------------------------------------------------------------------------------------------------
@@ -73,7 +72,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 ---------------------------------------------------------------------------------------------------
 --]]
-lvim.builtin.dashboard.active = true
+lvim.builtin.alpha.active = true
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
@@ -175,60 +174,73 @@ lvim.builtin.treesitter.highlight.enabled = true
 --]]
 
 lvim.plugins = {
-    {"folke/tokyonight.nvim"},
-    {"Mofiqul/dracula.nvim"},
-    {"overcache/NeoSolarized"},
-    {
-      'norcalli/nvim-colorizer.lua',
-      config = function()
-        require("colorizer").setup()
-      end
-    },
-    {
-      'github/copilot.vim'
-    },
-    {
-      "ray-x/lsp_signature.nvim",
-      config = function()
-        require("lsp_signature").on_attach()
-      end,
-      event = "BufRead"
-    },
-    {
-      "ray-x/guihua.lua",
-      command = "cd lua/fzy && make"
-    },
-    {
-      "ray-x/navigator.lua",
-      config = function()
-        require'navigator'.setup({
-          debug = false, -- log output, set to true and log path: ~/.cache/nvim/gh.log
-          width = 0.75, -- max width ratio (number of cols for the floating window) / (window width)
-          height = 0.3, -- max list window height, 0.3 by default
-          preview_height = 0.35, -- max height of preview windows
-          border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"}, -- border style, can be one of 'none', 'single', 'double',
-                                                             -- 'shadow', or a list of chars which defines the border
-          on_attach = function(client, bufnr)
-            -- your hook
-          end,
-          -- put a on_attach of your own here, e.g
-          -- function(client, bufnr)
-          --   -- the on_attach will be called at end of navigator on_attach
-          -- end,
-          -- The attach code will apply to all LSP clients
+  { "folke/tokyonight.nvim" },
+  { "Mofiqul/dracula.nvim" },
+  { "overcache/NeoSolarized" },
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require("colorizer").setup()
+    end
+  },
+  {
+    'github/copilot.vim'
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    event = { "VimEnter" },
+    config = function()
+      vim.defer_fn(function()
+        require("copilot").setup()
+      end, 100)
+    end,
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    after = { 'copilot.lua', 'nvim-cmp' },
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    config = function()
+      require("lsp_signature").on_attach()
+    end,
+    event = "BufRead"
+  },
+  {
+    "ray-x/guihua.lua",
+    command = "cd lua/fzy && make"
+  },
+  {
+    "ray-x/navigator.lua",
+    config = function()
+      require 'navigator'.setup({
+        debug = false, -- log output, set to true and log path: ~/.cache/nvim/gh.log
+        width = 0.75, -- max width ratio (number of cols for the floating window) / (window width)
+        height = 0.3, -- max list window height, 0.3 by default
+        preview_height = 0.35, -- max height of preview windows
+        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }, -- border style, can be one of 'none', 'single', 'double',
+        -- 'shadow', or a list of chars which defines the border
+        on_attach = function(client, bufnr)
+          -- your hook
+        end,
+        -- put a on_attach of your own here, e.g
+        -- function(client, bufnr)
+        --   -- the on_attach will be called at end of navigator on_attach
+        -- end,
+        -- The attach code will apply to all LSP clients
 
-          default_mapping = true,  -- set to false if you will remap every key
-          keymaps = {{key = "gK", func = "declaration()"}}, -- a list of key maps
-          -- this kepmap gK will override "gD" mapping function declaration()  in default kepmap
-          -- please check mapping.lua for all keymaps
-          treesitter_analysis = true, -- treesitter variable context
-          transparency = 50, -- 0 ~ 100 blur the main window, 100: fully transparent, 0: opaque,  set to nil or 100 to disable it
+        default_mapping = true, -- set to false if you will remap every key
+        keymaps = { { key = "gK", func = "declaration()" } }, -- a list of key maps
+        -- this kepmap gK will override "gD" mapping function declaration()  in default kepmap
+        -- please check mapping.lua for all keymaps
+        treesitter_analysis = true, -- treesitter variable context
+        transparency = 50, -- 0 ~ 100 blur the main window, 100: fully transparent, 0: opaque,  set to nil or 100 to disable it
 
-          lsp_signature_help = true, -- if you would like to hook ray-x/lsp_signature plugin in navigator
-          lsp_installer = true, -- set to true if you would like use the lsp installed by williamboman/nvim-lsp-installer
-        })
-      end
-    },
+        lsp_signature_help = true, -- if you would like to hook ray-x/lsp_signature plugin in navigator
+        lsp_installer = true, -- set to true if you would like use the lsp installed by williamboman/nvim-lsp-installer
+      })
+    end
+  },
 }
 
 --[[

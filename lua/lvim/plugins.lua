@@ -91,7 +91,13 @@ local core_plugins = {
     "saadparwaiz1/cmp_luasnip",
   },
   {
+    "hrsh7th/cmp-cmdline",
+  },
+  {
     "hrsh7th/cmp-buffer",
+  },
+  {
+    "f3fora/cmp-spell",
   },
   {
     "hrsh7th/cmp-path",

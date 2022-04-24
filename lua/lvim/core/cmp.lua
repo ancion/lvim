@@ -20,6 +20,7 @@ end
 local function feedkeys(key, mode)
   vim.fn.feedkeys(T(key), mode)
 end
+
 M.methods.feedkeys = feedkeys
 
 ---checks if emmet_ls is available and active in the buffer
@@ -99,7 +100,7 @@ local function jumpable(dir)
       local n_next = node.next
       local next_pos = n_next and n_next.mark:pos_begin()
       local candidate = n_next ~= snippet and next_pos and (pos[1] < next_pos[1])
-        or (pos[1] == next_pos[1] and pos[2] < next_pos[2])
+          or (pos[1] == next_pos[1] and pos[2] < next_pos[2])
 
       -- Past unmarked exit node, exit early
       if n_next == nil or n_next == snippet.next then
@@ -143,6 +144,7 @@ local function jumpable(dir)
     return inside_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable()
   end
 end
+
 M.methods.jumpable = jumpable
 
 M.config = function()
@@ -172,31 +174,31 @@ M.config = function()
       fields = { "kind", "abbr", "menu" },
       max_width = 0,
       kind_icons = {
-        Class = " ",
-        Color = " ",
-        Constant = "ﲀ ",
-        Constructor = " ",
-        Enum = "練",
-        EnumMember = " ",
-        Event = " ",
-        Field = " ",
-        File = "",
-        Folder = " ",
-        Function = " ",
-        Interface = "ﰮ ",
-        Keyword = " ",
-        Method = " ",
-        Module = " ",
-        Operator = "",
-        Property = " ",
-        Reference = " ",
-        Snippet = " ",
-        Struct = " ",
-        Text = " ",
-        TypeParameter = " ",
-        Unit = "塞",
-        Value = " ",
-        Variable = " ",
+        Class         = " :",
+        Color         = " :",
+        Constant      = "ﲀ :",
+        Constructor   = " :",
+        Enum          = "練:",
+        EnumMember    = " :",
+        Event         = " :",
+        Field         = " :",
+        File          = " :",
+        Folder        = " :",
+        Function      = " :",
+        Interface     = "ﰮ :",
+        Keyword       = " :",
+        Method        = " :",
+        Module        = " :",
+        Operator      = " :",
+        Property      = " :",
+        Reference     = " :",
+        Snippet       = " :",
+        Struct        = " :",
+        Text          = " :",
+        TypeParameter = " :",
+        Unit          = "塞:",
+        Value         = " :",
+        Variable      = " :",
       },
       source_names = {
         nvim_lsp = "(LSP)",
@@ -207,6 +209,7 @@ M.config = function()
         vsnip = "(Snippet)",
         luasnip = "(Snippet)",
         buffer = "(Buffer)",
+        copilot = "(Copilot)",
       },
       duplicates = {
         buffer = 1,
@@ -223,7 +226,7 @@ M.config = function()
         vim_item.kind = lvim.builtin.cmp.formatting.kind_icons[vim_item.kind]
         vim_item.menu = lvim.builtin.cmp.formatting.source_names[entry.source.name]
         vim_item.dup = lvim.builtin.cmp.formatting.duplicates[entry.source.name]
-          or lvim.builtin.cmp.formatting.duplicates_default
+            or lvim.builtin.cmp.formatting.duplicates_default
         return vim_item
       end,
     },
@@ -237,11 +240,13 @@ M.config = function()
       documentation = cmp.config.window.bordered(),
     },
     sources = {
+      { name = "copilot" },
       { name = "nvim_lsp" },
       { name = "path" },
       { name = "luasnip" },
       { name = "cmp_tabnine" },
       { name = "nvim_lua" },
+      { name = "spell" },
       { name = "buffer" },
       { name = "calc" },
       { name = "emoji" },
@@ -254,7 +259,7 @@ M.config = function()
       ["<C-d>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       -- TODO: potentially fix emmet nonsense
-      ["<C-n>"] = cmp.mapping(function(fallback)
+      ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expandable() then
@@ -272,7 +277,7 @@ M.config = function()
         "i",
         "s",
       }),
-      ["<C-p>"] = cmp.mapping(function(fallback)
+      ["<S-Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
         elseif jumpable(-1) then
@@ -308,7 +313,18 @@ M.config = function()
 end
 
 function M.setup()
-  require("cmp").setup(lvim.builtin.cmp)
+  local cmp = require("cmp")
+  cmp.setup(lvim.builtin.cmp)
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+  cmp.setup.cmdline(":", {
+    sources = {
+      { name = 'cmdline' },
+    }
+  })
 end
 
 return M

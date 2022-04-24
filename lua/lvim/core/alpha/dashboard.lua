@@ -37,6 +37,7 @@ function M.get_sections()
   local git_utils = require "lvim.utils.git"
 
   local current_branch = git_utils.get_lvim_branch()
+  local num_plugins_loaded = #vim.fn.globpath(get_runtime_dir() .. "/site/pack/packer/start", "*", 0, 1)
 
   local lvim_version
   if current_branch ~= "HEAD" or "" then
@@ -49,8 +50,13 @@ function M.get_sections()
     type = "text",
     val = text.align_center({ width = 0 }, {
       "",
-      "lunarvim.org",
-      lvim_version,
+      "    :: Lunarvim loaded [ " .. num_plugins_loaded .. " ] plugins ",
+      "---------------------------------------------------------------------",
+      "     :: Version :  [ " .. lvim_version .. " ]   ",
+      "",
+      [[#####################################################################]],
+      [[ |######## \\ 🪶:: Talking is cheap, show me you code !! // #########|]],
+      [[#####################################################################]],
     }, 0.5),
     opts = {
       position = "center",
@@ -60,16 +66,16 @@ function M.get_sections()
 
   local buttons = {
     entries = {
-      { "SPC f", "  Find File", "<CMD>Telescope find_files<CR>" },
-      { "SPC n", "  New File", "<CMD>ene!<CR>" },
-      { "SPC P", "  Recent Projects ", "<CMD>Telescope projects<CR>" },
-      { "SPC s r", "  Recently Used Files", "<CMD>Telescope oldfiles<CR>" },
-      { "SPC s t", "  Find Word", "<CMD>Telescope live_grep<CR>" },
+      { "<Space>   f", "   Find File", "<CMD>Telescope find_files<CR>" },
+      { "<Space>   n", "   New File", "<CMD>ene!<CR>" },
+      { "<Space>   P", "   Recent Projects ", "<CMD>Telescope projects<CR>" },
+      { "<Space> s r", "   Recently Used Files", "<CMD>Telescope oldfiles<CR>" },
+      { "<Space> s t", "   Find Word", "<CMD>Telescope live_grep<CR>" },
       {
-        "SPC L c",
-        "  Configuration",
+        "<Spave> r c", "   Configuration",
         "<CMD>edit " .. require("lvim.config").get_user_config_path() .. " <CR>",
       },
+      { "<Space>   c", "   Choose Colorschema ", "<CMD>Telescope colorscheme<CR>" },
     },
   }
 
