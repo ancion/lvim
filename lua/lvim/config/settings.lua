@@ -62,6 +62,20 @@ M.load_default_options = function()
   end
 end
 
+-- yank_for_wsl
+
+M.yank_for_wsl = function()
+  vim.cmd [[
+    let s:clip = '/mnt/c/Windows/System32/clip.exe'
+    if executable(s:clip) 
+      augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+      augroup END
+    endif
+  ]]
+end
+
 M.load_headless_options = function()
   vim.opt.shortmess = ""   -- try to prevent echom from cutting messages off or prompting
   vim.opt.more = false     -- don't pause listing when screen is filled
@@ -75,6 +89,7 @@ M.load_options = function()
     M.load_headless_options()
     return
   end
+  M.yank_for_wsl()
   M.load_default_options()
 end
 

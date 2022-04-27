@@ -38,7 +38,8 @@ local defaults = {
     ["<A-Left>"] = "<C-\\><C-N><C-w>h",
     ["<A-Right>"] = "<C-\\><C-N><C-w>l",
 
-    ["<C-i>"] = { 'copilot#Accept("\\<CR>")', { expr = true } },
+    --copilot
+    ["<A-i>"] = { 'copilot#Accept("<CR>")', { expr = true } },
 
     --runs conditionally
     ["<C-j>"] = { 'pumvisible() ? "\\<C-n>" : "\\<C-j>"', { expr = true } },

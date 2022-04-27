@@ -14,6 +14,7 @@ function M.config()
         "startify",
         "dashboard",
         "alpha",
+        "outline",
       },
       auto_reload_on_write = true,
       hijack_unnamed_buffer_when_opening = false,

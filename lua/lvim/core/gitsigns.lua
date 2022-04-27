@@ -8,7 +8,7 @@ M.config = function()
       signs = {
         add = {
           hl = "GitSignsAdd",
-          text = "▎",
+          text = "░",
           numhl = "GitSignsAddNr",
           linehl = "GitSignsAddLn",
         },
@@ -20,19 +20,19 @@ M.config = function()
         },
         delete = {
           hl = "GitSignsDelete",
-          text = "⌦",
+          text = "░",
           numhl = "GitSignsDeleteNr",
           linehl = "GitSignsDeleteLn",
         },
         topdelete = {
           hl = "GitSignsDelete",
-          text = "",
+          text = "┅",
           numhl = "GitSignsDeleteNr",
           linehl = "GitSignsDeleteLn",
         },
         changedelete = {
           hl = "GitSignsChange",
-          text = "░",
+          text = "▒",
           numhl = "GitSignsChangeNr",
           linehl = "GitSignsChangeLn",
         },

@@ -79,6 +79,7 @@ styles.lvim = {
   },
   sections = {
     lualine_a = {
+      components.diagnostics,
       components.mode,
     },
     lualine_b = {
@@ -90,7 +91,6 @@ styles.lvim = {
       components.python_env,
     },
     lualine_x = {
-      components.diagnostics,
       components.filetype,
       components.encoding,
     },
@@ -122,9 +122,9 @@ function M.get_style(style)
     local Log = require "lvim.core.log"
     Log:error(
       "Invalid lualine style"
-        .. string.format('"%s"', style)
-        .. "options are: "
-        .. string.format('"%s"', table.concat(style_keys, '", "'))
+      .. string.format('"%s"', style)
+      .. "options are: "
+      .. string.format('"%s"', table.concat(style_keys, '", "'))
     )
     Log:debug '"lvim" style is applied.'
     style = "lvim"
@@ -135,7 +135,7 @@ end
 
 function M.update()
   local style = M.get_style(lvim.builtin.lualine.style)
-  -- TODO
+  -- TODO: update lualine style
   lvim.builtin.lualine = vim.tbl_deep_extend("keep", lvim.builtin.lualine, style)
 end
 

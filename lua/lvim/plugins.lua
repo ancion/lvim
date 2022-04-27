@@ -1,15 +1,22 @@
 local core_plugins = {
   -- Packer can manage itself as an optional plugin
   { "wbthomason/packer.nvim" },
+  { "Tastyep/structlog.nvim" },
+  { "nvim-lua/popup.nvim" },
+  { "nvim-lua/plenary.nvim" },
+
+  -- lsp
   { "neovim/nvim-lspconfig" },
   { "tamago324/nlsp-settings.nvim" },
+  { "williamboman/nvim-lsp-installer" },
+
+  --
   {
     "jose-elias-alvarez/null-ls.nvim",
   },
   { "antoinemadec/FixCursorHold.nvim" }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
-  {
-    "williamboman/nvim-lsp-installer",
-  },
+
+  -- onedark
   {
     "lunarvim/onedarker.nvim",
     config = function()
@@ -22,23 +29,56 @@ local core_plugins = {
     end,
     disable = lvim.colorscheme ~= "onedarker",
   },
+
+  -- Icons
+  { "kyazdani42/nvim-web-devicons" },
+
+  -- indent-blankline
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require("lvim.core.indentline").setup()
+    end
+  },
+
+  -- outline
+  {
+    "stevearc/aerial.nvim",
+    config = function()
+      require("lvim.core.aerial").setup()
+    end
+  },
+
+  -- notifycaiton
   {
     "rcarriga/nvim-notify",
-
     config = function()
       require("lvim.core.notify").setup()
     end,
     requires = { "nvim-telescope/telescope.nvim" },
-    disable = not lvim.builtin.notify.active or not lvim.builtin.telescope.active,
+    disable = not lvim.builtin.notify.active
+        or not lvim.builtin.telescope.active,
   },
-  { "Tastyep/structlog.nvim" },
 
-  { "nvim-lua/popup.nvim" },
-  { "nvim-lua/plenary.nvim" },
+  -- Replace And search
+  {
+    "nvim-pack/nvim-spectre",
+    config = function()
+      require("lvim.core.spectre").setup()
+    end
+  },
+
+  -- diffview
+  {
+    "sindrets/diffview.nvim",
+    config = function()
+      require("lvim.core.diffview").setup()
+    end
+  },
+
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
-
     config = function()
       require("lvim.core.telescope").setup()
     end,
@@ -50,6 +90,8 @@ local core_plugins = {
     run = "make",
     disable = not lvim.builtin.telescope.active,
   },
+  { "nvim-telescope/telescope-ui-select.nvim" },
+
   -- Install nvim-cmp, and buffer source as a dependency
   {
     "hrsh7th/nvim-cmp",
@@ -63,9 +105,15 @@ local core_plugins = {
       "rafamadriz/friendly-snippets",
     },
   },
-  {
-    "rafamadriz/friendly-snippets",
-  },
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "saadparwaiz1/cmp_luasnip" },
+  { "hrsh7th/cmp-cmdline" },
+  { "hrsh7th/cmp-buffer" },
+  { "f3fora/cmp-spell" },
+  { "hrsh7th/cmp-path" },
+
+  -- snippets
+  { "rafamadriz/friendly-snippets" },
   {
     "L3MON4D3/LuaSnip",
     config = function()
@@ -84,24 +132,7 @@ local core_plugins = {
       require("luasnip.loaders.from_snipmate").lazy_load()
     end,
   },
-  {
-    "hrsh7th/cmp-nvim-lsp",
-  },
-  {
-    "saadparwaiz1/cmp_luasnip",
-  },
-  {
-    "hrsh7th/cmp-cmdline",
-  },
-  {
-    "hrsh7th/cmp-buffer",
-  },
-  {
-    "f3fora/cmp-spell",
-  },
-  {
-    "hrsh7th/cmp-path",
-  },
+
   {
     "folke/lua-dev.nvim",
     module = "lua-dev",
@@ -144,7 +175,6 @@ local core_plugins = {
 
   {
     "lewis6991/gitsigns.nvim",
-
     config = function()
       require("lvim.core.gitsigns").setup()
     end,
@@ -180,9 +210,6 @@ local core_plugins = {
     end,
     disable = not lvim.builtin.project.active,
   },
-
-  -- Icons
-  { "kyazdani42/nvim-web-devicons" },
 
   -- Status Line and Bufferline
   {
@@ -222,6 +249,8 @@ local core_plugins = {
     -- event = "BufRead",
     disable = not lvim.builtin.dap.active,
   },
+  { "theHamsta/nvim-dap-virtual-text" },
+  { "rcarriga/nvim-dap-ui" },
 
   -- alpha
   {
@@ -244,9 +273,7 @@ local core_plugins = {
   },
 
   -- SchemaStore
-  {
-    "b0o/schemastore.nvim",
-  },
+  { "b0o/schemastore.nvim" },
 }
 
 for _, entry in ipairs(core_plugins) do

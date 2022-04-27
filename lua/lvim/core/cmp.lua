@@ -316,14 +316,18 @@ function M.setup()
   local cmp = require("cmp")
   cmp.setup(lvim.builtin.cmp)
   cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = 'buffer' }
     }
   })
   cmp.setup.cmdline(":", {
-    sources = {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
       { name = 'cmdline' },
-    }
+    }, {
+      { name = 'path' },
+    })
   })
 end
 

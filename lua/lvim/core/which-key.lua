@@ -28,10 +28,11 @@ M.config = function()
         group = "+", -- symbol prepended to a group
       },
       window = {
-        border = "single", -- none, single, double, shadow
+        border = "rounded", -- none, single, double, shadow
         position = "bottom", -- bottom, top
         margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
         padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
+        winblend = 0,
       },
       layout = {
         height = { min = 4, max = 25 }, -- min and max height of the columns
@@ -64,10 +65,12 @@ M.config = function()
       ["/"] = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" },
     },
     mappings = {
+      [";"] = { "<cmd>Alpha<CR>", 'Dashboard' },
       ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
       ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer" },
       ["f"] = { require("lvim.core.telescope.custom-finders").find_project_files, "Find File" },
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+      ["o"] = { "<cmd>AerialToggle<CR>", "Outline" },
       b = {
         name = "Buffers",
         j = { "<cmd>BufferLinePick<cr>", "Jump" },

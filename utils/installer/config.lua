@@ -18,8 +18,10 @@
 lvim.log.level = "warn"
 lvim.format_on_save = true
 -- lvim.colorscheme = "onedarker"
--- lvim.colorscheme = "tokyonight"
-lvim.colorscheme = "dracula"
+lvim.colorscheme = "tokyonight"
+-- lvim.colorscheme = "dracula"
+-- lvim.colorscheme = "NeoSolarized"
+-- lvim.colorscheme = "catppuccin"
 
 
 -- [[
@@ -174,18 +176,78 @@ lvim.builtin.treesitter.highlight.enabled = true
 --]]
 
 lvim.plugins = {
+  -- litee family
+  {
+    "ldelossa/litee.nvim",
+    config = function()
+      require("litee.lib").setup({
+        panel = {
+          orientation = "right",
+          panel_size = 50,
+        }
+      })
+    end
+  },
+  {
+    "ldelossa/litee-calltree.nvim",
+    config = function()
+      require("litee.calltree").setup({
+        -- NOTE: the plugin is in-developing
+        on_open = "pannel", -- panel | popout
+        hide_cursor = false,
+        keymaps = {
+          expand = "o",
+          collapse = "zc",
+          collapse_all = "zM",
+          jump = "<CR>",
+          jump_split = "s",
+          jump_vsplit = "v",
+          jump_tab = "t",
+          hover = "i",
+          details = "d",
+          close = "Q",
+          close_panel_pop_out = "Q",
+          help = "?",
+          hide = "H",
+          switch = "S",
+          focus = "f"
+        }
+      })
+    end
+  },
+  -- colorscheme
   { "folke/tokyonight.nvim" },
   { "Mofiqul/dracula.nvim" },
   { "overcache/NeoSolarized" },
+  { "catppuccin/nvim", as = "catppuccin" },
+
+  -- colorPanel
   {
     'norcalli/nvim-colorizer.lua',
     config = function()
       require("colorizer").setup()
     end
   },
+
+  -- todo_comments
   {
-    'github/copilot.vim'
+    "folke/todo-comments.nvim",
+    config = function()
+      require("todo-comments").setup({
+        keywords = {
+          --alt : alise
+          FIX  = { icon = " ", color = "#DC2626", alt = { "FIXME", "BUG", "FIXIT", "ISSUE", "!" } },
+          TODO = { icon = " ", color = "#2563EB" },
+          HACK = { icon = " ", color = "#7C3AED" },
+          WARN = { icon = " ", color = "#FBBF24", alt = { "WARNING", "XXX" } },
+          PERF = { icon = " ", color = "#FC9868", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+          NOTE = { icon = " ", color = "#10B981", alt = { "INFO" } }
+        }
+      })
+    end
   },
+
+  { 'github/copilot.vim' },
   {
     "zbirenbaum/copilot.lua",
     event = { "VimEnter" },
@@ -199,6 +261,8 @@ lvim.plugins = {
     "zbirenbaum/copilot-cmp",
     after = { 'copilot.lua', 'nvim-cmp' },
   },
+
+  -- function signature for lsp
   {
     "ray-x/lsp_signature.nvim",
     config = function()
@@ -221,6 +285,7 @@ lvim.plugins = {
         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }, -- border style, can be one of 'none', 'single', 'double',
         -- 'shadow', or a list of chars which defines the border
         on_attach = function(client, bufnr)
+          client.on_attach(bufnr)
           -- your hook
         end,
         -- put a on_attach of your own here, e.g

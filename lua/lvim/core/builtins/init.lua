@@ -16,6 +16,9 @@ local builtins = {
   "lvim.core.notify",
   "lvim.core.lualine",
   "lvim.core.alpha",
+  "lvim.core.aerial",
+  "lvim.core.diffview",
+  "lvim.core.spectre"
 }
 
 function M.config(config)
