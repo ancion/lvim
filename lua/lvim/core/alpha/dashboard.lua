@@ -73,7 +73,7 @@ function M.get_sections()
       { "<Space> s t", "   Find Word", "<CMD>Telescope live_grep<CR>" },
       {
         "<Spave> r c", "   Configuration",
-        "jCMD>edit " .. require("lvim.config").get_user_config_path() .. " <CR>",
+        "<CMD>edit " .. require("lvim.config").get_user_config_path() .. " <CR>",
       },
       { "<Space> s c", "   Choose Colorschema ", "<CMD>Telescope colorscheme<CR>" },
     },

@@ -239,6 +239,12 @@ M.config = function()
           "Colorscheme with Preview",
         },
       },
+      R = {
+        name = "Replace",
+        f = { "<CMD>lua require('spectre').open_file_search()<CR>", "Replace File" },
+        p = { "<CMD>lua require('spectre').open()<CR>", "Replace Project" },
+        s = { "<CMD>lua require('spectre').open_visual({select_word=true})<CR>", "Search" },
+      },
       T = {
         name = "Treesitter",
         i = { ":TSConfigInfo<cr>", "Info" },

@@ -12,8 +12,8 @@ function M.set_global_variables()
     "Trouble",
   }
   vim.g.indentLine_enabled = 1
-  -- vim.g.indent_blankline_char = "│"
-  vim.g.indent_blankline_char = "▏"
+  vim.g.indent_blankline_char = "│"
+  --vim.g.indent_blankline_char = "▏"
   -- vim.g.indent_blankline_char = "▎"
   vim.g.indent_blankline_show_trailing_blankline_indent = false
   vim.g.indent_blankline_show_first_indent_level = true
@@ -64,7 +64,7 @@ M.setup = function()
   -- 设置该插件的全局变量
   M.set_global_variables()
   indentline.setup({
-    show_current_context = true,
+    show_current_context = false,
   })
 end
 return M

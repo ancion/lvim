@@ -18,10 +18,10 @@
 lvim.log.level = "warn"
 lvim.format_on_save = true
 -- lvim.colorscheme = "onedarker"
-lvim.colorscheme = "tokyonight"
+-- lvim.colorscheme = "tokyonight"
 -- lvim.colorscheme = "dracula"
 -- lvim.colorscheme = "NeoSolarized"
--- lvim.colorscheme = "catppuccin"
+lvim.colorscheme = "catppuccin"
 
 
 -- [[
@@ -77,6 +77,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.builtin.alpha.active = true
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
+lvim.builtin.dap.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
 
