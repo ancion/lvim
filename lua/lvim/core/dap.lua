@@ -38,9 +38,11 @@ M.setup = function()
   })
 
   -- defined sign
-  vim.fn.sign_define("DapBreakpoint", lvim.builtin.dap.breakpoint)
-  vim.fn.sign_define("DapBreakpointRejected", lvim.builtin.dap.breakpoint_rejected)
-  vim.fn.sign_define("DapStopped", lvim.builtin.dap.stopped)
+  if lvim.use_icons then
+    vim.fn.sign_define("DapBreakpoint", lvim.builtin.dap.breakpoint)
+    vim.fn.sign_define("DapBreakpointRejected", lvim.builtin.dap.breakpoint_rejected)
+    vim.fn.sign_define("DapStopped", lvim.builtin.dap.stopped)
+  end
 
   -- defined dapui
   dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
