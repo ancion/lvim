@@ -91,7 +91,7 @@ function M.config()
       },
       ['ui-select'] = {
         require('telescope.themes').get_dropdown {
-          bg = nil,
+          previewer = false
         }
       },
     },

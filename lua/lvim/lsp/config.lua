@@ -94,7 +94,7 @@ return {
   },
   buffer_mappings = {
     normal_mode = {
-      ["M"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover" },
+      ["M"]  = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Show hover" },
       ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
       ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
       ["gr"] = { "<cmd>lua vim.lsp.buf.references()<CR>", "Goto references" },
