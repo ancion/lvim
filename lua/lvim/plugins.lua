@@ -187,7 +187,7 @@ local core_plugins = {
 
   -- Whichkey
   {
-    "folke/which-key.nvim",
+    "max397574/which-key.nvim",
     config = function()
       require("lvim.core.which-key").setup()
     end,
