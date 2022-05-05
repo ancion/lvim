@@ -86,6 +86,7 @@ M.config = function()
       ["f"] = { "<cmd>lua require('lvim.core.telescope.custom-finders').find_project_files()<CR>", "Find File" },
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
       ["o"] = { "<cmd>AerialToggle<CR>", "Outline" },
+      ["q"] = { "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "Force Quit" },
       b = {
         name = "Buffers",
         j = { "<cmd>BufferLinePick<cr>", "Jump" },
@@ -129,6 +130,8 @@ M.config = function()
       -- " Debugging
       g = {
         name = "Git",
+        f = { "<cmd>DiffviewFileHistory<cr>", "File History" },
+        P = { "<cmd>DiffviewOpen<cr>", "Diff Project" },
         j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
         k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
         l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
