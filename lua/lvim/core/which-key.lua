@@ -80,13 +80,14 @@ M.config = function()
       ["/"] = { "<ESC><CMD>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", "Comment" },
     },
     mappings = {
-      [";"] = { "<cmd>Alpha<CR>", 'Dashboard' },
+      [";"] = { "<cmd>Alpha<CR>", "Dashboard" },
+      ["w"] = { "<cmd>w!<CR>", "Save" },
+      ["q"] = { "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "Force Quit" },
       ["/"] = { "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", "Comment" },
       ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer" },
       ["f"] = { "<cmd>lua require('lvim.core.telescope.custom-finders').find_project_files()<CR>", "Find File" },
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
       ["o"] = { "<cmd>AerialToggle<CR>", "Outline" },
-      ["q"] = { "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "Force Quit" },
       b = {
         name = "Buffers",
         j = { "<cmd>BufferLinePick<cr>", "Jump" },

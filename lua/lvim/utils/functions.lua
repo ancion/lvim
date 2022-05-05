@@ -7,7 +7,7 @@ function M.smart_quit()
 
   if modified then
     vim.ui.input({
-      prompt = "You have unsaved changes, quit anyway? (y/n)",
+      prompt = "You have unsaved changes, quit anyway? (y/n) : ",
     }, function(input)
       if input == "y" then
         vim.cmd "q!"
