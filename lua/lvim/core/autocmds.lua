@@ -124,6 +124,7 @@ function M.enable_transparent_mode()
   vim.cmd "au ColorScheme * hi Pmenu ctermbg=none guibg=none"
   vim.cmd "au ColorScheme * hi PmenuSel ctermfg=Black ctermbg=Cyan guifg=Black guibg=Cyan"
   vim.cmd "au ColorScheme * hi NormalFloat ctermbg=none guibg=none"
+  vim.cmd "au ColorScheme * hi FloatBorder ctermbg=none guibg=none"
   vim.cmd "au ColorScheme * hi LineNr ctermbg=none guibg=none"
   vim.cmd "au ColorScheme * hi WinSeparator ctermbg=none guibg=none guifg=grey"
   vim.cmd "let &fcs='eob: '"
