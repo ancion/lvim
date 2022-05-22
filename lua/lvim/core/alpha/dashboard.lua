@@ -39,12 +39,13 @@ function M.get_sections()
   local current_branch = git_utils.get_lvim_branch()
   local num_plugins_loaded = #vim.fn.globpath(get_runtime_dir() .. "/site/pack/packer/start", "*", 0, 1)
 
-  local lvim_version
-  if current_branch ~= "HEAD" or "" then
-    lvim_version = current_branch .. "-" .. git_utils.get_lvim_current_sha()
-  else
-    lvim_version = "v" .. git_utils.get_lvim_tag()
-  end
+  -- local lvim_version
+  -- if current_branch ~= "HEAD" or "" then
+  --   lvim_version = current_branch .. "-" .. git_utils.get_lvim_current_sha()
+  -- else
+  --   lvim_version = "v" .. git_utils.get_lvim_tag()
+  -- end
+  local lvim_version = require("lvim.utils.git").get_lvim_version()
 
   local footer = {
     type = "text",
@@ -73,7 +74,6 @@ function M.get_sections()
       { "<Space> s t", "   Find Word", "<CMD>Telescope live_grep<CR>" },
       {
         "<Spave> r c", "   Configuration",
-        "<CMD>edit " .. require("lvim.config").get_user_config_path() .. " <CR>",
       },
       { "<Space> s c", "   Choose Colorschema ", "<CMD>Telescope colorscheme<CR>" },
     },

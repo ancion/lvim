@@ -2,7 +2,7 @@ local M = {}
 local Log = require "lvim.core.log"
 
 --- Load the default set of autogroups and autocommands.
-function M.load_augroups()
+function M.load_defaults()
   local user_config_file = require("lvim.config"):get_user_config_path()
 
   if vim.loop.os_uname().version:match "Windows" then
@@ -10,56 +10,80 @@ function M.load_augroups()
     user_config_file = user_config_file:gsub("\\", "/")
   end
 
-  return {
-    _general_settings = {
-      { "FileType", "qf,help,man", "nnoremap <silent> <buffer> q :close<CR>" },
+  local definitions = {
+    {
+      "BufReadPost",
       {
-        "BufReadPost",
-        "*",
-        [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]],
-      },
-      {
-        "TextYankPost",
-        "*",
-        "lua require('vim.highlight').on_yank({higroup = 'Search', timeout = 200})",
-      },
-      {
-        "BufWinEnter",
-        "dashboard",
-        "setlocal cursorline signcolumn=yes cursorcolumn number",
-      },
-      { "BufWritePost", user_config_file, "lua require('lvim.config'):reload()" },
-      { "FileType", "qf", "set nobuflisted" },
-      -- { "VimLeavePre", "*", "set title set titleold=" },
-    },
-    _formatoptions = {
-      {
-        "BufWinEnter,BufRead,BufNewFile",
-        "*",
-        "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
+        group = "_general_settings",
+        pattern = "*",
+        command = [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]],
       },
     },
-    _filetypechanges = {},
-    _git = {
-      { "FileType", "gitcommit", "setlocal wrap" },
-      { "FileType", "gitcommit", "setlocal spell" },
+    {
+      "TextYankPost",
+      {
+        group = "_general_settings",
+        pattern = "*",
+        desc = "Highlight text on yank",
+        callback = function()
+          require("vim.highlight").on_yank { higroup = "Search", timeout = 200 }
+        end,
+      },
     },
-    _markdown = {
-      { "FileType", "markdown", "setlocal wrap" },
-      { "FileType", "markdown", "setlocal spell" },
+    {
+      "BufWritePost",
+      {
+        group = "_general_settings",
+        pattern = user_config_file,
+        desc = "Trigger LvimReload on saving " .. vim.fn.expand "%:~",
+        callback = function()
+          require("lvim.config"):reload()
+        end,
+      },
     },
-    _buffer_bindings = {
-      { "FileType", "floaterm", "nnoremap <silent> <buffer> q :q<CR>" },
+    {
+      "FileType",
+      {
+        group = "_filetype_settings",
+        pattern = "qf",
+        command = "set nobuflisted",
+      },
     },
-    _auto_resize = {
-      -- will cause split windows to be resized evenly if main window is resized
-      { "VimResized", "*", "tabdo wincmd =" },
+    {
+      "FileType",
+      {
+        group = "_filetype_settings",
+        pattern = { "gitcommit", "markdown" },
+        command = "setlocal wrap spell",
+      },
     },
-    _general_lsp = {
-      { "FileType", "lspinfo,lsp-installer,null-ls-info", "nnoremap <silent> <buffer> q :close<CR>" },
+    {
+      "FileType",
+      {
+        group = "_buffer_mappings",
+        pattern = { "qf", "help", "man", "floaterm", "lspinfo", "lsp-installer", "null-ls-info" },
+        command = "nnoremap <silent> <buffer> q :close<CR>",
+      },
     },
-    custom_groups = {},
+    {
+      { "BufWinEnter", "BufRead", "BufNewFile" },
+      {
+        group = "_format_options",
+        pattern = "*",
+        command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
+      },
+    },
+    {
+      "VimResized",
+      {
+        group = "_auto_resize",
+        pattern = "*",
+        command = "tabdo wincmd =",
+      },
+    },
   }
+
+  M.define_autocmds(definitions)
 end
 
 local get_format_on_save_opts = function()
@@ -89,7 +113,7 @@ function M.enable_format_on_save()
 end
 
 function M.disable_format_on_save()
-  pcall(vim.api.nvim_del_augroup_by_name, "lsp_format_on_save")
+  M.clear_augroup "lsp_format_on_save"
   Log:debug "disabled format-on-save"
 end
 
@@ -102,11 +126,11 @@ function M.configure_format_on_save()
 end
 
 function M.toggle_format_on_save()
-  local status, _ = pcall(vim.api.nvim_get_autocmds, {
+  local exists, _ = pcall(vim.api.nvim_get_autocmds, {
     group = "lsp_format_on_save",
     event = "BufWritePre",
   })
-  if not status then
+  if not exists then
     M.enable_format_on_save()
   else
     M.disable_format_on_save()
@@ -114,53 +138,80 @@ function M.toggle_format_on_save()
 end
 
 function M.enable_transparent_mode()
-  vim.cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
-  vim.cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
-  vim.cmd "au ColorScheme * hi NormalNC ctermbg=none guibg=none"
-  vim.cmd "au ColorScheme * hi MsgArea ctermbg=none guibg=none"
-  vim.cmd "au ColorScheme * hi TelescopeBorder ctermbg=none guibg=none"
-  vim.cmd "au ColorScheme * hi NvimTreeNormal ctermbg=none guibg=none"
-  vim.cmd "au ColorScheme * hi EndOfBuffer ctermbg=none guibg=none"
-  vim.cmd "au ColorScheme * hi Pmenu ctermbg=none guibg=none"
-  vim.cmd "au ColorScheme * hi PmenuSel ctermfg=Black ctermbg=Cyan guifg=Black guibg=Cyan"
-  vim.cmd "au ColorScheme * hi NormalFloat ctermbg=none guibg=none"
-  vim.cmd "au ColorScheme * hi FloatBorder ctermbg=none guibg=none"
-  vim.cmd "au ColorScheme * hi LineNr ctermbg=none guibg=none"
-  vim.cmd "au ColorScheme * hi WinSeparator ctermbg=none guibg=none guifg=grey"
-  vim.cmd "let &fcs='eob: '"
+  -- vim.cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
+  -- vim.cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
+  -- vim.cmd "au ColorScheme * hi NormalNC ctermbg=none guibg=none"
+  -- vim.cmd "au ColorScheme * hi MsgArea ctermbg=none guibg=none"
+  -- vim.cmd "au ColorScheme * hi TelescopeBorder ctermbg=none guibg=none"
+  -- vim.cmd "au ColorScheme * hi NvimTreeNormal ctermbg=none guibg=none"
+  -- vim.cmd "au ColorScheme * hi EndOfBuffer ctermbg=none guibg=none"
+  -- vim.cmd "au ColorScheme * hi Pmenu ctermbg=none guibg=none"
+  -- vim.cmd "au ColorScheme * hi PmenuSel ctermfg=Black ctermbg=Cyan guifg=Black guibg=Cyan"
+  -- vim.cmd "au ColorScheme * hi NormalFloat ctermbg=none guibg=none"
+  -- vim.cmd "au ColorScheme * hi FloatBorder ctermbg=none guibg=none"
+  -- vim.cmd "au ColorScheme * hi LineNr ctermbg=none guibg=none"
+  -- vim.cmd "au ColorScheme * hi WinSeparator ctermbg=none guibg=none guifg=grey"
+  -- vim.cmd "let &fcs='eob: '"
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*",
+    callback = function()
+      local hl_groups = {
+        "Normal",
+        "SignColumn",
+        "NormalNC",
+        "TelescopeBorder",
+        "NvimTreeNormal",
+        "EndOfBuffer",
+        "MsgArea",
+        "Pmenu",
+        "NormalFloat",
+        "FloatBorder",
+        "LineNr",
+        "WinSeparator"
+      }
+      for _, name in ipairs(hl_groups) do
+        vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))
+      end
+    end,
+  })
+  vim.opt.fillchars = "eob: "
 end
 
---- Disable autocommand groups if it exists
---- This is more reliable than trying to delete the augroup itself
+--- Clean autocommand in a group if it exists
+--- This is safer than trying to delete the augroup itself
 ---@param name string the augroup name
-function M.disable_augroup(name)
+function M.clear_augroup(name)
   -- defer the function in case the autocommand is still in-use
+  local exists, _ = pcall(vim.api.nvim_get_autocmds, { group = name })
+  if not exists then
+    Log:debug("ignoring request to clear autocmds from non-existent group " .. name)
+    return
+  end
   vim.schedule(function()
-    if vim.fn.exists("#" .. name) == 1 then
-      vim.cmd("augroup " .. name)
-      vim.cmd "autocmd!"
-      vim.cmd "augroup END"
+    local status_ok, _ = xpcall(function()
+      vim.api.nvim_clear_autocmds { group = name }
+    end, debug.traceback)
+    if not status_ok then
+      Log:warn("problems detected while clearing autocmds from " .. name)
+      Log:debug(debug.traceback())
     end
   end)
 end
 
 --- Create autocommand groups based on the passed definitions
----@param definitions table contains trigger, pattern and text. The key will be used as a group name
-function M.define_augroups(definitions, buffer)
-  for group_name, definition in pairs(definitions) do
-    vim.cmd("augroup " .. group_name)
-    if buffer then
-      vim.cmd [[autocmd! * <buffer>]]
-    else
-      vim.cmd [[autocmd!]]
+--- Also creates the augroup automatically if it doesn't exist
+---@param definitions table contains a tuple of event, opts, see `:h nvim_create_autocmd`
+function M.define_autocmds(definitions)
+  for _, entry in ipairs(definitions) do
+    local event = entry[1]
+    local opts = entry[2]
+    if type(opts.group) == "string" and opts.group ~= "" then
+      local exists, _ = pcall(vim.api.nvim_get_autocmds, { group = opts.group })
+      if not exists then
+        vim.api.nvim_create_augroup(opts.group, {})
+      end
     end
-
-    for _, def in pairs(definition) do
-      local command = table.concat(vim.tbl_flatten { "autocmd", def }, " ")
-      vim.cmd(command)
-    end
-
-    vim.cmd "augroup END"
+    vim.api.nvim_create_autocmd(event, opts)
   end
 end
 
