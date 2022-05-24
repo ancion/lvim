@@ -44,19 +44,21 @@ vim.cmd [[
         :TermExec cmd='lua %'
       elseif &filetype == 'dart'
         :TermExec cmd='dart %'
+      elseif &filetype == 'rust'
+        :TermExec cmd='cargo run'
       endif
     endfunction
   ]]
 
-  -- [[ command! BufferKill lua require('lvim.core.bufferline').buf_kill('bd') ]],
-  -- :LvimInfo
-  -- [[ command! LvimInfo lua require('lvim.core.info').toggle_popup(vim.bo.filetype) ]],
-  -- [[ command! LvimCacheReset lua require('lvim.utils.hooks').reset_cache() ]],
-  -- [[ command! LvimUpdate lua require('lvim.bootstrap').update() ]],
-  -- [[ command! LvimSyncCorePlugins lua require('lvim.plugin-loader'):sync_core_plugins() ]],
-  -- [[ command! LvimReload lua require('lvim.config'):reload() ]],
-  -- [[ command! LvimToggleFormatOnSave lua require('lvim.core.autocmds').toggle_format_on_save() ]],
-  -- [[ command! LvimVersion lua require('lvim.core.telescope.custom-finders').view_lunarvim_changelog() ]],
+-- [[ command! BufferKill lua require('lvim.core.bufferline').buf_kill('bd') ]],
+-- :LvimInfo
+-- [[ command! LvimInfo lua require('lvim.core.info').toggle_popup(vim.bo.filetype) ]],
+-- [[ command! LvimCacheReset lua require('lvim.utils.hooks').reset_cache() ]],
+-- [[ command! LvimUpdate lua require('lvim.bootstrap').update() ]],
+-- [[ command! LvimSyncCorePlugins lua require('lvim.plugin-loader'):sync_core_plugins() ]],
+-- [[ command! LvimReload lua require('lvim.config'):reload() ]],
+-- [[ command! LvimToggleFormatOnSave lua require('lvim.core.autocmds').toggle_format_on_save() ]],
+-- [[ command! LvimVersion lua require('lvim.core.telescope.custom-finders').view_lunarvim_changelog() ]],
 
 M.defaults = {
   {

@@ -160,6 +160,7 @@ function M.enable_transparent_mode()
         "SignColumn",
         "NormalNC",
         "TelescopeBorder",
+        "TelescopeNormal",
         "NvimTreeNormal",
         "EndOfBuffer",
         "MsgArea",

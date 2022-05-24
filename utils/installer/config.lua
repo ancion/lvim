@@ -19,9 +19,9 @@ lvim.log.level = "warn"
 lvim.format_on_save = true
 -- lvim.colorscheme = "onedarker"
 -- lvim.colorscheme = "tokyonight"
--- lvim.colorscheme = "dracula"
+lvim.colorscheme = "dracula"
 -- lvim.colorscheme = "NeoSolarized"
-lvim.colorscheme = "catppuccin"
+-- lvim.colorscheme = "catppuccin"
 
 
 -- [[
