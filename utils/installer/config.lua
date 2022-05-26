@@ -298,6 +298,7 @@ lvim.plugins = {
         -- the attach code will apply to all lsp clients
 
         default_mapping = true, -- set to false if you will remap every key
+        -- a list of key maps
         keymaps = {
           { key = "gD", func = "declaration()" },
           { key = "M", func = "hover()" },
@@ -306,13 +307,14 @@ lvim.plugins = {
           { key = "<Leader>gI", func = "incoming_calls()" },
           { key = "<Leader>gO", func = "outgoing_calls()" },
 
-        }, -- a list of key maps
+        },
         -- this kepmap gk will override "gd" mapping function declaration()  in default kepmap
         -- please check mapping.lua for all keymaps
         treesitter_analysis = true, -- treesitter variable context
         transparency = 50, -- 0 ~ 100 blur the main window, 100: fully transparent, 0: opaque,  set to nil or 100 to disable it
 
         lsp_signature_help = true, -- if you would like to hook ray-x/lsp_signature plugin in navigator
+        lsp_signature_cfg = nil,
         lsp_installer = true, -- set to true if you would like use the lsp installed by williamboman/nvim-lsp-installer
       })
     end

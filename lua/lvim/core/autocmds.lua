@@ -161,6 +161,7 @@ function M.enable_transparent_mode()
         "NormalNC",
         "TelescopeBorder",
         "TelescopeNormal",
+        "TelescopeSelection",
         "NvimTreeNormal",
         "EndOfBuffer",
         "MsgArea",
