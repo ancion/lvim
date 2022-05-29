@@ -2,7 +2,7 @@ local M = {}
 local Log = require "lvim.core.log"
 
 function M.config()
-  local vim_show_icons = lvim.use_icons and 1 or 0
+  local vim_show_icons = lvim.use_icons and true or false
   lvim.builtin.nvimtree = {
     active = true,
     on_config_done = nil,
@@ -67,6 +67,8 @@ function M.config()
         signcolumn = "yes",
       },
       renderer = {
+        highlight_git = true;
+        root_folder_modifier = ":t",
         indent_markers = {
           enable = true,
           icons = {
@@ -77,6 +79,35 @@ function M.config()
         },
         icons = {
           webdev_colors = lvim.use_icons,
+          git_placement = "before",
+          padding = " ",
+          symlink_arrow = "➛",
+          show = {
+            git = vim_show_icons,
+            folder = vim_show_icons,
+            file = vim_show_icons,
+            folder_arrow = vim_show_icons,
+          },
+          glyphs = {
+            default = "",
+            symlink = "",
+            git = {
+              unstaged = "",
+              staged = "",
+              unmerged = "",
+              renamed = "➜",
+              deleted = "",
+              untracked = "U",
+              ignored = "◌",
+            },
+            folder = {
+              default = "",
+              open = "",
+              empty = "",
+              empty_open = "",
+              symlink = "",
+            },
+          },
         },
       },
       filters = {
@@ -130,34 +161,6 @@ function M.config()
         },
       },
     },
-    show_icons = {
-      git = vim_show_icons,
-      folders = vim_show_icons,
-      files = vim_show_icons,
-      folder_arrows = vim_show_icons,
-    },
-    git_hl = 1,
-    root_folder_modifier = ":t",
-    icons = {
-      default = "",
-      symlink = "",
-      git = {
-        unstaged = "",
-        staged = "",
-        unmerged = "",
-        renamed = "➜",
-        deleted = "",
-        untracked = "U",
-        ignored = "◌",
-      },
-      folder = {
-        default = "",
-        open = "",
-        empty = "",
-        empty_open = "",
-        symlink = "",
-      },
-    },
   }
   lvim.builtin.which_key.mappings["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" }
 end
@@ -175,7 +178,7 @@ function M.setup()
 
   -- Implicitly update nvim-tree when project module is active
   if lvim.builtin.project.active then
-    lvim.builtin.nvimtree.respect_buf_cwd = 1
+    lvim.builtin.nvimtree.setup.respect_buf_cwd = true
     lvim.builtin.nvimtree.setup.update_cwd = true
     lvim.builtin.nvimtree.setup.update_focused_file = { enable = true, update_cwd = true }
   end
