@@ -2,7 +2,6 @@ local M = {}
 local Log = require "lvim.core.log"
 
 function M.config()
-  local vim_show_icons = lvim.use_icons and true or false
   lvim.builtin.nvimtree = {
     active = true,
     on_config_done = nil,
@@ -67,8 +66,6 @@ function M.config()
         signcolumn = "yes",
       },
       renderer = {
-        highlight_git = true;
-        root_folder_modifier = ":t",
         indent_markers = {
           enable = true,
           icons = {
@@ -80,13 +77,11 @@ function M.config()
         icons = {
           webdev_colors = lvim.use_icons,
           git_placement = "before",
-          padding = " ",
-          symlink_arrow = "➛",
           show = {
-            git = vim_show_icons,
-            folder = vim_show_icons,
-            file = vim_show_icons,
-            folder_arrow = vim_show_icons,
+            git = lvim.use_icons,
+            folder = lvim.use_icons,
+            file = lvim.use_icons,
+            folder_arrow = lvim.use_icons,
           },
           glyphs = {
             default = "",
@@ -109,6 +104,8 @@ function M.config()
             },
           },
         },
+        highlight_git = true,
+        root_folder_modifier = ":t",
       },
       filters = {
         dotfiles = false,
