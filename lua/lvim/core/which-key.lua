@@ -258,7 +258,7 @@ M.config = function()
           "Colorscheme with Preview",
         },
       },
-      R = {
+      r = {
         name = "Replace",
         f = { "<CMD>lua require('spectre').open_file_search()<CR>", "Replace File" },
         p = { "<CMD>lua require('spectre').open()<CR>", "Replace Project" },

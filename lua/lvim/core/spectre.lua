@@ -1,7 +1,7 @@
 local M = {}
 
 -- https://github.com/nvim-pack/nvim-spectre
--- WARN: spectre 手动安装依赖项 sed 和 ripgrep
+-- NOTE: spectre 手动安装依赖项 sed 和 ripgrep
 -- sed 命令（自行安装，如果已有则忽略）
 -- ripgrep： https://github.com/BurntSushi/ripgrep
 
