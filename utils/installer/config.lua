@@ -222,7 +222,13 @@ lvim.plugins = {
   { "folke/tokyonight.nvim" },
   { "Mofiqul/dracula.nvim" },
   { "overcache/NeoSolarized" },
-  { "catppuccin/nvim", as = "catppuccin" },
+  {
+    "catppuccin/nvim",
+    as = "catppuccin",
+    config = function()
+      vim.g.catppuccin_flavour = "mocha"
+    end
+  },
 
   -- colorPanel
   {
