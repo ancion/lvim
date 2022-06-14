@@ -18,7 +18,7 @@ return {
     "mode",
     fmt = function(str)
       --return "  | ⟦ " .. vim.fn.mode() .. " ⟧ "
-      return "▍[" .. str .. "] "
+      return " -- " .. str .. " -- "
     end,
     padding = { left = 0, right = 0 },
     color = {},
@@ -80,7 +80,6 @@ return {
     always_visible = true,
     --separator={left="", right=""},
     --separator = { left = "┣", right = "┫" },
-    separator      = { left = "▋", right = "" },
     cond           = conditions.hide_in_width,
   },
   treesitter = {

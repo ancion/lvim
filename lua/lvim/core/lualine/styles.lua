@@ -46,8 +46,8 @@ styles.default = {
     disabled_filetypes = {},
   },
   sections = {
-    lualine_a = { "mode" },
-    lualine_b = { "branch" },
+    lualine_a = { "branch", "diagnostics" },
+    lualine_b = { "mode" },
     lualine_c = { "filename" },
     lualine_x = { "encoding", "fileformat", "filetype" },
     lualine_y = { "progress" },
@@ -72,21 +72,21 @@ styles.lvim = {
     icons_enabled = lvim.use_icons,
     --component_separators = { left = "", right = "" },
     --section_separators = { left = "", right = "" },
-    component_separators = { left = "·", right = "·" },
+    component_separators = { left = "", right = "·" },
     section_separators = { left = "", right = "" },
 
     disabled_filetypes = { "alpha", "NvimTree", "Outline", "dashboard" },
   },
   sections = {
     lualine_a = {
+      components.branch,
       components.diagnostics,
-      components.mode,
     },
     lualine_b = {
-      components.branch,
-      components.filename,
+      components.mode,
     },
     lualine_c = {
+      components.filename,
       components.diff,
       components.python_env,
     },
