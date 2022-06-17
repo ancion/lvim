@@ -77,6 +77,7 @@ function M.config()
         icons = {
           webdev_colors = lvim.use_icons,
           git_placement = "before",
+          symlink_arrow = "  ",
           show = {
             git = lvim.use_icons,
             folder = lvim.use_icons,
