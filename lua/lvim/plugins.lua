@@ -76,7 +76,8 @@ local core_plugins = {
     "sindrets/diffview.nvim",
     config = function()
       require("lvim.core.diffview").setup()
-    end
+    end,
+    disable = not lvim.builtin.diffview.active,
   },
 
   -- Telescope

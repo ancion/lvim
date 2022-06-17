@@ -28,7 +28,7 @@ M.config = function()
       },
       -- replace word
       ['run_replace'] = {
-        map  = "<leader>r",
+        map  = "<leader>R",
         cmd  = "<cmd>lua require('spectre.action').run_replace()<CR>",
         desc = "replace all"
       },

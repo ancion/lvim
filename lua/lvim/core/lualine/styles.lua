@@ -93,6 +93,7 @@ styles.lvim = {
     lualine_x = {
       components.filetype,
       components.encoding,
+      components.platform,
     },
     lualine_y = {
       components.treesitter,

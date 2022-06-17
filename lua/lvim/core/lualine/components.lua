@@ -132,6 +132,7 @@ return {
   },
   location = { "location", cond = conditions.hide_in_width, color = {} },
   progress = { "progress", cond = conditions.hide_in_width, color = {} },
+  platform = { "fileformat", cond = conditions.hide_in_width, color = {} },
   spaces = {
     function()
       if not vim.api.nvim_buf_get_option(0, "expandtab") then
@@ -162,7 +163,7 @@ return {
       local index = math.ceil(line_ratio * #chars)
       return chars[index]
     end,
-    padding = { left = 0, right = 0 },
+    padding = { left = 1, right = 1 },
     color = { fg = colors.yellow, bg = colors.bg },
     cond = nil,
   },
