@@ -49,7 +49,8 @@ local core_plugins = {
     "stevearc/aerial.nvim",
     config = function()
       require("lvim.core.aerial").setup()
-    end
+    end,
+    disable = not lvim.builtin.aerial.active
   },
 
   -- notifycaiton
@@ -68,7 +69,8 @@ local core_plugins = {
     "nvim-pack/nvim-spectre",
     config = function()
       require("lvim.core.spectre").setup()
-    end
+    end,
+    diable = not lvim.builtin.spectre.active
   },
 
   -- diffview
@@ -129,13 +131,13 @@ local core_plugins = {
       local paths = {}
       if lvim.builtin.luasnip.sources.friendly_snippets then
         paths[#paths + 1] = utils.join_paths(
-                get_runtime_dir(),
-                "site",
-                "pack",
-                "packer",
-                "start",
-                "friendly-snippets"
-            )
+          get_runtime_dir(),
+          "site",
+          "pack",
+          "packer",
+          "start",
+          "friendly-snippets"
+        )
       end
       local user_snippets = utils.join_paths(get_config_dir(), "snippets")
       if utils.is_directory(user_snippets) then

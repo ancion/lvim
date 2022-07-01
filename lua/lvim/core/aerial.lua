@@ -3,6 +3,8 @@ local M = {}
 -- Call the setup function to change the default behavior
 M.config = function()
   lvim.builtin.aerial = {
+    active = true,
+    on_config_done = nil,
     -- Priority list of preferred backends for aerial.
     -- This can be a filetype map (see :help aerial-filetype-map)
     options = {
@@ -236,6 +238,9 @@ function M.setup()
     return
   end
   aerial.setup(lvim.builtin.aerial.options)
+  if lvim.builtin.aerial.on_config_done then
+    lvim.builtin.aerial.on_config_done(aerial)
+  end
 end
 
 return M

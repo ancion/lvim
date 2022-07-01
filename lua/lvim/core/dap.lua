@@ -7,13 +7,13 @@ M.config = function()
     active = false,
     on_config_done = nil,
     breakpoint = {
-      text = "🟢", --
+      text = "🔴",
       texthl = "LspDiagnosticsSignError",
       linehl = "",
       numhl = "",
     },
     breakpoint_rejected = {
-      text = "",
+      text = "🪲",
       texthl = "LspDiagnosticsSignHint",
       linehl = "",
       numhl = "",
