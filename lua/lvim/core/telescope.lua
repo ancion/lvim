@@ -69,18 +69,18 @@ function M.config()
       border = {},
       borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
       color_devicons = true,
-      set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
-      pickers = {
-        find_files = {
-          theme = "dropdown",
-          previewer = false,
-          find_command = { "fd", "--type=file", "--hidden", "--smart-case" },
-          hidden = true,
-        },
-        live_grep = {
-          --@usage don't include the filename in the search results
-          only_sort_text = true,
-        },
+      set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil
+    },
+    pickers = {
+      find_files = {
+        theme = "dropdown",
+        hidden = true,
+        -- previewer = false,
+        -- find_command = { "fd", "--type=file", "--hidden", "--smart-case" },
+      },
+      live_grep = {
+        --@usage don't include the filename in the search results
+        only_sort_text = true,
       },
     },
     extensions = {

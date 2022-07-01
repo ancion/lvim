@@ -160,7 +160,6 @@ function M.config()
       },
     },
   }
-  lvim.builtin.which_key.mappings["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" }
 end
 
 function M.setup()
@@ -175,6 +174,7 @@ function M.setup()
     return
   end
 
+  lvim.builtin.which_key.mappings["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" }
   lvim.builtin.nvimtree._setup_called = true
 
   -- Implicitly update nvim-tree when project module is active
