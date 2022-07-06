@@ -75,7 +75,7 @@ function M.config()
       find_files = {
         theme = "dropdown",
         hidden = true,
-        -- previewer = false,
+        previewer = false,
         -- find_command = { "fd", "--type=file", "--hidden", "--smart-case" },
       },
       live_grep = {
