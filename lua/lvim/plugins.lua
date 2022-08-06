@@ -330,8 +330,8 @@ local core_plugins = {
 
   -- Debugging
   {
-    -- "mfussenegger/nvim-dap",
-    "ravenxrz/nvim-dap",
+    "mfussenegger/nvim-dap",
+    -- "ravenxrz/nvim-dap",
     -- event = "BufWinEnter",
     config = function()
       require("lvim.core.dap").setup()
