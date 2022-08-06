@@ -29,7 +29,6 @@ M.config = function()
 end
 
 M.setup = function()
-  local dap, dapui  = require "dap", require 'dapui'
   local dap_install = require 'dap-install'
 
   -- defined dap install_path
@@ -44,44 +43,68 @@ M.setup = function()
     vim.fn.sign_define("DapStopped", lvim.builtin.dap.stopped)
   end
 
-  -- defined dapui
-  dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
-  require('dap.ext.vscode').load_launchjs(nil, { cppdgb = { "cpp" } })
-
-  -- dapui config
-  dap.listeners.after.event_initialized['dapui_config'] = function()
-    dapui.open()
-    vim.api.nvim_command("DapVirtualTextEnable")
-    dapui.close('tray')
-  end
-  dap.listeners.before.event_terminated['dapui_config'] = function()
-    vim.api.nvim_command("DapVirtualTextDisable")
-    dapui.close()
-  end
-  dap.listeners.before.event_exited['dapui_config'] = function()
-    vim.api.nvim_command("DapVirtualTextDisable")
-    dapui.close()
-  end
-  -- for some debug adapter, terminate to exit events will no fire, use disconnect reuset instead
-  dap.listeners.before.disconnect['dapui_config'] = function()
-    vim.api.nvim_command("DapVirtualTextDisable")
-    dapui.close()
-  end
+  -- set_dap_ui grid
+  M.set_dap_ui()
 
   -- debug keybindings
   M.dap_keybings()
 
-  -- debug level
-  dap.set_log_level("DEBUG")
+  -- more develop language config
+  M.config_debug()
 
   -- dap_config
   dap_install.config("python", {})
+end
+
+
+-- 配置调试的信息
+M.config_debug = function()
+  local dap = require("dap")
+
+  -- defined dapui
+  dap.defaults.fallback.terminal_win_cmd = "50vsplit new"
+  -- debug level
+  dap.set_log_level("DEBUG")
+
+  -- debug cpp
+  require('dap.ext.vscode').load_launchjs(nil, { cppdgb = { "cpp" } })
+
 
   if lvim.builtin.dap.on_config_done then
     lvim.builtin.dap.on_config_done(dap)
   end
 end
 
+
+M.set_dap_ui = function()
+  local dap, dapui = require "dap", require 'dapui'
+
+  local debug_open = function()
+    dapui.open()
+    vim.api.nvim_command("DapVirtualTextEnable")
+  end
+  local debug_close = function()
+    dap.repl.close()
+    dapui.close()
+    vim.api.nvim_command("DapVirtualTextDisable")
+    --vim.api.nvim_command("bdelete! term:") -- close debug terminal
+  end
+
+  -- dapui config
+  dap.listeners.after.event_initialized['dapui_config'] = function()
+    debug_open()
+  end
+  dap.listeners.before.event_terminated['dapui_config'] = function()
+    debug_close()
+  end
+  dap.listeners.before.event_exited['dapui_config'] = function()
+    debug_close()
+  end
+  -- for some debug adapter, terminate to exit events will no fire, use disconnect reuset instead
+  dap.listeners.before.disconnect['dapui_config'] = function()
+    debug_close()
+  end
+end
 
 M.dap_keybings = function()
   -- lvim.builtin.which_key.mappings["d"] = {

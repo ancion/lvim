@@ -69,9 +69,10 @@ function M.config()
         indent_markers = {
           enable = true,
           icons = {
-            corner = "└ ",
-            edge = "│ ",
-            none = "  ",
+            corner = "└",
+            edge = "│",
+            item = "│",
+            none = " ",
           },
         },
         icons = {

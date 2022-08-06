@@ -283,7 +283,7 @@ local core_plugins = {
     "rcarriga/nvim-dap-ui",
     config = function()
       require("dapui").setup({
-        icons = { expanded = "▾", collapsed = "▸" },
+        icons = { expanded = "", collapsed = "" },
         mappings = {
           -- Use a table to apply multiple mappings
           expand = { "o", "<2-LeftMouse>", "<CR>" },
@@ -297,21 +297,20 @@ local core_plugins = {
           {
             -- You can change the order of elements in the sidebar
             elements = {
-              { id = "scopes", size = 0.35 }, -- Can be float or integer > 1
+              { id = "scopes", size = 0.38 }, -- Can be float or integer > 1
               { id = "stacks", size = 0.35 },
               { id = "watches", size = 0.15 },
-              { id = "breakpoints", size = 0.15 },
+              { id = "breakpoints", size = 0.12 },
             },
             size = 40,
             position = "left", -- Can be "left", "right", "top", "bottom"
           },
           {
-
             elements = {
-              "repl",
-              "console",
+              { id = "repl", size = 0.5 },
+              { id = "console", size = 0.5 },
             },
-            size = 10,
+            size = 15,
             position = "bottom", -- Can be "left", "right", "top", "bottom"
           }
         },
