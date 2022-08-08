@@ -73,7 +73,7 @@ function M.get_sections()
       { "<Space> s r", "   Recently Used Files", "<CMD>Telescope oldfiles<CR>" },
       { "<Space> s t", "   Find Word", "<CMD>Telescope live_grep<CR>" },
       {
-        "<Spave> r c", "   Configuration",
+        "<Spave> r c", "   Configuration", "<cmd>e $HOME/.config/lvim/config.lua<CR>",
       },
       { "<Space> s c", "   Choose Colorschema ", "<CMD>Telescope colorscheme<CR>" },
     },

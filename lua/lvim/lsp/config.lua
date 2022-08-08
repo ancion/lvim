@@ -126,6 +126,7 @@ return {
     setup = {
       ensure_installed = {},
       ui = {
+        border = "rounded",
         icons = {
           server_installed = "✓",
           server_pending = "",

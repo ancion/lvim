@@ -66,6 +66,7 @@ function M.config()
         signcolumn = "yes",
       },
       renderer = {
+        group_empty = true,
         indent_markers = {
           enable = true,
           icons = {
@@ -119,7 +120,10 @@ function M.config()
           ".gradle",
           ".mvn",
           ".metadata",
-          ".settings"
+          ".settings",
+          ".project",
+          ".factorypath",
+          ".classpath"
         },
         exclude = {},
       },
