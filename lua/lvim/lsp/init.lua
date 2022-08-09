@@ -3,6 +3,12 @@ local Log = require "lvim.core.log"
 local utils = require "lvim.utils"
 local autocmds = require "lvim.core.autocmds"
 
+local function add_lsp_buffer_options(bufnr)
+  for k, v in pairs(lvim.lsp.buffer_options) do
+    vim.api.nvim_buf_set_option(bufnr, k, v)
+  end
+end
+
 local function add_lsp_buffer_keybindings(bufnr)
   local mappings = {
     normal_mode = "n",
@@ -67,6 +73,7 @@ function M.common_on_attach(client, bufnr)
     lu.setup_codelens_refresh(client, bufnr)
   end
   add_lsp_buffer_keybindings(bufnr)
+  add_lsp_buffer_options(bufnr)
 end
 
 function M.get_common_opts()
@@ -103,7 +110,10 @@ function M.setup()
   end)
 
   pcall(function()
-    require("nvim-lsp-installer").setup(lvim.lsp.installer.setup)
+    require("mason-lspconfig").setup(lvim.lsp.installer.setup)
+    local util = require "lspconfig.util"
+    -- automatic_installation is handled by lsp-manager
+    util.on_setup = nil
   end)
 
   require("lvim.lsp.null-ls").setup()

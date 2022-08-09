@@ -18,7 +18,8 @@ local builtins = {
   "lvim.core.alpha",
   "lvim.core.aerial",
   "lvim.core.diffview",
-  "lvim.core.spectre"
+  "lvim.core.spectre",
+  "lvim.core.mason",
 }
 
 function M.config(config)

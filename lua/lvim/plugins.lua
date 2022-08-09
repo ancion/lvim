@@ -8,7 +8,7 @@ local core_plugins = {
   -- lsp
   { "neovim/nvim-lspconfig" },
   { "tamago324/nlsp-settings.nvim" },
-  { "williamboman/nvim-lsp-installer" },
+  --{ "williamboman/nvim-lsp-installer" },
 
   --
   {
@@ -17,6 +17,13 @@ local core_plugins = {
   { "antoinemadec/FixCursorHold.nvim" }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
 
   -- onedark
+  { "williamboman/mason-lspconfig.nvim" },
+  {
+    "williamboman/mason.nvim",
+    config = function()
+      require("lvim.core.mason").setup()
+    end,
+  },
   {
     "lunarvim/onedarker.nvim",
     branch = "freeze",

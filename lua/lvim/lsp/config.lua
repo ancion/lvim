@@ -88,7 +88,6 @@ return {
   },
   on_attach_callback = nil,
   on_init_callback = nil,
-  automatic_servers_installation = true,
   automatic_configuration = {
     ---@usage list of servers that the automatic installer will skip
     skipped_servers = skipped_servers,
@@ -121,6 +120,12 @@ return {
     insert_mode = {},
     visual_mode = {},
   },
+  buffer_options = {
+    --- enable completion triggered by <c-x><c-o>
+    omnifunc = "v:lua.vim.lsp.omnifunc",
+    --- use gq for formatting
+    formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:500})",
+  },
   ---@usage list of settings of nvim-lsp-installer
   installer = {
     setup = {
@@ -132,6 +137,8 @@ return {
           server_pending = "",
           server_uninstalled = "✗",
         },
+      automatic_installation = {
+        exclude = {},
       },
     },
   },
@@ -148,6 +155,8 @@ return {
     setup = {},
     config = {},
   },
-  ---@deprecated use automatic_configuration.skipped_servers instead
+  ---@deprecated use lvim.lsp.automatic_configuration.skipped_servers instead
   override = {},
+  ---@deprecated use lvim.lsp.installer.setup.automatic_installation instead
+  automatic_servers_installation = nil,
 }
