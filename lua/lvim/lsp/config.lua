@@ -137,6 +137,7 @@ return {
           server_pending = "",
           server_uninstalled = "✗",
         },
+      },
       automatic_installation = {
         exclude = {},
       },
