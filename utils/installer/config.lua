@@ -318,7 +318,8 @@ lvim.plugins = {
 
         lsp_signature_help = true, -- if you would like to hook ray-x/lsp_signature plugin in navigator
         lsp_signature_cfg = nil,
-        lsp_installer = true, -- set to true if you would like use the lsp installed by williamboman/nvim-lsp-installer
+        lsp_installer = false, -- set to true if you would like use the lsp installed by williamboman/nvim-lsp-installer
+        mason = true,
       })
     end
   },
