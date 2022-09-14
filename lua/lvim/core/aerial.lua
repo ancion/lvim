@@ -13,20 +13,41 @@ M.config = function()
         "lsp",
         "markdown",
       },
-      -- Enum: persist, close, auto, global
-      --   persist - aerial window will stay open until closed
-      --   close   - aerial window will close when original file is no longer visible
-      --   auto    - aerial window will stay open as long as there is a visible
-      --             buffer to attach to
-      --   global  - same as 'persist', and will always show symbols for the current buffer
-      close_behavior = "auto",
+      layout = {
+        -- There control the width of the aerial window.
+        -- They can be integers ot a float between 0 and 1 (e.g. 0.4 for 40%)
+        -- min_width and max_width can be a list of mixed types.
+        -- max_width = { 40, 0.2 } means "the lesser of 40 columns or 20% of total"
+        max_width = { 50 },
+        width = nil,
+        min_width = 30,
+
+        -- Determines the default direction to open the aerial window. The 'prefer'
+        -- options will open the window in the other direction *if* there is a
+        -- different buffer in the way of the preferred direction
+        -- Enum: prefer_right, prefer_left, right, left, float
+        default_direction = "prefer_right",
+
+        -- Determines where the aerial window will be opened
+        -- edge  : - open aerial at the far right/left of the editor
+        -- window: - open aerial to the right/left of the current window
+        placement = "window",
+      },
+
+
+      -- Determines how the aerial window decides which buffer to display symbols for
+      -- window - aerial window will display symbols for buffer in the window from which it wad opened
+      -- global - aerial window will display symbols for the current window
+      attach_mode = "window",
+
+      -- List of enum values that configure when to auto-closr the aerial window
+      --  unfocus        - close aerial when you leave the original source window
+      --  switch_buffer  - close aerial when you change the buffers in the source window
+      --  unsupported    - close aerial when attaching to a buffer that has no symbol source
+      close_automatic_events = { "unsupported" },
+
       -- Set to false to remove the default keybindings for the aerial buffer
       default_bindings = true,
-      -- Enum: prefer_right, prefer_left, right, left, float
-      -- Determines the default direction to open the aerial window. The 'prefer'
-      -- options will open the window in the other direction *if* there is a
-      -- different buffer in the way of the preferred direction
-      default_direction = "prefer_right",
       -- Disable aerial on files with this many lines
       disable_max_lines = 10000,
 
@@ -126,13 +147,6 @@ M.config = function()
       -- 'auto' will manage folds if your previous foldmethod was 'manual'
       manage_folds = false,
 
-      -- These control the width of the aerial window.
-      -- They can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
-      -- min_width and max_width can be a list of mixed types.
-      -- max_width = {40, 0.2} means "the lesser of 40 columns or 20% of total"
-      max_width = { 50 },
-      width = nil,
-      min_width = 30,
 
       -- Set default symbol icons to use patched font icons (see https://www.nerdfonts.com/)
       -- "auto" will set it to true if nvim-web-devicons or lspkind-nvim is installed.
@@ -182,7 +196,7 @@ M.config = function()
         -- Controls border appearance. Passed to nvim_open_win
         border = "rounded",
 
-        -- Enum: cursor, editor, win
+        -- Deternimes location of floating window
         --   cursor - Opens float on top of the cursor
         --   editor - Opens float centered in the editor
         --   win    - Opens float centered in the window
