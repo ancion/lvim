@@ -25,17 +25,16 @@ local core_plugins = {
     end,
   },
   {
-    "lunarvim/onedarker.nvim",
-    branch = "freeze",
+    "lunarvim/tokyonight.nvim",
     config = function()
       pcall(function()
-        if lvim and lvim.colorscheme == "onedarker" then
-          require("onedarker").setup()
-          lvim.builtin.lualine.options.theme = "onedarker"
+        if lvim and lvim.colorscheme == "tokyonight-night" then
+          require("tokyonight-night").setup()
+          lvim.builtin.lualine.options.theme = "tokyonight-night"
         end
       end)
     end,
-    disable = lvim.colorscheme ~= "onedarker",
+    disable = lvim.colorscheme ~= "tokyonight-night",
   },
 
   -- Icons
@@ -198,7 +197,14 @@ local core_plugins = {
     end,
     disable = not lvim.builtin.nvimtree.active,
   },
-
+  -- Lir
+  {
+    "christianchiarulli/lir.nvim",
+    config = function()
+      require("lvim.core.lir").setup()
+    end,
+    disable = not lvim.builtin.lir.active,
+  },
   {
     "lewis6991/gitsigns.nvim",
     config = function()

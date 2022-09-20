@@ -35,6 +35,9 @@
   "gitsigns.nvim": {
     "commit": "d7e0bcb"
   },
+  "lir.nvim": {
+    "commit": "7d8c6c4"
+  },
   "lua-dev.nvim": {
     "commit": "fd7a18e"
   },
@@ -80,8 +83,8 @@
   "nvim-web-devicons": {
     "commit": "2d02a56"
   },
-  "onedarker.nvim": {
-    "commit": "b00dd21"
+  "tokyonight.nvim": {
+    "commit": "48fc163"
   },
   "packer.nvim": {
     "commit": "6afb674"
@@ -112,5 +115,8 @@
   },
   "which-key.nvim": {
     "commit": "d5f0c63"
+  },
+  "vim-illuminate": {
+    "commit": "b545262"
   }
 }
