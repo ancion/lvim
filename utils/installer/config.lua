@@ -304,6 +304,7 @@ lvim.plugins = {
         -- end,
         -- the attach code will apply to all lsp clients
 
+        ts_fold = false, -- modified version of treesitter folding
         default_mapping = true, -- set to false if you will remap every key
         -- a list of key maps
         keymaps = {
@@ -314,6 +315,8 @@ lvim.plugins = {
         -- this kepmap gk will override "gd" mapping function declaration()  in default kepmap
         -- please check mapping.lua for all keymaps
         treesitter_analysis = true, -- treesitter variable context
+        treesitter_analysis_max_num = 100, -- how many items to run treesitter_analysis
+        treesitter_analysis_condense = true, -- condense form form treesitter_analysis
         transparency = 50, -- 0 ~ 100 blur the main window, 100: fully transparent, 0: opaque,  set to nil or 100 to disable it
 
         lsp_signature_help = true, -- if you would like to hook ray-x/lsp_signature plugin in navigator
