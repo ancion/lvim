@@ -219,7 +219,6 @@ lvim.plugins = {
     end
   },
   -- colorscheme
-  { "folke/tokyonight.nvim" },
   { "Mofiqul/dracula.nvim" },
   { "overcache/NeoSolarized" },
   {
@@ -229,8 +228,6 @@ lvim.plugins = {
       vim.g.catppuccin_flavour = "mocha"
     end
   },
-  { "RRethy/vim-illuminate" },
-
   -- colorPanel
   {
     'norcalli/nvim-colorizer.lua',

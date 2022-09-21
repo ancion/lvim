@@ -25,6 +25,48 @@ M.config = function()
       numhl = "LspDiagnosticsSignInformation",
     },
     install_path = utils.join_paths(vim.call('stdpath', 'data'), 'dapinstall/'),
+    dap_ui_opt = {
+      icons = { expanded = "", collapsed = "" },
+      mappings = {
+        -- Use a table to apply multiple mappings
+        expand = { "o", "<2-LeftMouse>", "<CR>" },
+        open = "O",
+        remove = "d",
+        edit = "e",
+        repl = "r",
+        toggle = "t",
+      },
+      layouts = {
+        {
+          -- You can change the order of elements in the sidebar
+          elements = {
+            { id = "scopes", size = 0.38 }, -- Can be float or integer > 1
+            { id = "stacks", size = 0.35 },
+            { id = "watches", size = 0.15 },
+            { id = "breakpoints", size = 0.12 },
+          },
+          size = 40,
+          position = "left", -- Can be "left", "right", "top", "bottom"
+        },
+        {
+          elements = {
+            { id = "repl", size = 0.5 },
+            { id = "console", size = 0.5 },
+          },
+          size = 15,
+          position = "bottom", -- Can be "left", "right", "top", "bottom"
+        }
+      },
+      floating = {
+        max_height = nil, -- These can be integers or a float between 0 and 1.
+        max_width = nil, -- Floats will be treated as percentage of your screen.
+        border = "single", -- Border style. Can be "single", "double" or "rounded"
+        mappings = {
+          close = { "q", "<Esc>" },
+        },
+      },
+      windows = { indent = 1 },
+    }
   }
 end
 
@@ -78,6 +120,8 @@ end
 
 M.set_dap_ui = function()
   local dap, dapui = require "dap", require 'dapui'
+
+  dapui.setup(lvim.builtin.dap.dap_ui_opt)
 
   local debug_open = function()
     dapui.open()

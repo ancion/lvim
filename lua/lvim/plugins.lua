@@ -25,16 +25,11 @@ local core_plugins = {
     end,
   },
   {
-    "lunarvim/tokyonight.nvim",
+    "folke/tokyonight.nvim",
     config = function()
-      pcall(function()
-        if lvim and lvim.colorscheme == "tokyonight-night" then
-          require("tokyonight-night").setup()
-          lvim.builtin.lualine.options.theme = "tokyonight-night"
-        end
-      end)
+      require("lvim.core.theme").setup()
     end,
-    disable = lvim.colorscheme ~= "tokyonight-night",
+    disable = not vim.startswith(lvim.colorscheme, "tokyonight"),
   },
 
   -- Icons
@@ -254,6 +249,15 @@ local core_plugins = {
     disable = not lvim.builtin.lualine.active,
   },
 
+  -- breadcrumbs
+  {
+    "SmiteshP/nvim-navic",
+    config = function()
+      require("lvim.core.breadcrumbs").setup()
+    end,
+    disable = not lvim.builtin.breadcrumbs.active,
+  },
+
   {
     "akinsho/bufferline.nvim",
     config = function()
@@ -293,50 +297,6 @@ local core_plugins = {
   },
   {
     "rcarriga/nvim-dap-ui",
-    config = function()
-      require("dapui").setup({
-        icons = { expanded = "", collapsed = "" },
-        mappings = {
-          -- Use a table to apply multiple mappings
-          expand = { "o", "<2-LeftMouse>", "<CR>" },
-          open = "O",
-          remove = "d",
-          edit = "e",
-          repl = "r",
-          toggle = "t",
-        },
-        layouts = {
-          {
-            -- You can change the order of elements in the sidebar
-            elements = {
-              { id = "scopes", size = 0.38 }, -- Can be float or integer > 1
-              { id = "stacks", size = 0.35 },
-              { id = "watches", size = 0.15 },
-              { id = "breakpoints", size = 0.12 },
-            },
-            size = 40,
-            position = "left", -- Can be "left", "right", "top", "bottom"
-          },
-          {
-            elements = {
-              { id = "repl", size = 0.5 },
-              { id = "console", size = 0.5 },
-            },
-            size = 15,
-            position = "bottom", -- Can be "left", "right", "top", "bottom"
-          }
-        },
-        floating = {
-          max_height = nil, -- These can be integers or a float between 0 and 1.
-          max_width = nil, -- Floats will be treated as percentage of your screen.
-          border = "single", -- Border style. Can be "single", "double" or "rounded"
-          mappings = {
-            close = { "q", "<Esc>" },
-          },
-        },
-        windows = { indent = 1 },
-      })
-    end,
   },
 
   -- Debugging
@@ -371,7 +331,30 @@ local core_plugins = {
   },
 
   -- SchemaStore
-  { "b0o/schemastore.nvim" },
+  {
+    "b0o/schemastore.nvim",
+  },
+
+  {
+    "RRethy/vim-illuminate",
+    config = function()
+      require("lvim.core.illuminate").setup()
+    end,
+    disable = not lvim.builtin.illuminate.active,
+  },
+  {
+    "lunarvim/onedarker.nvim",
+    branch = "freeze",
+    config = function()
+      pcall(function()
+        if lvim and lvim.colorscheme == "onedarker" then
+          require("onedarker").setup()
+          lvim.builtin.lualine.options.theme = "onedarker"
+        end
+      end)
+    end,
+    disable = lvim.colorscheme ~= "onedarker",
+  },
 }
 
 local default_snapshot_path = join_paths(get_lvim_base_dir(), "snapshots", "default.json")

@@ -42,7 +42,7 @@ bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/
 If you are running Neovim 0.8+
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
+export LV_BRANCH="rolling"; bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
 ```
 
 To run the install script without any interaction you can pass the `-y` flag to automatically install all dependencies and have no prompts. This is particularly useful in automated installations.
@@ -70,7 +70,7 @@ Example:
 ```lua
 -- general
 lvim.format_on_save = true
-lvim.colorscheme = "onedarker"
+lvim.colorscheme = "tokyonight"
 
 lvim.leader = "space"
 -- add your own keymapping
@@ -125,7 +125,7 @@ linters.setup {
 -- Additional Plugins
 lvim.plugins = {
     {"lunarvim/colorschemes"},
-    {"folke/tokyonight.nvim"}, {
+    {
         "ray-x/lsp_signature.nvim",
         config = function() require"lsp_signature".on_attach() end,
         event = "BufRead"

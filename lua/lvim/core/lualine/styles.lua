@@ -11,6 +11,7 @@ styles.none = {
   style = "none",
   options = {
     theme = "auto",
+    globalstatus = true,
     icons_enabled = lvim.use_icons,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
@@ -40,6 +41,7 @@ styles.default = {
   style = "default",
   options = {
     theme = "auto",
+    globalstatus = true,
     icons_enabled = lvim.use_icons,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
@@ -69,6 +71,7 @@ styles.lvim = {
   style = "lvim",
   options = {
     theme = "auto",
+    globalstatus = true,
     icons_enabled = lvim.use_icons,
     --component_separators = { left = "", right = "" },
     --section_separators = { left = "", right = "" },
@@ -100,7 +103,8 @@ styles.lvim = {
       components.lsp,
     },
     lualine_z = {
-      components.scrollbar,
+      components.location,
+      components.progress,
     },
   },
   inactive_sections = {
