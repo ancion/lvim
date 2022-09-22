@@ -4,6 +4,39 @@ M.config = function()
   lvim.builtin.theme = {
     name = "tokyonight",
     options = {
+      on_highlights = function(hl, c)
+        hl.IndentBlanklineContextChar = {
+          fg = c.dark5,
+        }
+        local prompt = "#2d3149"
+        -- hl.TelescopeNormal = {
+        --   bg = c.bg_dark,
+        --   fg = c.fg_dark,
+        -- }
+        -- hl.TelescopeBorder = {
+        --   bg = c.bg_dark,
+        --   fg = c.bg_dark,
+        -- }
+        -- hl.TelescopePromptNormal = {
+        --   bg = prompt,
+        -- }
+        -- hl.TelescopePromptBorder = {
+        --   bg = prompt,
+        --   fg = prompt,
+        -- }
+        -- hl.TelescopePromptTitle = {
+        --   bg = prompt,
+        --   fg = prompt,
+        -- }
+        -- hl.TelescopePreviewTitle = {
+        --   bg = c.bg_dark,
+        --   fg = c.bg_dark,
+        -- }
+        -- hl.TelescopeResultsTitle = {
+        --   bg = c.bg_dark,
+        --   fg = c.bg_dark,
+        -- }
+      end,
       style = "night", -- The theme comes in three styles, `storm`, a darker variant `night` and `day`
       transparent = lvim.transparent_window, -- Enable this to disable setting the background color
       terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
@@ -35,6 +68,12 @@ M.config = function()
       use_background = true, -- can be light/dark/auto. When auto, background will be set to vim.o.background
     },
   }
+  local status_ok, theme = pcall(require, "tokyonight")
+  if not status_ok then
+    return
+  end
+
+  theme.setup(lvim.builtin.theme.options)
 end
 
 M.setup = function()

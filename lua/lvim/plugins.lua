@@ -29,7 +29,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.theme").setup()
     end,
-    disable = not vim.startswith(lvim.colorscheme, "tokyonight"),
+    -- disable = not vim.startswith(lvim.colorscheme, "tokyonight"),
   },
 
   -- Icons
@@ -342,6 +342,15 @@ local core_plugins = {
     end,
     disable = not lvim.builtin.illuminate.active,
   },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require("lvim.core.indentlines").setup()
+    end,
+    disable = not lvim.builtin.indentlines.active,
+  },
+
   {
     "lunarvim/onedarker.nvim",
     branch = "freeze",

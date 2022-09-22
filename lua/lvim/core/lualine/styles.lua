@@ -78,7 +78,8 @@ styles.lvim = {
     component_separators = { left = "", right = "·" },
     section_separators = { left = "", right = "" },
 
-    disabled_filetypes = { "alpha", "NvimTree", "Outline", "dashboard" },
+    disabled_filetypes = { "alpha"},
+    -- "NvimTree", "Outline",
   },
   sections = {
     lualine_a = {
@@ -109,16 +110,28 @@ styles.lvim = {
   },
   inactive_sections = {
     lualine_a = {
-      "filename",
+      components.mode,
     },
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {},
+    lualine_b = {
+      components.branch,
+    },
+    lualine_c = {
+      components.diff,
+      components.python_env,
+    },
+    lualine_x = {
+      components.diagnostics,
+      components.lsp,
+      components.spaces,
+      components.filetype,
+    },
+    lualine_y = { components.location },
+    lualine_z = {
+      components.progress,
+    },
   },
   tabline = {},
-  extensions = { "nvim-tree" },
+  extensions = {},
 }
 
 function M.get_style(style)
