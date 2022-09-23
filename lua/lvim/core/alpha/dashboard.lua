@@ -118,25 +118,26 @@ function M.get_sections()
       hl = "Number",
     },
   }
+  local buttons = {}
 
-  local dashboard = require "alpha.themes.dashboard"
-
-  local function button(sc, txt, keybind, keybind_opts)
-    local b = dashboard.button(sc, txt, keybind, keybind_opts)
-    b.opts.hl_shortcut = "Macro"
-    return b
+  local status_ok, dashboard = pcall(require, "alpha.themes.dashboard")
+  if status_ok then
+    local function button(sc, txt, keybind, keybind_opts)
+      local b = dashboard.button(sc, txt, keybind, keybind_opts)
+      b.opts.hl_shortcut = "Macro"
+      return b
+    end
+    buttons = {
+      val = {
+          button( "<Space>   f", "   Find File", "<CMD>Telescope find_files<CR>" ),
+          button( "<Space>   n", "   New File", "<CMD>ene!<CR>" ),
+          button( "<Space>   P", "   Recent Projects ", "<CMD>Telescope projects<CR>" ),
+          button( "<Space> s r", "   Recently Used Files", "<CMD>Telescope oldfiles<CR>" ),
+          button( "<Spave> r c", "   Configuration", "<cmd>e $HOME/.config/lvim/config.lua<CR>"),
+          button( "<Space> s c", "   Choose Colorschema ", "<CMD>Telescope colorscheme<CR>"),
+      },
+    }
   end
-
-  local buttons = {
-    val = {
-      button( "<Space>   f", "   Find File", "<CMD>Telescope find_files<CR>" ),
-      button( "<Space>   n", "   New File", "<CMD>ene!<CR>" ),
-      button( "<Space>   P", "   Recent Projects ", "<CMD>Telescope projects<CR>" ),
-      button( "<Space> s r", "   Recently Used Files", "<CMD>Telescope oldfiles<CR>" ),
-      button( "<Spave> r c", "   Configuration", "<cmd>e $HOME/.config/lvim/config.lua<CR>"),
-      button( "<Space> s c", "   Choose Colorschema ", "<CMD>Telescope colorscheme<CR>"),
-    },
-  }
 
   return {
     header = header,
