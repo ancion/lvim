@@ -42,7 +42,7 @@ local core_plugins = {
   {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
-      require("lvim.core.indentline").setup()
+      require("lvim.core.indentlines").setup()
     end
   },
 

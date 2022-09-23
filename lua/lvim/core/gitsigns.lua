@@ -7,20 +7,21 @@ M.config = function()
     opts = {
       signs = {
         add = {
+          -- ░ ▎ ▎
           hl = "GitSignsAdd",
-          text = "░",
+          text = "┃",
           numhl = "GitSignsAddNr",
           linehl = "GitSignsAddLn",
         },
         change = {
           hl = "GitSignsChange",
-          text = "░",
+          text = "┃",
           numhl = "GitSignsChangeNr",
           linehl = "GitSignsChangeLn",
         },
         delete = {
           hl = "GitSignsDelete",
-          text = "░",
+          text = "►",
           numhl = "GitSignsDeleteNr",
           linehl = "GitSignsDeleteLn",
         },
@@ -32,7 +33,7 @@ M.config = function()
         },
         changedelete = {
           hl = "GitSignsChange",
-          text = "▒",
+          text = "┃",
           numhl = "GitSignsChangeNr",
           linehl = "GitSignsChangeLn",
         },
