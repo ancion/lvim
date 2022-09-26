@@ -4,11 +4,6 @@ function M.config()
   lvim.builtin.mason = {
     ui = {
       border = "rounded",
-      icons = {
-        package_installed = "✓",
-        package_pending = "➜",
-        package_uninstalled = "✗"
-      },
       keymaps = {
         toggle_package_expand = "<CR>",
         install_package = "i",
