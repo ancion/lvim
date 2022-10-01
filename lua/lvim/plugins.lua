@@ -14,9 +14,8 @@ local core_plugins = {
   {
     "jose-elias-alvarez/null-ls.nvim",
   },
-  { "antoinemadec/FixCursorHold.nvim" }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
+  -- { "antoinemadec/FixCursorHold.nvim" }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
 
-  -- onedark
   { "williamboman/mason-lspconfig.nvim" },
   {
     "williamboman/mason.nvim",
@@ -344,6 +343,7 @@ local core_plugins = {
   },
 
 
+  -- onedark
   {
     "lunarvim/onedarker.nvim",
     branch = "freeze",
