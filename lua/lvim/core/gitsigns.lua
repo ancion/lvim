@@ -7,37 +7,31 @@ M.config = function()
     opts = {
       signs = {
         add = {
-          -- ░ ▎ ▎
           hl = "GitSignsAdd",
-         --  text = "┃",
           text = lvim.icons.ui.BoldLineLeft,
           numhl = "GitSignsAddNr",
           linehl = "GitSignsAddLn",
         },
         change = {
           hl = "GitSignsChange",
-          --text = "┃",
           text = lvim.icons.ui.BoldLineLeft,
           numhl = "GitSignsChangeNr",
           linehl = "GitSignsChangeLn",
         },
         delete = {
           hl = "GitSignsDelete",
-          --text = "►",
           text = lvim.icons.ui.Triangle,
           numhl = "GitSignsDeleteNr",
           linehl = "GitSignsDeleteLn",
         },
         topdelete = {
           hl = "GitSignsDelete",
-      --    text = "┅",
-          text = lvim.icons.ui.Triangle,
+          text = lvim.icons.ui.SignsDelete,
           numhl = "GitSignsDeleteNr",
           linehl = "GitSignsDeleteLn",
         },
         changedelete = {
           hl = "GitSignsChange",
-       --   text = "┃",
           text = lvim.icons.ui.BoldLineLeft,
           numhl = "GitSignsChangeNr",
           linehl = "GitSignsChangeLn",

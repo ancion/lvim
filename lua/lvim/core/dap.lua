@@ -7,15 +7,13 @@ M.config = function()
     active = false,
     on_config_done = nil,
     breakpoint = {
-     -- text = "🔴",
-      text = lvim.icons.ui.Bug,
+      text = lvim.icons.ui.Breakpoint,
       texthl = "LspDiagnosticsSignError",
       linehl = "",
       numhl = "",
     },
     breakpoint_rejected = {
-     --  text = "🪲",
-      text = lvim.icons.ui.Bug,
+      text = lvim.icons.ui.BugText,
       texthl = "LspDiagnosticsSignHint",
       linehl = "",
       numhl = "",
@@ -28,7 +26,10 @@ M.config = function()
     },
     install_path = utils.join_paths(vim.call('stdpath', 'data'), 'dapinstall/'),
     dap_ui_opt = {
-      icons = { expanded = "", collapsed = "" },
+      icons = { 
+        expanded = lvim.icons.ui.ChevronShortDown,
+        collapsed = lvim.icons.ui.NormalArrowRight,
+      },
       mappings = {
         -- Use a table to apply multiple mappings
         expand = { "o", "<2-LeftMouse>", "<CR>" },

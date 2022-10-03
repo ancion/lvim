@@ -6,7 +6,6 @@ end
 
 local function diagnostics_indicator(num, _, diagnostics, _)
   local result = {}
- -- local symbols = { error = " ", warning = "", info = "" }
   local symbols = {
     error = lvim.icons.diagnostics.Error,
     warning = lvim.icons.diagnostics.Warning,

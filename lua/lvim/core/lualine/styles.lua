@@ -81,10 +81,15 @@ styles.lvim = {
     icons_enabled = lvim.use_icons,
     --component_separators = { left = "", right = "" },
     --section_separators = { left = "", right = "" },
-    component_separators = { left = "", right = "·" },
-    section_separators = { left = "", right = "" },
-
-    disabled_filetypes = { "alpha"},
+    component_separators = {
+      left = lvim.icons.ui.DividerRight,
+      right = lvim.icons.ui.MiddleDot,
+    },
+    section_separators = {
+      left = lvim.icons.ui.BoldDividerRight,
+      right = lvim.icons.ui.BoldDividerLeft,
+    },
+    disabled_filetypes = { "alpha" },
     -- "NvimTree", "Outline",
   },
   sections = {

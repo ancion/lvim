@@ -22,3 +22,4 @@ local commands = reload "lvim.core.commands"
 commands.load(commands.defaults)
 
 reload("lvim.lsp").setup()
+
