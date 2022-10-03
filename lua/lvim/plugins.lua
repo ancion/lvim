@@ -1,3 +1,4 @@
+-- local require = require("lvim.utils.require").require
 local core_plugins = {
   -- Packer can manage itself as an optional plugin
   { "wbthomason/packer.nvim" },
