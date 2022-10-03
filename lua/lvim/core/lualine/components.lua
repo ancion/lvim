@@ -37,12 +37,10 @@ if lvim.colorscheme == "tokyonight" then
 end
 
 return {
-  --            ⟦ ⟧      秊          all used icon in lualine
   mode = {
     "mode",
     fmt = function(str)
       return " -- " .. str .. " -- "
-      --return " " .. lvim.icons.ui.Target .. " "
     end,
     padding = { left = 0, right = 0 },
     color = {},
@@ -61,7 +59,6 @@ return {
   diff = {
     "diff",
     source = diff_source,
-    -- symbols = { added = "  ", modified = " ", removed = " " },
     symbols = {
       added = lvim.icons.git.LineAdded .. " ",
       modified = lvim.icons.git.LineModified .. " ",
@@ -96,26 +93,19 @@ return {
     "diagnostics",
     sources        = { "nvim_diagnostic" },
     sections       = { "error", "warn" },
-    -- symbols = { error = " ", warn = " ", info = " ", hint = " " },
-    symbols        = { error = " ", warn = " " },
     color          = {
       --bg = colors.blue,
       gui = 'bold',
     },
-    colored        = false,
+    colored = false,
     always_visible = true,
-    --separator={left="", right=""},
-    --separator = { left = "┣", right = "┫" },
-    cond           = conditions.hide_in_width,
-    --    sources = { "nvim_diagnostic" },
-    --    symbols = { error = " ", warn = " ", info = " ", hint = " " },
-    --symbols = {
-    --  error = lvim.icons.diagnostics.BoldError .. " ",
-    --  warn = lvim.icons.diagnostics.BoldWarning .. " ",
-    --  info = lvim.icons.diagnostics.BoldInformation .. " ",
-    --  hint = lvim.icons.diagnostics.BoldHint .. " ",
-    --},
-    -- cond = conditions.hide_in_width,
+    symbols = {
+     error = lvim.icons.diagnostics.Error .. " ",
+     warn = lvim.icons.diagnostics.Warning .. " ",
+     -- info = lvim.icons.diagnostics.BoldInformation .. " ",
+     -- hint = lvim.icons.diagnostics.BoldHint .. " ",
+    },
+    cond = conditions.hide_in_width,
   },
   treesitter = {
     function()

@@ -21,14 +21,10 @@ function M.config()
         enable = lvim.use_icons,
         show_on_dirs = false,
         icons = {
-       --   hint = "",
-       --   info = "",
-       --   warning = "",
-       --   error = "",
-          hint = lvim.icons.diagnostics.BoldHint,
-          info = lvim.icons.diagnostics.BoldInformation,
-          warning = lvim.icons.diagnostics.BoldWarning,
-          error = lvim.icons.diagnostics.BoldError,
+          hint = lvim.icons.diagnostics.Hint,
+          info = lvim.icons.diagnostics.Information,
+          warning = lvim.icons.diagnostics.Warning,
+          error = lvim.icons.diagnostics.Error,
         },
       },
       update_focused_file = {
@@ -71,7 +67,7 @@ function M.config()
         icons = {
           webdev_colors = lvim.use_icons,
           git_placement = "before",
-          symlink_arrow = "  ",
+          symlink_arrow = " " .. lvim.icons.ui.NormalArrowRight .. " ",
           show = {
             git = lvim.use_icons,
             folder = lvim.use_icons,
@@ -82,13 +78,6 @@ function M.config()
             default = lvim.icons.ui.Text,
             symlink = lvim.icons.ui.FileSymlink,
             git = {
-      --        unstaged = "",
-      --        staged = "",
-      --        unmerged = "",
-      --        renamed = "➜",
-      --        deleted = "",
-      --        untracked = "U",
-      --        ignored = "◌",
               deleted = lvim.icons.git.FileDeleted,
               ignored = lvim.icons.git.FileIgnored,
               renamed = lvim.icons.git.FileRenamed,
