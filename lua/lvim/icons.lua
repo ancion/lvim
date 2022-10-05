@@ -129,7 +129,8 @@ return {
     BugText = "🪲",
     ColorPanel = " ",
     MiddleDot = "·",
-    Aliens = ""
+    Aliens = "",
+    Circular = "",
     --            ⟦ ⟧      秊          ,
   },
   diagnostics = {

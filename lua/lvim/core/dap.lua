@@ -46,9 +46,6 @@ M.setup = function()
     vim.fn.sign_define("DapStopped", lvim.builtin.dap.stopped)
   end
 
-  -- set_dap_ui grid
-  M.set_dap_ui()
-
   -- debug keybindings
   M.dap_keybings()
 
@@ -75,8 +72,6 @@ M.config_debug = function()
 
   -- debug cpp
   require('dap.ext.vscode').load_launchjs(nil, { cppdgb = { "cpp" } })
-
-
 end
 
 
@@ -122,9 +117,9 @@ M.setup_ui = function()
   dapui.setup {
     expand_lines = true,
     icons = {
-        expanded = lvim.icons.ui.ChevronShortDown,
-        collapsed = lvim.icons.ui.NormalArrowRight,
-        circular = "",
+      expanded = lvim.icons.ui.ChevronShortDown,
+      collapsed = lvim.icons.ui.NormalArrowRight,
+      circular = lvim.icons.ui.Circular,
     },
     mappings = {
       -- Use a table to apply multiple mappings
@@ -144,7 +139,7 @@ M.setup_ui = function()
           { id = "watches", size = 0.25 },
         },
         size = 0.33,
-        position = "right",
+        position = "left",
       },
       {
         elements = {
