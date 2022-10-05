@@ -26,10 +26,6 @@ local core_plugins = {
   },
   {
     "folke/tokyonight.nvim",
-    config = function()
-      require("lvim.core.theme").setup()
-    end,
-    -- disable = not vim.startswith(lvim.colorscheme, "tokyonight"),
   },
 
   -- Icons
@@ -198,6 +194,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.lir").setup()
     end,
+    requires = { "kyazdani42/nvim-web-devicons" },
     disable = not lvim.builtin.lir.active,
   },
   {
@@ -295,9 +292,6 @@ local core_plugins = {
       })
     end,
   },
-  {
-    "rcarriga/nvim-dap-ui",
-  },
 
   -- Debugging
   {
@@ -306,6 +300,24 @@ local core_plugins = {
     -- event = "BufWinEnter",
     config = function()
       require("lvim.core.dap").setup()
+    end,
+    disable = not lvim.builtin.dap.active,
+  },
+
+  -- Debugger management
+  {
+    "Pocco81/dap-buddy.nvim",
+    branch = "dev",
+    -- event = "BufWinEnter",
+    -- event = "BufRead",
+    disable = not lvim.builtin.dap.active,
+  },
+
+  -- Debugger user interface
+  {
+    "rcarriga/nvim-dap-ui",
+    config = function()
+      require("lvim.core.dap").setup_ui()
     end,
     disable = not lvim.builtin.dap.active,
   },

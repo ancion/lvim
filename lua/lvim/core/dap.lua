@@ -25,51 +25,9 @@ M.config = function()
       numhl = "LspDiagnosticsSignInformation",
     },
     install_path = utils.join_paths(vim.call('stdpath', 'data'), 'dapinstall/'),
-    dap_ui_opt = {
-      icons = { 
-        expanded = lvim.icons.ui.ChevronShortDown,
-        collapsed = lvim.icons.ui.NormalArrowRight,
-      },
-      mappings = {
-        -- Use a table to apply multiple mappings
-        expand = { "o", "<2-LeftMouse>", "<CR>" },
-        open = "O",
-        remove = "d",
-        edit = "e",
-        repl = "r",
-        toggle = "t",
-      },
-      layouts = {
-        {
-          -- You can change the order of elements in the sidebar
-          elements = {
-            { id = "scopes", size = 0.38 }, -- Can be float or integer > 1
-            { id = "stacks", size = 0.35 },
-            { id = "watches", size = 0.15 },
-            { id = "breakpoints", size = 0.12 },
-          },
-          size = 40,
-          position = "left", -- Can be "left", "right", "top", "bottom"
-        },
-        {
-          elements = {
-            { id = "repl", size = 0.5 },
-            { id = "console", size = 0.5 },
-          },
-          size = 15,
-          position = "bottom", -- Can be "left", "right", "top", "bottom"
-        }
-      },
-      floating = {
-        max_height = nil, -- These can be integers or a float between 0 and 1.
-        max_width = nil, -- Floats will be treated as percentage of your screen.
-        border = "single", -- Border style. Can be "single", "double" or "rounded"
-        mappings = {
-          close = { "q", "<Esc>" },
-        },
-      },
-      windows = { indent = 1 },
-    }
+    ui = {
+      auto_open = true,
+    },
   }
 end
 
@@ -99,6 +57,10 @@ M.setup = function()
 
   -- dap_config
   dap_install.config("python", {})
+
+  if lvim.builtin.dap.on_config_done then
+    lvim.builtin.dap.on_config_done(dap)
+  end
 end
 
 
@@ -115,43 +77,8 @@ M.config_debug = function()
   require('dap.ext.vscode').load_launchjs(nil, { cppdgb = { "cpp" } })
 
 
-  if lvim.builtin.dap.on_config_done then
-    lvim.builtin.dap.on_config_done(dap)
-  end
 end
 
-
-M.set_dap_ui = function()
-  local dap, dapui = require "dap", require 'dapui'
-
-  dapui.setup(lvim.builtin.dap.dap_ui_opt)
-
-  local debug_open = function()
-    dapui.open()
-    vim.api.nvim_command("DapVirtualTextEnable")
-  end
-  local debug_close = function()
-    dap.repl.close()
-    dapui.close()
-    vim.api.nvim_command("DapVirtualTextDisable")
-    --vim.api.nvim_command("bdelete! term:") -- close debug terminal
-  end
-
-  -- dapui config
-  dap.listeners.after.event_initialized['dapui_config'] = function()
-    debug_open()
-  end
-  dap.listeners.before.event_terminated['dapui_config'] = function()
-    debug_close()
-  end
-  dap.listeners.before.event_exited['dapui_config'] = function()
-    debug_close()
-  end
-  -- for some debug adapter, terminate to exit events will no fire, use disconnect reuset instead
-  dap.listeners.before.disconnect['dapui_config'] = function()
-    debug_close()
-  end
-end
 
 M.dap_keybings = function()
   -- lvim.builtin.which_key.mappings["d"] = {
@@ -165,10 +92,11 @@ M.dap_keybings = function()
   --   i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
   --   o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
   --   u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
-  --   p = { "<cmd>lua require'dap'.pause.toggle()<cr>", "Pause" },
+  --   p = { "<cmd>lua require'dap'.pause()<cr>", "Pause" },
   --   r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
   --   s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
   --   q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
+  --   U = { "<cmd>lua require'dapui'.toggle()<cr>", "Toggle UI" },
   -- }
   vim.api.nvim_set_keymap("n", '<F3>', "<cmd>lua require'dap'.pause.toggle()<cr>", {})
   vim.api.nvim_set_keymap("n", '<F4>', "<cmd>lua require'dap'.repl.toggle()<cr>", {})
@@ -188,20 +116,81 @@ function M.reload_continue()
 end
 
 -- TODO: put this up there ^^^ call in ftplugin
+M.setup_ui = function()
+  local dap = require "dap"
+  local dapui = require "dapui"
+  dapui.setup {
+    expand_lines = true,
+    icons = {
+        expanded = lvim.icons.ui.ChevronShortDown,
+        collapsed = lvim.icons.ui.NormalArrowRight,
+        circular = "",
+    },
+    mappings = {
+      -- Use a table to apply multiple mappings
+      expand = { "<CR>", "<2-LeftMouse>" },
+      open = "o",
+      remove = "d",
+      edit = "e",
+      repl = "r",
+      toggle = "t",
+    },
+    layouts = {
+      {
+        elements = {
+          { id = "scopes", size = 0.33 },
+          { id = "breakpoints", size = 0.17 },
+          { id = "stacks", size = 0.25 },
+          { id = "watches", size = 0.25 },
+        },
+        size = 0.33,
+        position = "right",
+      },
+      {
+        elements = {
+          { id = "repl", size = 0.45 },
+          { id = "console", size = 0.55 },
+        },
+        size = 0.27,
+        position = "bottom",
+      },
+    },
+    floating = {
+      max_height = 0.9,
+      max_width = 0.5, -- Floats will be treated as percentage of your screen.
+      border = vim.g.border_chars, -- Border style. Can be 'single', 'double' or 'rounded'
+      mappings = {
+        close = { "q", "<Esc>" },
+      },
+    },
+  }
 
--- M.dap = function()
---   if lvim.plugin.dap.active then
---     local dap_install = require "dap-install"
---     dap_install.config("python_dbg", {})
---   end
--- end
---
--- M.dap = function()
---   -- gem install readapt ruby-debug-ide
---   if lvim.plugin.dap.active then
---     local dap_install = require "dap-install"
---     dap_install.config("ruby_vsc_dbg", {})
---   end
--- end
+  if lvim.builtin.dap.ui.auto_open then
+    local debug_open = function()
+      dapui.open()
+      vim.api.nvim_command("DapVirtualTextEnable")
+    end
+    local debug_close = function()
+      dap.repl.close()
+      dapui.close()
+      vim.api.nvim_command("DapVirtualTextDisable")
+      --vim.api.nvim_command("bdelete! term:") -- close debug terminal
+    end
+    -- dapui config
+    dap.listeners.after.event_initialized["dapui_config"] = function()
+      debug_open()
+    end
+    dap.listeners.before.event_terminated['dapui_config'] = function()
+      debug_close()
+    end
+    dap.listeners.before.event_exited['dapui_config'] = function()
+      debug_close()
+    end
+    -- for some debug adapter, terminate to exit events will no fire, use disconnect reuset instead
+    dap.listeners.before.disconnect['dapui_config'] = function()
+      debug_close()
+    end
+  end
+end
 
 return M
