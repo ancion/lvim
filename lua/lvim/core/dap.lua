@@ -4,7 +4,7 @@ local utils = require('lvim.utils')
 
 M.config = function()
   lvim.builtin.dap = {
-    active = false,
+    active = true,
     on_config_done = nil,
     breakpoint = {
       text = lvim.icons.ui.Breakpoint,
@@ -32,8 +32,11 @@ M.config = function()
 end
 
 M.setup = function()
+  local status_ok, dap = pcall(require, "dap")
+  if not status_ok then
+    return
+  end
   local dap_install = require 'dap-install'
-
   -- defined dap install_path
   dap_install.setup({
     installation_path = lvim.builtin.dap.install_path
@@ -112,7 +115,10 @@ end
 
 -- TODO: put this up there ^^^ call in ftplugin
 M.setup_ui = function()
-  local dap = require "dap"
+  local status_ok, dap = pcall(require, "dap")
+  if not status_ok then
+    return
+  end
   local dapui = require "dapui"
   dapui.setup {
     expand_lines = true,

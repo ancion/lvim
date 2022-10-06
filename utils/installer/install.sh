@@ -201,11 +201,11 @@ function print_missing_dep_msg() {
 }
 
 function check_neovim_min_version() {
-  local verify_version_cmd='if !has("nvim-0.7") | cquit | else | quit | endif'
+  local verify_version_cmd='if !has("nvim-0.8") | cquit | else | quit | endif'
 
   # exit with an error if min_version not found
   if ! nvim --headless -u NONE -c "$verify_version_cmd"; then
-    echo "[ERROR]: LunarVim requires at least Neovim v0.7 or higher"
+    echo "[ERROR]: LunarVim requires at least Neovim v0.8 or higher"
     exit 1
   fi
 }
@@ -439,7 +439,8 @@ function setup_lvim() {
 
   setup_shim
 
-  cp "$LUNARVIM_BASE_DIR/utils/installer/config.example.lua" "$LUNARVIM_CONFIG_DIR/config.lua"
+  [ ! -f "$LUNARVIM_CONFIG_DIR/config.lua" ] \
+    && cp "$LUNARVIM_BASE_DIR/utils/installer/config.example.lua" "$LUNARVIM_CONFIG_DIR/config.lua"
 
   echo "Preparing Packer setup"
 
