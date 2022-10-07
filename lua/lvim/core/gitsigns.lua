@@ -8,13 +8,13 @@ M.config = function()
       signs = {
         add = {
           hl = "GitSignsAdd",
-          text = lvim.icons.ui.BoldLineLeft,
+          text = lvim.icons.ui.LineMiddle,
           numhl = "GitSignsAddNr",
           linehl = "GitSignsAddLn",
         },
         change = {
           hl = "GitSignsChange",
-          text = lvim.icons.ui.BoldLineLeft,
+          text = lvim.icons.ui.LineMiddle,
           numhl = "GitSignsChangeNr",
           linehl = "GitSignsChangeLn",
         },
@@ -32,7 +32,7 @@ M.config = function()
         },
         changedelete = {
           hl = "GitSignsChange",
-          text = lvim.icons.ui.BoldLineLeft,
+          text = lvim.icons.ui.LineMiddle,
           numhl = "GitSignsChangeNr",
           linehl = "GitSignsChangeLn",
         },

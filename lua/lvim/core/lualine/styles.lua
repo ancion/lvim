@@ -121,23 +121,28 @@ styles.lvim = {
   },
   inactive_sections = {
     lualine_a = {
-      components.mode,
+      components.branch,
+      components.diagnostics,
     },
     lualine_b = {
-      components.branch,
+      components.mode,
     },
     lualine_c = {
+      components.filename,
       components.diff,
       components.python_env,
     },
     lualine_x = {
-      components.diagnostics,
-      components.lsp,
-      components.spaces,
       components.filetype,
+      components.encoding,
+      components.platform,
     },
-    lualine_y = { components.location },
+    lualine_y = {
+      components.treesitter,
+      components.lsp,
+    },
     lualine_z = {
+      components.location,
       components.progress,
     },
   },

@@ -97,15 +97,15 @@ return {
       --bg = colors.blue,
       gui = 'bold',
     },
-    colored = false,
+    colored        = false,
     always_visible = true,
-    symbols = {
-     error = lvim.icons.diagnostics.Error .. " ",
-     warn = lvim.icons.diagnostics.Warning .. " ",
-     -- info = lvim.icons.diagnostics.BoldInformation .. " ",
-     -- hint = lvim.icons.diagnostics.BoldHint .. " ",
+    symbols        = {
+      error = lvim.icons.diagnostics.Error .. " ",
+      warn = lvim.icons.diagnostics.Warning .. " ",
+      -- info = lvim.icons.diagnostics.BoldInformation .. " ",
+      -- hint = lvim.icons.diagnostics.BoldHint .. " ",
     },
-    cond = conditions.hide_in_width,
+    cond           = conditions.hide_in_width,
   },
   treesitter = {
     function()
