@@ -112,6 +112,7 @@ styles.lvim = {
     },
     lualine_y = {
       components.treesitter,
+      components.copilot,
       components.lsp,
     },
     lualine_z = {
@@ -139,6 +140,7 @@ styles.lvim = {
     },
     lualine_y = {
       components.treesitter,
+      components.copilot,
       components.lsp,
     },
     lualine_z = {

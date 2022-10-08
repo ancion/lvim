@@ -36,7 +36,7 @@ return {
     Variable      = "",
   },
   git = {
-    LineAdded     = "落",
+    LineAdded     = "",
     LineModified  = "",
     LineRemoved   = "",
     FileDeleted   = "",
@@ -48,7 +48,7 @@ return {
     FileUntracked = "U",
     Diff          = "",
     Repo          = "",
-    Octoface      = "",
+    Octoface      = "",
     Branch        = "",
   },
   ui = {

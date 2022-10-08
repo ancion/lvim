@@ -16,7 +16,7 @@ local statusline_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
 local cursorline_hl = vim.api.nvim_get_hl_by_name("CursorLine", true)
 local normal_hl = vim.api.nvim_get_hl_by_name("Normal", true)
 
-vim.api.nvim_set_hl(0, "SLCopilot", { fg = "#6CC644", bg = statusline_hl.background })
+-- vim.api.nvim_set_hl(0, "SLCopilot", { fg = "#6CC644", bg = "NONE" })
 vim.api.nvim_set_hl(0, "SLGitIcon", { fg = "#E8AB53", bg = cursorline_hl.background })
 vim.api.nvim_set_hl(0, "SLBranchName", { fg = normal_hl.foreground, bg = cursorline_hl.background })
 vim.api.nvim_set_hl(0, "SLProgress", { fg = "#ECBE7B", bg = statusline_hl.background })
@@ -25,17 +25,17 @@ local location_color = nil
 local branch = lvim.icons.git.Branch
 local separator = lvim.icons.ui.LineMiddle
 
-if lvim.colorscheme == "tokyonight" then
-  location_color = "SLBranchName"
-  branch = "%#SLGitIcon#" .. lvim.icons.git.Branch .. "%*" .. "%#SLBranchName#"
+-- if lvim.colorscheme == "tokyonight" then
+--   location_color = "SLBranchName"
+--   branch = "%#SLGitIcon#" .. lvim.icons.git.Branch .. "%*" .. "%#SLBranchName#"
 
-  local status_ok, tnc = pcall(require, "tokyonight.colors")
-  if status_ok then
-    local tncolors = tnc.setup { transform = true }
-    vim.api.nvim_set_hl(0, "SLSeparator", { fg = cursorline_hl.background, bg = tncolors.black })
-    separator = "%#SLSeparator#" .. lvim.icons.ui.LineMiddle .. "%*"
-  end
-end
+--   local status_ok, tnc = pcall(require, "tokyonight.colors")
+--   if status_ok then
+--     local tncolors = tnc.setup { transform = true }
+--     vim.api.nvim_set_hl(0, "SLSeparator", { fg = cursorline_hl.background, bg = tncolors.black })
+--     separator = "%#SLSeparator#" .. lvim.icons.ui.LineMiddle .. "%*"
+--   end
+-- end
 
 return {
   mode = {
@@ -119,6 +119,27 @@ return {
     end,
     cond = conditions.hide_in_width,
   },
+  copilot = {
+    function(msg)
+      local buf_clients = vim.lsp.buf_get_clients()
+      if next(buf_clients) == nil then
+        if type(msg) == "boolean" or #msg == 0 then
+          return ""
+        end
+        return msg
+      end
+      local copilot_active = false
+      for _, client in pairs(buf_clients) do
+        if client.name == "copilot" then
+          copilot_active = true
+        end
+      end
+      if copilot_active then
+        return lvim.icons.git.Octoface
+      end
+    end,
+    color = { fg = colors.green },
+  },
   lsp = {
     function(msg)
       msg = msg or "[lsp  ]"
@@ -133,16 +154,11 @@ return {
 
       local buf_ft = vim.bo.filetype
       local buf_client_names = {}
-      local copilot_active = false
 
       -- add client
       for _, client in pairs(buf_clients) do
         if client.name ~= "null-ls" and client.name ~= "copilot" then
           table.insert(buf_client_names, client.name)
-        end
-
-        if client.name == "copilot" then
-          copilot_active = true
         end
       end
 
@@ -159,11 +175,6 @@ return {
       local unique_client_names = vim.fn.uniq(buf_client_names)
 
       local language_servers = "[" .. table.concat(unique_client_names, ", ") .. "]"
-
-      if copilot_active then
-        language_servers = "%#SLCopilot#" .. lvim.icons.git.Octoface .. "%* " .. language_servers
-      end
-
       return language_servers
     end,
     separator = separator,
