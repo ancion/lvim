@@ -12,7 +12,7 @@ return {
     Field         = "",
     File          = "",
     Folder        = "",
-    Function      = "",
+    Function      = "",
     Interface     = "ﮣ",
     Key           = "",
     Keyword       = "",
