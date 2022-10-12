@@ -36,7 +36,7 @@
     "commit": "7d8c6c4"
   },
   "lua-dev.nvim": {
-    "commit": "2ffe2f6"
+    "commit": "2410be2"
   },
   "lualine.nvim": {
     "commit": "a52f078"
@@ -75,7 +75,7 @@
     "commit": "4144654"
   },
   "nvim-tree.lua": {
-    "commit": "7282f7d"
+    "commit": "b01e7be"
   },
   "nvim-treesitter": {
     "commit": "8e76333"
