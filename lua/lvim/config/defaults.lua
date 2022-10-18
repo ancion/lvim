@@ -1,5 +1,6 @@
 return {
   leader = "space",
+  reload_config_on_save = true,
   colorscheme = "tokyonight",
   transparency = false,
   format_on_save = {
