@@ -80,6 +80,8 @@ local core_plugins = {
     --disable = not lvim.builtin.diffview.active,
   },
 
+  { "Tastyep/structlog.nvim" },
+
   -- Telescope
   {
     "nvim-telescope/telescope.nvim",
