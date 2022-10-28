@@ -78,7 +78,7 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 ---------------------------------------------------------------------------------------------------
 --]]
 lvim.builtin.alpha.active = true
-lvim.builtin.notify.active = true
+--lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.dap.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"

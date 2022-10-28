@@ -2,21 +2,12 @@
 local core_plugins = {
   -- Packer can manage itself as an optional plugin
   { "wbthomason/packer.nvim" },
-  { "Tastyep/structlog.nvim" },
-  { "nvim-lua/popup.nvim" },
-  { "nvim-lua/plenary.nvim" },
-
   -- lsp
   { "neovim/nvim-lspconfig" },
   { "tamago324/nlsp-settings.nvim" },
-  --{ "williamboman/nvim-lsp-installer" },
-
-  --
   {
     "jose-elias-alvarez/null-ls.nvim",
   },
-  -- { "antoinemadec/FixCursorHold.nvim" }, -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
-
   { "williamboman/mason-lspconfig.nvim" },
   {
     "williamboman/mason.nvim",
@@ -27,40 +18,22 @@ local core_plugins = {
   {
     "folke/tokyonight.nvim",
   },
+  { "Tastyep/structlog.nvim" },
 
-  -- Icons
-  {
-    "kyazdani42/nvim-web-devicons",
-    disable = not lvim.use_icons,
-  },
+  { "nvim-lua/popup.nvim" },
+  { "nvim-lua/plenary.nvim" },
 
-  -- indent-blankline
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    config = function()
-      require("lvim.core.indentlines").setup()
-    end
-  },
-
-  -- outline
-  {
-    "stevearc/aerial.nvim",
-    config = function()
-      require("lvim.core.aerial").setup()
-    end,
-    disable = not lvim.builtin.aerial.active
-  },
 
   -- notifycaiton
-  {
-    "rcarriga/nvim-notify",
-    config = function()
-      require("lvim.core.notify").setup()
-    end,
-    requires = { "nvim-telescope/telescope.nvim" },
-    disable = not lvim.builtin.notify.active
-        or not lvim.builtin.telescope.active,
-  },
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   config = function()
+  --     require("lvim.core.notify").setup()
+  --   end,
+  --   requires = { "nvim-telescope/telescope.nvim" },
+  --   disable = not lvim.builtin.notify.active
+  --       or not lvim.builtin.telescope.active,
+  -- },
 
   -- Replace And search
   {
@@ -80,7 +53,6 @@ local core_plugins = {
     --disable = not lvim.builtin.diffview.active,
   },
 
-  { "Tastyep/structlog.nvim" },
 
   -- Telescope
   {
@@ -237,6 +209,12 @@ local core_plugins = {
     disable = not lvim.builtin.project.active,
   },
 
+  -- Icons
+  {
+    "kyazdani42/nvim-web-devicons",
+    disable = not lvim.use_icons,
+  },
+
   -- Status Line and Bufferline
   {
     -- "hoob3rt/lualine.nvim",
@@ -348,6 +326,24 @@ local core_plugins = {
     disable = not lvim.builtin.illuminate.active,
   },
 
+
+  -- indent-blankline
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require("lvim.core.indentlines").setup()
+    end,
+    disable = not lvim.builtin.indentlines.active,
+  },
+
+  -- outline
+  {
+    "stevearc/aerial.nvim",
+    config = function()
+      require("lvim.core.aerial").setup()
+    end,
+    disable = not lvim.builtin.aerial.active
+  },
 
   -- onedark
   {
