@@ -32,6 +32,10 @@ M.config = function()
         -- edge  : - open aerial at the far right/left of the editor
         -- window: - open aerial to the right/left of the current window
         placement = "window",
+
+        -- Set to true to only open aerial at the far right/left of the editor
+        -- Default behavior opens aerial relative to current window
+        placement_editor_edge = false,
       },
 
 
@@ -163,9 +167,6 @@ M.config = function()
       -- This can be a function (see :help aerial-open-automatic)
       open_automatic = false,
 
-      -- Set to true to only open aerial at the far right/left of the editor
-      -- Default behavior opens aerial relative to current window
-      placement_editor_edge = false,
 
       -- Run this command after jumping to a symbol (false will disable)
       post_jump_cmd = "normal! zz",
