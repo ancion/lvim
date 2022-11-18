@@ -33,7 +33,6 @@ M.load_default_options = function()
     showtabline = 2,                -- always show tabs
     smartcase = true,               -- smart case
     smartindent = true,             -- make indenting smarter again
-    laststatus = 3,                 -- set show one statusline whern split window
     splitbelow = true,              -- force all horizontal splits to go below current window
     splitright = true,              -- force all vertical splits to go to the right of current window
     swapfile = false,               -- creates a swapfile
@@ -62,7 +61,7 @@ M.load_default_options = function()
     sidescrolloff = 8, -- minimal number of screen lines to keep left and right of the cursor.
     showcmd = false,
     ruler = false,
-    laststatus = 3,
+    laststatus = 3,                 -- set show one statusline whern split window
   }
 
   ---  SETTINGS  ---

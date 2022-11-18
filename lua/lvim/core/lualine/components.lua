@@ -24,7 +24,6 @@ vim.api.nvim_set_hl(0, "SLProgress", { fg = "#ECBE7B", bg = statusline_hl.backgr
 
 local location_color = nil
 local branch = lvim.icons.git.Branch
-local separator = lvim.icons.ui.LineMiddle
 
 -- if lvim.colorscheme == "tokyonight" then
 --   location_color = "SLBranchName"
@@ -36,6 +35,10 @@ local separator = lvim.icons.ui.LineMiddle
 --     vim.api.nvim_set_hl(0, "SLSeparator", { fg = cursorline_hl.background, bg = tncolors.black })
 --     separator = "%#SLSeparator#" .. lvim.icons.ui.LineMiddle .. "%*"
 --   end
+-- end
+--
+-- if lvim.colorscheme == "lunar" then
+--   branch = "%#SLGitIcon#" .. lvim.icons.git.Branch .. "%*" .. "%#SLBranchName#"
 -- end
 
 return {
@@ -178,7 +181,6 @@ return {
       local language_servers = "[" .. table.concat(unique_client_names, ", ") .. "]"
       return language_servers
     end,
-    separator = separator,
     color = { gui = "bold" },
     cond = conditions.hide_in_width,
   },
@@ -199,7 +201,6 @@ return {
       local shiftwidth = vim.api.nvim_buf_get_option(0, "shiftwidth")
       return lvim.icons.ui.Tab .. " " .. shiftwidth
     end,
-    separator = separator,
     padding = 1,
   },
   encoding = {

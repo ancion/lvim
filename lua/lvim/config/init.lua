@@ -29,28 +29,17 @@ function M:init()
   local lvim_lsp_config = require "lvim.lsp.config"
   lvim.lsp = vim.deepcopy(lvim_lsp_config)
 
-  ---@deprecated replaced with lvim.builtin.alpha
-  lvim.builtin.dashboard = {
-    active = false,
-    on_config_done = nil,
-    search_handler = "",
-    disable_at_vim_enter = 0,
-    session_directory = "",
-    custom_header = {},
-    custom_section = {},
-    footer = {},
-  }
-
   lvim.builtin.luasnip = {
     sources = {
       friendly_snippets = true,
     },
   }
 
+  require("lvim.config._deprecated").handle()
   ---@deprecated
-  lvim.builtin.notify = {
-    active = false,
-  }
+  -- lvim.builtin.notify = {
+  --   active = false,
+  -- }
 end
 
 local function handle_deprecated_settings()
@@ -137,8 +126,6 @@ function M:load(config_path)
   end
 
   Log:set_level(lvim.log.level)
-
-  handle_deprecated_settings()
 
   autocmds.define_autocmds(lvim.autocommands)
 
