@@ -87,6 +87,7 @@ M.config = function()
       ["f"] = { "<cmd>lua require('lvim.core.telescope.custom-finders').find_project_files()<CR>", "Find File" },
       ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
       ["o"] = { "<cmd>AerialToggle<CR>", "Outline" },
+      ["e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
       b = {
         name = "Buffers",
         j = { "<cmd>BufferLinePick<cr>", "Jump" },
