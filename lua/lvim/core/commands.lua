@@ -8,7 +8,7 @@ vim.cmd [[
       cclose
     endif
   endfunction
-  ]]
+]]
 
 -- : CompileAndRun
 vim.cmd [[
@@ -48,7 +48,7 @@ vim.cmd [[
         :TermExec cmd='cargo run'
       endif
     endfunction
-  ]]
+]]
 
 -- [[ command! BufferKill lua require('lvim.core.bufferline').buf_kill('bd') ]],
 -- :LvimInfo

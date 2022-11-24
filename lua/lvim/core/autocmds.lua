@@ -198,20 +198,6 @@ function M.enable_reload_config_on_save()
 end
 
 function M.enable_transparent_mode()
-  -- vim.cmd "au ColorScheme * hi Normal ctermbg=none guibg=none"
-  -- vim.cmd "au ColorScheme * hi SignColumn ctermbg=none guibg=none"
-  -- vim.cmd "au ColorScheme * hi NormalNC ctermbg=none guibg=none"
-  -- vim.cmd "au ColorScheme * hi MsgArea ctermbg=none guibg=none"
-  -- vim.cmd "au ColorScheme * hi TelescopeBorder ctermbg=none guibg=none"
-  -- vim.cmd "au ColorScheme * hi NvimTreeNormal ctermbg=none guibg=none"
-  -- vim.cmd "au ColorScheme * hi EndOfBuffer ctermbg=none guibg=none"
-  -- vim.cmd "au ColorScheme * hi Pmenu ctermbg=none guibg=none"
-  -- vim.cmd "au ColorScheme * hi PmenuSel ctermfg=Black ctermbg=Cyan guifg=Black guibg=Cyan"
-  -- vim.cmd "au ColorScheme * hi NormalFloat ctermbg=none guibg=none"
-  -- vim.cmd "au ColorScheme * hi FloatBorder ctermbg=none guibg=none"
-  -- vim.cmd "au ColorScheme * hi LineNr ctermbg=none guibg=none"
-  -- vim.cmd "au ColorScheme * hi WinSeparator ctermbg=none guibg=none guifg=grey"
-  -- vim.cmd "let &fcs='eob: '"
   vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = "*",
     callback = function()
