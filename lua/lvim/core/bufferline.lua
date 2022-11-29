@@ -58,7 +58,6 @@ M.config = function()
     options = {
       numbers = "ordinal", -- can be "none" | "ordinal" | "buffer_id" | "both" | function
       mode = "buffers", -- set to "tabs" to only show tabpages instead
-      numbers = "none", -- can be "none" | "ordinal" | "buffer_id" | "both" | function
       close_command = function(bufnr) -- can be a string | function, see "Mouse actions"
         M.buf_kill("bd", bufnr, false)
       end,
