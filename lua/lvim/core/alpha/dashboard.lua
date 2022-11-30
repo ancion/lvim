@@ -130,33 +130,55 @@ function M.get_sections()
       hl = "Number",
     },
   }
-  local buttons = {}
 
-  local status_ok, dashboard = pcall(require, "alpha.themes.dashboard")
-  if status_ok then
-    local function button(sc, txt, keybind, keybind_opts)
-      local b = dashboard.button(sc, txt, keybind, keybind_opts)
-      b.opts.hl_shortcut = "Include"
-      return b
-    end
+--   local status_ok, dashboard = pcall(require, "alpha.themes.dashboard")
+--   if status_ok then
+--     local function button(sc, txt, keybind, keybind_opts)
+--       local b = dashboard.button(sc, txt, keybind, keybind_opts)
+--       b.opts.hl_shortcut = "Include"
+--       return b
+--     end
 
-    buttons = {
-      val = {
-        button("f", lvim.icons.ui.FindFile .. " Find File", "<CMD>Telescope find_files<CR>"),
-        button("t", lvim.icons.ui.FindText .. "  Find Text", "<CMD>Telescope live_grep<CR>"),
-        button("n", lvim.icons.ui.NewFile .. "  New File", "<CMD>ene!<CR>"),
-        button("p", lvim.icons.ui.Aliens .. "  Recent Projects ", "<CMD>Telescope projects<CR>"),
-        button("r", lvim.icons.ui.FolderOpen .. "  Recent files", ":Telescope oldfiles <CR>"),
-        button(
-          "c",
-          lvim.icons.ui.Gear .. "  Configuration",
-          "<CMD>edit " .. require("lvim.config"):get_user_config_path() .. " <CR>"
-        ),
-        button("<Space> c", lvim.icons.ui.ColorPanel .. " Choose Colorschema ", "<CMD>Telescope colorscheme<CR>"),
+--     buttons = {
+--       val = {
+--         button("f", lvim.icons.ui.FindFile .. " Find File", "<CMD>Telescope find_files<CR>"),
+--         button("t", lvim.icons.ui.FindText .. "  Find Text", "<CMD>Telescope live_grep<CR>"),
+--         button("n", lvim.icons.ui.NewFile .. "  New File", "<CMD>ene!<CR>"),
+--         button("p", lvim.icons.ui.Aliens .. "  Recent Projects ", "<CMD>Telescope projects<CR>"),
+--         button("r", lvim.icons.ui.FolderOpen .. "  Recent files", ":Telescope oldfiles <CR>"),
+--         button(
+--           "c",
+--           lvim.icons.ui.Gear .. "  Configuration",
+--           "<CMD>edit " .. require("lvim.config"):get_user_config_path() .. " <CR>"
+--         ),
+--         button("<Space> c", lvim.icons.ui.ColorPanel .. " Choose Colorschema ", "<CMD>Telescope colorscheme<CR>"),
+--       },
+--     },
+--   return {
+--     header = header,
+--     buttons = buttons,
+--     footer = footer,
+--   }
+-- end
+  local buttons = {
+    opts = {
+      hl_shortcut = "Include",
+      spacing = 1,
+    },
+    entries = {
+      { "f", lvim.icons.ui.FindFile .. "  Find File", "<CMD>Telescope find_files<CR>" },
+      { "t", lvim.icons.ui.FindText .. "  Find Text", "<CMD>Telescope live_grep<CR>" },
+      { "n", lvim.icons.ui.NewFile .. "  New File", "<CMD>ene!<CR>" },
+      { "p", lvim.icons.ui.Aliens .. "  Recent Projects ", "<CMD>Telescope projects<CR>" },
+      { "r", lvim.icons.ui.FolderOpen .. "  Recent files", ":Telescope oldfiles <CR>" },
+      {
+        "c",
+        lvim.icons.ui.Gear .. "  Configuration",
+        "<CMD>edit " .. require("lvim.config"):get_user_config_path() .. " <CR>",
       },
-    }
-  end
-
+      { "<space>c", lvim.icons.ui.ColorPanel .. " Choose Colorscheme ", "<CMD>Telescope colorscheme<CR>" }
+    },
+  }
   return {
     header = header,
     buttons = buttons,
