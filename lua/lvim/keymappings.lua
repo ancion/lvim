@@ -86,7 +86,7 @@ local defaults = {
     ["<leader>="] = ":cnext<CR>",
     ["<leader>-"] = ":cprev<CR>",
     ["<C-1>"] = ":call QuickFixToggle()<CR>",
-    ["<F22>"] = ":call CompilerAndRun()<CR>",
+    ["<F58>"] = ":call CompilerAndRun()<CR>",
   },
 
   term_mode = {
