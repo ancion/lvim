@@ -16,7 +16,11 @@
 ---------------------------------------------------------------------------------------------------
 -- ]]
 lvim.log.level = "warn"
-lvim.format_on_save = false
+lvim.format_on_save = {
+  enabled = true,
+  pattern = "*.lua",
+  timeout = 1000,
+}
 -- lvim.colorscheme = "onedarker"
 lvim.colorscheme = "tokyonight"
 -- lvim.colorscheme = "dracula"
@@ -254,20 +258,20 @@ lvim.plugins = {
     end
   },
 
-  { 'github/copilot.vim' },
-  {
-    "zbirenbaum/copilot.lua",
-    event = { "VimEnter" },
-    config = function()
-      vim.defer_fn(function()
-        require("copilot").setup()
-      end, 100)
-    end,
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    after = { 'copilot.lua', 'nvim-cmp' },
-  },
+  -- { 'github/copilot.vim' },
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   after = { "lualine.nvim" },
+  --   config = function()
+  --     vim.defer_fn(function()
+  --       require("copilot").setup()
+  --     end, 100)
+  --   end,
+  -- },
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   after = { 'copilot.lua', 'nvim-cmp' },
+  -- },
 
   -- function signature for lsp
   {
