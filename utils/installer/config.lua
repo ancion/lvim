@@ -258,20 +258,20 @@ lvim.plugins = {
     end
   },
 
-  -- { 'github/copilot.vim' },
-  -- {
-  --   "zbirenbaum/copilot.lua",
-  --   after = { "lualine.nvim" },
-  --   config = function()
-  --     vim.defer_fn(function()
-  --       require("copilot").setup()
-  --     end, 100)
-  --   end,
-  -- },
-  -- {
-  --   "zbirenbaum/copilot-cmp",
-  --   after = { 'copilot.lua', 'nvim-cmp' },
-  -- },
+  { 'github/copilot.vim' },
+  {
+    "zbirenbaum/copilot.lua",
+    event = { "VimEnter" },
+    config = function()
+      vim.defer_fn(function()
+        require("copilot").setup()
+      end, 100)
+    end,
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    after = { 'copilot.lua', 'nvim-cmp' },
+  },
 
   -- function signature for lsp
   {
@@ -297,6 +297,8 @@ lvim.plugins = {
         -- 'shadow', or a list of chars which defines the border
         on_attach = function(client, bufnr)
           require("illuminate").on_attach(client)
+          local navic = require("nvim-navic")
+          navic.attach(client, bufnr)
           -- your hook
         end,
         -- put a on_attach of your own here, e.g
