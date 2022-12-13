@@ -205,17 +205,11 @@ function M.enable_transparent_mode()
         "Normal",
         "SignColumn",
         "NormalNC",
-        "TelescopeBorder",
-        "TelescopeNormal",
-        "TelescopeSelection",
         "NvimTreeNormal",
         "EndOfBuffer",
         "MsgArea",
         "Pmenu",
-        "NormalFloat",
-        "FloatBorder",
         "LineNr",
-        "WinSeparator"
       }
       for _, name in ipairs(hl_groups) do
         vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))

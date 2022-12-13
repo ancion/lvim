@@ -84,6 +84,17 @@ M.setup = function()
 
   vim.g.colors_name = lvim.colorscheme
   vim.cmd("colorscheme " .. lvim.colorscheme)
+  local hl_groups = {
+    "TelescopeBorder",
+    "TelescopeNormal",
+    "TelescopeSelection",
+    "NormalFloat",
+    "FloatBorder",
+    "WinSeparator"
+  }
+  for _, name in ipairs(hl_groups) do
+    vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))
+  end
 
   require("lvim.core.lualine").setup()
   require("lvim.core.lir").icon_setup()
