@@ -92,7 +92,7 @@ function M.get_sections()
         return vim.api.nvim_buf_get_option(buf, "filetype") == "alpha"
       end, vim.api.nvim_list_wins())
 
-      if vim.api.nvim_win_get_height(alpha_wins[#alpha_wins]) < 36 then
+      if vim.api.nvim_win_get_height(alpha_wins[#alpha_wins]) < 45 then
         return M.banner_small
       end
       return banner
