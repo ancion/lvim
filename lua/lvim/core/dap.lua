@@ -39,6 +39,7 @@ M.config = function()
           expanded = lvim.icons.ui.ChevronShortDown,
           collapsed = lvim.icons.ui.NormalArrowRight,
           circular = lvim.icons.ui.Circular,
+          current_frame = " " .. lvim.icons.ui.Frame,
         },
         -- icons = { expanded = "", collapsed = "", circular = "" },
         mappings = {
@@ -78,6 +79,18 @@ M.config = function()
             close = { "q", "<Esc>" },
           },
         },
+        controls = {
+          icons = {
+            pause = lvim.icons.ui.Pause,
+            play = lvim.icons.ui.Play,
+            step_into = lvim.icons.ui.StepInto,
+            step_over = lvim.icons.ui.StepOver,
+            step_out = lvim.icons.ui.StepOut,
+            step_back = lvim.icons.ui.StepBack,
+            run_last = lvim.icons.ui.RunLast,
+            terminate = lvim.icons.ui.Terminate,
+          }
+        }
       },
     },
   }
