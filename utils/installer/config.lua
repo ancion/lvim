@@ -320,11 +320,10 @@ lvim.plugins = {
         treesitter_analysis = true, -- treesitter variable context
         treesitter_analysis_max_num = 100, -- how many items to run treesitter_analysis
         treesitter_analysis_condense = true, -- condense form form treesitter_analysis
-        transparency = 50, -- 0 ~ 100 blur the main window, 100: fully transparent, 0: opaque,  set to nil or 100 to disable it
+        transparency = 70, -- 0 ~ 100 blur the main window, 100: fully transparent, 0: opaque,  set to nil or 100 to disable it
 
         lsp_signature_help = true, -- if you would like to hook ray-x/lsp_signature plugin in navigator
         lsp_signature_cfg = nil,
-        lsp_installer = false, -- set to true if you would like use the lsp installed by williamboman/nvim-lsp-installer
         mason = true,
       })
     end
