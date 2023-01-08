@@ -167,7 +167,7 @@ local core_plugins = {
   },
   -- Lir
   {
-    "christianchiarulli/lir.nvim",
+    "LunarVim/lir.nvim",
     config = function()
       require("lvim.core.lir").setup()
     end,
