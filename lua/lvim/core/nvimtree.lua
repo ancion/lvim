@@ -84,8 +84,8 @@ function M.config()
             symlink = lvim.icons.ui.FileSymlink,
             bookmark = lvim.icons.ui.BookMark,
             folder = {
-              arrow_closed = lvim.icons.ui.TriangleShortArrowRight,
-              arrow_open = lvim.icons.ui.TriangleShortArrowDown,
+              arrow_closed = lvim.icons.ui.ChevronShortRight,
+              arrow_open = lvim.icons.ui.ChevronShortDown,
               default = lvim.icons.ui.Folder,
               open = lvim.icons.ui.FolderOpen,
               empty = lvim.icons.ui.EmptyFolder,
@@ -142,7 +142,7 @@ function M.config()
         dotfiles = false,
         git_clean = false,
         no_buffer = false,
-        custom = { 
+        custom = {
           ".idea",
           ".git",
           ".vim",
@@ -154,7 +154,7 @@ function M.config()
           ".project",
           ".factorypath",
           ".classpath"
-      },
+        },
         exclude = {},
       },
       filesystem_watchers = {
