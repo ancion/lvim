@@ -1,8 +1,7 @@
 local M = {}
 
-
+local cb = nil
 function M.config()
-  local cb = require("diffview.config").diffview_callback
   lvim.builtin.diffview = {
     active = true,
     on_config_done = nil,
@@ -130,6 +129,7 @@ function M.setup()
     vim.notify_once("diffview not found")
     return
   end
+  cb = require("diffview.config").diffview_callback
   diffview.setup(lvim.builtin.diffview.opts)
   if lvim.builtin.diffview.on_config_done then
     lvim.builtin.diffview.on_config_done(diffview)
