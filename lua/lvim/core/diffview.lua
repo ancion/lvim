@@ -135,6 +135,7 @@ function M.setup()
     vim.notify_once("diffview not found")
     return
   end
+  cb = require("diffview.config").diffview_callback
   diffview.setup(lvim.builtin.diffview.opts)
   if lvim.builtin.diffview.on_config_done then
     lvim.builtin.diffview.on_config_done(diffview)
