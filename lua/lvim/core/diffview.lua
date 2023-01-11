@@ -1,8 +1,13 @@
 local M = {}
 
-
 function M.config()
-  local cb = require("diffview.config").diffview_callback
+  local cb 
+  local loaded, _ = pcall (require, "diffview")
+  if loaded then 
+      cb = require("diffview.config").diffview_callback
+  else
+      return
+  end
   lvim.builtin.diffview = {
     active = true,
     on_config_done = nil,
