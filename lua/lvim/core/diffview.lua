@@ -1,16 +1,16 @@
 local M = {}
 
-function M.config()
-  local cb 
-  local loaded, _ = pcall (require, "diffview")
-  if loaded then 
-      cb = require("diffview.config").diffview_callback
-  else
-      return
-  end
+M.config = function()
   lvim.builtin.diffview = {
     active = true,
     on_config_done = nil,
+  }
+  local loaded, _ = pcall(require, "diffview")
+  if not loaded then
+    return
+  end
+  local cb = require("diffview.config").diffview_callback
+  lvim.builtin.diffview = vim.tbl_extend("force", lvim.builtin.diffview, {
     opts = {
       diff_binaries = false, -- Show diffs for binaries
       enhanced_diff_hl = false, -- See ':h diffview-config-enhanced_diff_hl'
@@ -126,7 +126,7 @@ function M.config()
         },
       },
     },
-  }
+  })
 end
 
 function M.setup()
@@ -135,7 +135,6 @@ function M.setup()
     vim.notify_once("diffview not found")
     return
   end
-  cb = require("diffview.config").diffview_callback
   diffview.setup(lvim.builtin.diffview.opts)
   if lvim.builtin.diffview.on_config_done then
     lvim.builtin.diffview.on_config_done(diffview)
