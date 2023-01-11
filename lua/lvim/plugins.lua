@@ -1,8 +1,5 @@
 -- local require = require("lvim.utils.require").require
 local core_plugins = {
-  -- Packer can manage itself as an optional plugin
-  -- { "wbthomason/packer.nvim" },
-
   { "folke/lazy.nvim", tag = "stable" },
   {
     "neovim/nvim-lspconfig",
@@ -47,7 +44,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.spectre").setup()
     end,
-    diable = not lvim.builtin.spectre.active
+    enabled = lvim.builtin.spectre.active
   },
 
   -- diffview
@@ -56,7 +53,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.diffview").setup()
     end,
-    --disable = not lvim.builtin.diffview.active,
+    enabled = lvim.builtin.diffview.active,
   },
 
 
@@ -67,12 +64,12 @@ local core_plugins = {
     config = function()
       require("lvim.core.telescope").setup()
     end,
-    dependencies = { "telescope-fzf-native.nvim" },
+    dependencies = { "telescope-fzf-native.nvim", "telescope-ui-select.nvim" },
     lazy = true,
     cmd = "Telescope",
     enabled = lvim.builtin.telescope.active,
   },
-  { "nvim-telescope/telescope-ui-select.nvim" },
+  { "nvim-telescope/telescope-ui-select.nvim", lazy = true },
 
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true, enabled = lvim.builtin.telescope.active },
   -- Install nvim-cmp, and buffer source as a dependency
@@ -89,11 +86,13 @@ local core_plugins = {
       "cmp_luasnip",
       "cmp-buffer",
       "cmp-path",
+      "cmp-spell",
+      "cmp-cmdline",
     },
   },
 
-  { "hrsh7th/cmp-cmdline", lazy=true },
-  { "f3fora/cmp-spell", lazy=true },
+  { "hrsh7th/cmp-cmdline", lazy = true },
+  { "f3fora/cmp-spell", lazy = true },
   { "hrsh7th/cmp-nvim-lsp", lazy = true },
   { "saadparwaiz1/cmp_luasnip", lazy = true },
   { "hrsh7th/cmp-buffer", lazy = true },
@@ -123,10 +122,10 @@ local core_plugins = {
   },
 
   -- snippets
-  { 
-      "rafamadriz/friendly-snippets", 
-      lazy = true, 
-      cond = lvim.builtin.luasnip.sources.friendly_snippets 
+  {
+    "rafamadriz/friendly-snippets",
+    lazy = true,
+    cond = lvim.builtin.luasnip.sources.friendly_snippets
   },
   {
     "folke/neodev.nvim",
@@ -146,7 +145,7 @@ local core_plugins = {
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    -- run = ":TSUpdate",
+    --run = ":TSUpdate",
     config = function()
       require("lvim.core.treesitter").setup()
     end,
@@ -160,7 +159,7 @@ local core_plugins = {
   {
     "kyazdani42/nvim-tree.lua",
     -- event = "BufWinOpen",
-    -- cmd = "NvimTreeToggle",
+    cmd = "NvimTreeToggle",
     config = function()
       require("lvim.core.nvimtree").setup()
     end,
@@ -253,7 +252,7 @@ local core_plugins = {
     "ravenxrz/DAPInstall.nvim",
     -- event = "BufWinEnter",
     -- event = "BufRead",
-    disable = not lvim.builtin.dap.active,
+    enabled = lvim.builtin.dap.active,
   },
   {
     "theHamsta/nvim-dap-virtual-text",
@@ -283,6 +282,9 @@ local core_plugins = {
     config = function()
       require("lvim.core.dap").setup()
     end,
+    dependencies = {
+      "nvim-dap-ui",
+    },
     enabled = lvim.builtin.dap.active,
   },
 
@@ -292,6 +294,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.dap").setup_ui()
     end,
+    lazy = true,
     enabled = lvim.builtin.dap.active,
   },
 
@@ -346,7 +349,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.aerial").setup()
     end,
-    disable = not lvim.builtin.aerial.active
+    enabled = lvim.builtin.aerial.active
   },
 
   -- onedark

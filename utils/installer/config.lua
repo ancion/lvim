@@ -223,11 +223,19 @@ lvim.plugins = {
     end
   },
   -- colorscheme
-  { "Mofiqul/dracula.nvim" },
-  { "overcache/NeoSolarized" },
+  {
+    "Mofiqul/dracula.nvim",
+    lazy = true,
+  },
+  {
+    "overcache/NeoSolarized",
+    lazy = true,
+  },
+
   {
     "catppuccin/nvim",
-    as = "catppuccin",
+    name = "catppuccin",
+    lazy = true,
     config = function()
       vim.g.catppuccin_flavour = "mocha"
     end
@@ -258,9 +266,13 @@ lvim.plugins = {
     end
   },
 
-  { 'github/copilot.vim' },
+  {
+    'github/copilot.vim',
+    lazy = true,
+  },
   {
     "zbirenbaum/copilot.lua",
+    lazy = true,
     event = { "VimEnter" },
     config = function()
       vim.defer_fn(function()
@@ -270,6 +282,7 @@ lvim.plugins = {
   },
   {
     "zbirenbaum/copilot-cmp",
+    lazy = true,
     after = { 'copilot.lua', 'nvim-cmp' },
   },
 
@@ -283,7 +296,7 @@ lvim.plugins = {
   },
   {
     "ray-x/guihua.lua",
-    command = "cd lua/fzy && make"
+    build = "cd lua/fzy && make"
   },
   {
     "ray-x/navigator.lua",
