@@ -104,7 +104,7 @@ function M.get_sections()
   }
 
   local text = require "lvim.interface.text"
-  local num_plugins_loaded = #vim.fn.globpath(get_runtime_dir() .. "/site/pack/packer/start", "*", 0, 1)
+  local num_plugins_loaded = #vim.fn.globpath(get_runtime_dir() .. "/site/pack/lazy/opt", "*", 0, 1)
   local lvim_version = require("lvim.utils.git").get_lvim_version()
 
   local footer = {
