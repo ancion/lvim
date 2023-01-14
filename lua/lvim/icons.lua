@@ -31,7 +31,7 @@ return {
     Struct        = "",
     Text          = "",
     TypeParameter = "",
-    Unit          = "ﮭ",
+    Unit          = "",
     Value         = "",
     Variable      = "",
   },
