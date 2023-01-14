@@ -35,7 +35,8 @@ M.config = function()
         -- ["<tab>"] = "TAB",
       },
       icons = {
-        breadcrumb = lvim.icons.ui.DoubleChevronRight, -- symbol used in the command line area that shows your active key combo
+        -- symbol used in the command line area that shows your active key combo
+        breadcrumb = lvim.icons.ui.DoubleChevronRight, 
         separator = lvim.icons.ui.NormalArrowRight .. " ", -- symbol used between a key and it's label
         group = lvim.icons.ui.Plus .. " ", -- symbol prepended to a group
       },
@@ -101,7 +102,7 @@ M.config = function()
     mappings = {
       [";"] = { "<cmd>Alpha<CR>", "Dashboard" },
       ["w"] = { "<cmd>w!<CR>", "Save" },
-      ["q"] = { "<cmd>lua require('lvim.utils.functions').smart_quit()<CR>", "Force Quit" },
+      ["q"] = { "<cmd>confirm q<CR>", "Quit" },
       ["/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment toggle current line" },
       ["c"] = { "<cmd>BufferKill<CR>", "Close Buffer" },
       --["f"] = { "<cmd>lua require('lvim.core.telescope.custom-finders').find_project_files()<CR>", "Find File" },

@@ -98,6 +98,11 @@ local core_plugins = {
   { "hrsh7th/cmp-buffer", lazy = true },
   { "hrsh7th/cmp-path", lazy = true },
   {
+    "hrsh7th/cmp-cmdline",
+    lazy = true,
+    enabled = lvim.builtin.cmp and lvim.builtin.cmp.cmdline.enable or false,
+  },
+  {
     "L3MON4D3/LuaSnip",
     config = function()
       local utils = require "lvim.utils"
