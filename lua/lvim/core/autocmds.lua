@@ -89,8 +89,6 @@ function M.load_defaults()
         pattern = "alpha",
         callback = function()
           vim.cmd [[
-            nnoremap <silent> <buffer> q :qa<CR>
-            nnoremap <silent> <buffer> <esc> :qa<CR>
             set nobuflisted
           ]]
         end,

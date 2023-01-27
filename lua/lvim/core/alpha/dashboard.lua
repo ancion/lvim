@@ -136,12 +136,13 @@ function M.get_sections()
       { "n", lvim.icons.ui.NewFile .. "  New File", "<CMD>ene!<CR>" },
       { "p", lvim.icons.ui.Aliens .. "  Recent Projects ", "<CMD>Telescope projects<CR>" },
       { "r", lvim.icons.ui.FolderOpen .. "  Recent files", ":Telescope oldfiles <CR>" },
+      { "q", lvim.icons.ui.Close .. "  Quit", "<CMD>quit<CR>" },
       {
         "c",
         lvim.icons.ui.Gear .. "  Configuration",
         "<CMD>edit " .. require("lvim.config"):get_user_config_path() .. " <CR>",
       },
-      { "<space>c", lvim.icons.ui.ColorPanel .. " Choose Colorscheme ", "<CMD>Telescope colorscheme<CR>" }
+      { "<space>c", lvim.icons.ui.ColorPanel .. " Choose Colorscheme ", "<CMD>Telescope colorscheme<CR>" },
     },
   }
   return {
