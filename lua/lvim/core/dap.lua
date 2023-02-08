@@ -24,7 +24,6 @@ M.config = function()
       linehl = "Visual",
       numhl = "DiagnosticSignWarn",
     },
-    install_path = utils.join_paths(vim.call('stdpath', 'data'), 'dapinstall/'),
     log = {
       level = "info",
     },
@@ -53,40 +52,24 @@ M.config = function()
         },
         -- Use this to override mappings for specific elements
         element_mappings = {},
-        expand_lines = true,
         layouts = {
           {
             elements = {
-              { id = "scopes", size = 0.33 },
+              { id = "scopes", size = 0.38 },
+              { id = "watches", size = 0.20 },
               { id = "breakpoints", size = 0.17 },
               { id = "stacks", size = 0.25 },
-              { id = "watches", size = 0.25 },
             },
             size = 0.33,
-            position = "left",
+            position = "right",
           },
           {
             elements = {
-              { id = "repl", size = 0.45 },
-              { id = "console", size = 0.55 },
+              { id = "repl", size = 0.40 },
+              { id = "console", size = 0.60 },
             },
-            size = 0.27,
+            size = 0.25,
             position = "bottom",
-          },
-        },
-        controls = {
-          enabled = true,
-          -- Display controls in this element
-          element = "repl",
-          icons = {
-            pause = "",
-            play = "",
-            step_into = "",
-            step_over = "",
-            step_out = "",
-            step_back = "",
-            run_last = "",
-            terminate = "",
           },
         },
         floating = {
@@ -98,6 +81,9 @@ M.config = function()
           },
         },
         controls = {
+          enabled = true,
+          -- Display controls in this element
+          element = "repl",
           icons = {
             pause = lvim.icons.ui.Pause,
             play = lvim.icons.ui.Play,
@@ -124,11 +110,6 @@ M.setup = function()
   if not status_ok then
     return
   end
-  local dap_install = require 'dap-install'
-  -- defined dap install_path
-  dap_install.setup({
-    installation_path = lvim.builtin.dap.install_path
-  })
 
   -- defined sign
   if lvim.use_icons then
@@ -143,9 +124,12 @@ M.setup = function()
   -- more develop language config
   M.config_debug()
 
-  -- dap_config
-  dap_install.config("python", {})
   dap.set_log_level(lvim.builtin.dap.log.level)
+
+  require("lvim.core.dap.dap_python")
+  require("lvim.core.dap.dap_js")
+  require("lvim.core.dap.dap_bash")
+  require("lvim.core.dap.dap_go")
 
   if lvim.builtin.dap.on_config_done then
     lvim.builtin.dap.on_config_done(dap)
