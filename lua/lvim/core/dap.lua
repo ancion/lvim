@@ -85,6 +85,7 @@ M.config = function()
           -- Display controls in this element
           element = "repl",
           icons = {
+            disconnect = lvim.icons.ui.disconnect,
             pause = lvim.icons.ui.Pause,
             play = lvim.icons.ui.Play,
             step_into = lvim.icons.ui.StepInto,

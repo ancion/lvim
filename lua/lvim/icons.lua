@@ -81,6 +81,7 @@ return {
     StepBack                = "",
     RunLast                 = "ﰇ",
     Terminate               = "■",
+    disconnect              = "ﮣ",
     Calendar                = "",
     Check                   = "",
     ChevronRight            = ">",
