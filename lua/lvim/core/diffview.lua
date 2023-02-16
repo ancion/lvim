@@ -5,7 +5,7 @@ M.config = function()
     active = true,
     on_config_done = nil,
   }
-  local loaded, _ = pcall(require, "diffview")
+  local loaded, _ = pcall(require, "diffview.config")
   if not loaded then
     return
   end
