@@ -72,10 +72,10 @@
     "commit": "cfafe0a"
   },
   "nvim-dap": {
-    "commit": "0d77088"
+    "commit": "82e98f3"
   },
   "nvim-dap-ui": {
-    "commit": "94aa67d"
+    "commit": "1101931"
   },
   "nvim-lspconfig": {
     "commit": "649137c"
