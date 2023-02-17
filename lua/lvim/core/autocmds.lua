@@ -238,6 +238,7 @@ function M.enable_transparent_mode()
         "SignColumn",
         "NormalNC",
         "NvimTreeNormal",
+        "NvimTreeNormalNC",
         "EndOfBuffer",
         "MsgArea",
         "Pmenu",
