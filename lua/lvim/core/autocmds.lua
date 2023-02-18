@@ -89,7 +89,7 @@ function M.load_defaults()
         pattern = "alpha",
         callback = function()
           vim.cmd [[
-            set nobuflisted
+            set showtabline=1
           ]]
         end,
       },
