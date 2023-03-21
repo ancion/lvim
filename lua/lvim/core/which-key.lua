@@ -71,7 +71,7 @@ M.config = function()
         v = { "j", "k" },
       },
       -- disable the WhichKey popup for certain buf types and file types.
-      -- Disabled by deafult for Telescope
+      -- Disabled by default for Telescope
       disable = {
         buftypes = {},
         filetypes = { "TelescopePrompt" },
