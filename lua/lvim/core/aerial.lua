@@ -99,7 +99,7 @@ M.config = function()
       -- default collapsed icon. The default icon set is determined by the
       -- "nerd_font" option below.
       -- If you have lspkind-nvim installed, aerial will use it for icons.
-      icons = {},
+      icons = lvim.icons.kind,
 
       -- Control which windows and buffers aerial should ignore.
       -- If close_behavior is "global", focusing an ignored window/buffer will
