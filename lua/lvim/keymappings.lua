@@ -84,6 +84,7 @@ local defaults = {
 
     ["S"] = ":w<CR>",
     ["Q"] = ":q<CR>",
+    ["\\s"] = ":%s//g<left><left>",
 
     -- QuickFix
     ["<leader>="] = ":cnext<CR>",
