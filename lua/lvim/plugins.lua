@@ -309,6 +309,9 @@ local core_plugins = {
       "nvim-dap-ui",
     },
     lazy = true,
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+    },
     enabled = lvim.builtin.dap.active,
   },
 
