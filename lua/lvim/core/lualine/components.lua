@@ -135,15 +135,10 @@ return {
     color = { fg = colors.green },
   },
   lsp = {
-    function(msg)
-      msg = msg or "[lsp  ]"
-      local buf_clients = vim.lsp.get_active_clients{ bufnr = 0 }
+    function()
+      local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
       if #buf_clients == 0 then
-        -- TODO: clean up this if statement
-        -- if type(msg) == "boolean" or #msg == 0 then
-          return "[lsp  ]"
-        -- end
-        -- return msg
+        return "[lsp  ]"
       end
 
       local buf_ft = vim.bo.filetype
