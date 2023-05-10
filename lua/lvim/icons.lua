@@ -5,7 +5,7 @@ return {
     Class         = "",
     Color         = "",
     Constant      = "",
-    Constructor   = "",
+    Constructor   = "",
     Enum          = "",
     EnumMember    = "",
     Event         = "",
