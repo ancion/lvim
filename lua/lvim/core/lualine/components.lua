@@ -55,9 +55,9 @@ return {
     "diff",
     source = diff_source,
     symbols = {
-      added = lvim.icons.git.LineAdded .. " ",
-      modified = lvim.icons.git.LineModified .. " ",
-      removed = lvim.icons.git.LineRemoved .. " ",
+      added = lvim.icons.git.LineAdded,
+      modified = lvim.icons.git.LineModified,
+      removed = lvim.icons.git.LineRemoved,
     },
     padding = { left = 2, right = 1 },
     diff_color = {

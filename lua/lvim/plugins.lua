@@ -305,9 +305,6 @@ local core_plugins = {
     config = function()
       require("lvim.core.dap").setup()
     end,
-    dependencies = {
-      "nvim-dap-ui",
-    },
     lazy = true,
     dependencies = {
       "rcarriga/nvim-dap-ui",
