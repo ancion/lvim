@@ -133,10 +133,10 @@ function M.get_sections()
     entries = {
       { "f", lvim.icons.ui.FindFile .. " Find File",       "<CMD>Telescope find_files<CR>" },
       { "t", lvim.icons.ui.FindText .. "  Find Text",      "<CMD>Telescope live_grep<CR>" },
-      { "n", lvim.icons.ui.NewFile .. "  New File",        "<CMD>ene!<CR>" },
+      { "n", lvim.icons.ui.File .. "  New File",           "<CMD>ene!<CR>" },
       { "p", lvim.icons.ui.Aliens .. "  Recent Projects ", "<CMD>Telescope projects<CR>" },
       { "r", lvim.icons.ui.FolderOpen .. "  Recent files", ":Telescope oldfiles <CR>" },
-      { "q", lvim.icons.ui.Close .. "  Quit",              "<CMD>quit<CR>" },
+      { "q", lvim.icons.ui.Exit .. "  Quit",               "<CMD>quit<CR>" },
       {
         "c",
         lvim.icons.ui.Gear .. "  Configuration",
