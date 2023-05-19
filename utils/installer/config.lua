@@ -180,6 +180,41 @@ lvim.builtin.treesitter.highlight.enabled = true
 ---------------------------------------------------------------------------------------------------
 --]]
 lvim.plugins = {
+
+  {
+    "folke/noice.nvim",
+    config = function()
+      require("noice").setup({
+        messages = {
+          enabled = false,
+        },
+        lsp = {
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["com.entry.get_documentation"] = true,
+          },
+          hover = {
+            enabled = false,
+          },
+          signature = {
+            enabled = false,
+          },
+        },
+        presets = {
+          bottom_search = false,        -- uses a classic bottom cmdline for search
+          command_palette = true,       -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false,           -- enables an input dialog for inc_rename.nvim
+          lsp_doc_border = true,        -- add a border to hover docs and signature help
+        }
+      })
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    }
+  },
   -- litee family
   {
     "ldelossa/litee.nvim",
@@ -307,8 +342,9 @@ lvim.plugins = {
         -- 'shadow', or a list of chars which defines the border
         on_attach = function(client, bufnr)
           require("illuminate").on_attach(client)
-          local navic = require("nvim-navic")
-          navic.attach(client, bufnr)
+          if client.server_capabilities.documentSymbolProvider then
+            require("nvim-navic").attach(client, bufnr)
+          end
           -- your hook
         end,
         -- put a on_attach of your own here, e.g
