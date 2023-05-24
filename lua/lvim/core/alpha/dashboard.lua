@@ -124,25 +124,21 @@ function M.get_sections()
       hl = "Number",
     },
   }
-
+  local user_config_path = require("lvim.config").get_user_config_path()
   local buttons = {
     opts = {
       hl_shortcut = "Include",
       spacing = 1,
     },
     entries = {
-      { "f", lvim.icons.ui.FindFile .. " Find File",       "<CMD>Telescope find_files<CR>" },
-      { "t", lvim.icons.ui.FindText .. "  Find Text",      "<CMD>Telescope live_grep<CR>" },
-      { "n", lvim.icons.ui.File .. "  New File",           "<CMD>ene!<CR>" },
-      { "p", lvim.icons.ui.Aliens .. "  Recent Projects ", "<CMD>Telescope projects<CR>" },
-      { "r", lvim.icons.ui.FolderOpen .. "  Recent files", ":Telescope oldfiles <CR>" },
-      { "q", lvim.icons.ui.Exit .. "  Quit",               "<CMD>quit<CR>" },
-      {
-        "c",
-        lvim.icons.ui.Gear .. "  Configuration",
-        "<CMD>edit " .. require("lvim.config"):get_user_config_path() .. " <CR>",
-      },
-      { "<space>c", lvim.icons.ui.ColorPanel .. "  Choose Colorscheme ", "<CMD>Telescope colorscheme<CR>" },
+      { "f", lvim.icons.ui.FindFile .. " Find File",              "<CMD>Telescope find_files<CR>" },
+      { "t", lvim.icons.ui.FindText .. "  Find Text",             "<CMD>Telescope live_grep<CR>" },
+      { "n", lvim.icons.ui.File .. "  New File",                  "<CMD>ene!<CR>" },
+      { "p", lvim.icons.ui.Aliens .. "  Recent Projects ",        "<CMD>Telescope projects<CR>" },
+      { "r", lvim.icons.ui.FolderOpen .. "  Recent files",        ":Telescope oldfiles <CR>" },
+      { "q", lvim.icons.ui.Exit .. "  Quit",                      "<CMD>quit<CR>" },
+      { "c", lvim.icons.ui.Gear .. "  Configuration",             "<CMD>edit " .. user_config_path .. " <CR>", },
+      { "s", lvim.icons.ui.ColorPanel .. "  Choose Colorscheme ", "<CMD>Telescope colorscheme<CR>" },
     },
   }
   return {
