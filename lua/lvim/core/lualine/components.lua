@@ -161,9 +161,14 @@ return {
       local linters = require "lvim.lsp.null-ls.linters"
       local supported_linters = linters.list_registered(buf_ft)
       vim.list_extend(buf_client_names, supported_linters)
-      local unique_client_names = vim.fn.uniq(buf_client_names)
 
-      local language_servers = "[" .. table.concat(unique_client_names, ", ") .. "]"
+      local unique_client_names = table.concat(buf_client_names, ", ")
+      local language_servers = string.format("[%s]", unique_client_names)
+
+      if copilot_active then
+        language_servers = language_servers .. "%#SLCopilot#" .. " " .. lvim.icons.git.Octoface .. "%*"
+      end
+
       return language_servers
     end,
     color = { gui = "bold" },
