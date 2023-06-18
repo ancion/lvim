@@ -25,6 +25,7 @@ lvim.colorscheme = "dracula"
 -- lvim.colorscheme = "NeoSolarized"
 -- lvim.colorscheme = "catppuccin"
 
+lvim.builtin.treesitter.rainbow.enable = true
 
 -- [[
 ---------------------------------------------------------------------------------------------------
@@ -276,13 +277,27 @@ lvim.plugins = {
   {
     'norcalli/nvim-colorizer.lua',
     config = function()
-      require("colorizer").setup()
+      require("colorizer").setup(
+        { "css", "scss", "html", "javascript", "vue", "typescript", "react" },
+        {
+          RGB = true,      -- #RGB hex codes
+          RRGGBB = true,   -- #RRGGBB hex codes
+          RRGGBBAA = true, -- #RRGGBBAA hex codes
+          rgb_fn = true,   -- css rgb() and rgba() functions
+          hsl_fn = true,   -- css hsl() and hsla() functions
+          css = true,      -- Enable all CSS features : rgb_fn hsl_fn, names, RGB RRRGGBB
+          css_fn = true,   -- Enable all CSS *functions*: rgb_fn hsl_fn
+        }
+      )
     end
   },
-
+  {
+    "mrjones2014/nvim-ts-rainbow",
+  },
   -- todo_comments
   {
     "folke/todo-comments.nvim",
+    event = "BufRead",
     config = function()
       require("todo-comments").setup({
         keywords = {
@@ -298,10 +313,7 @@ lvim.plugins = {
     end
   },
 
-  {
-    'github/copilot.vim',
-    lazy = true,
-  },
+  { 'github/copilot.vim', lazy = true, },
   {
     "zbirenbaum/copilot.lua",
     lazy = true,
@@ -321,10 +333,10 @@ lvim.plugins = {
   -- function signature for lsp
   {
     "ray-x/lsp_signature.nvim",
+    event = "BufRead",
     config = function()
       require("lsp_signature").on_attach()
     end,
-    event = "BufRead"
   },
   {
     "ray-x/guihua.lua",
