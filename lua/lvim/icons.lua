@@ -1,8 +1,8 @@
 return {
   kind = {
-    Array         = "",
-    Boolean       = "",
-    Class         = "",
+    Array         = "󰅪",
+    Boolean       = "",
+    Class         = "",
     Color         = "",
     Constant      = "",
     Constructor   = "",
@@ -17,11 +17,11 @@ return {
     Key           = "",
     Keyword       = "",
     Method        = "",
-    Module        = "",
+    Module        = "󰠲",
     Namespace     = "",
-    Null          = "",
+    Null          = "󰟢",
     Number        = "",
-    Object        = "",
+    Object        = "",
     Operator      = "",
     Package       = "",
     Property      = "",
@@ -91,7 +91,7 @@ return {
     ChevronShortUp          = "",
     Circle                  = "",
     Close                   = "",
-    CloudDownload           = "",
+    CloudDownload           = "󰭽",
     Code                    = "",
     Comment                 = "",
     Dashboard               = "",
@@ -146,7 +146,7 @@ return {
     MiddleDot               = "·",
     Aliens                  = "",
     Circular                = "",
-    --                   ⟦ ⟧           
+    --                    ⟦ ⟧           
   },
   diagnostics = {
     BoldError       = "",
