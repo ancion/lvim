@@ -41,7 +41,8 @@ local defaults = {
     -- 'jj' for quitting insert mode
     ["jj"] = "<ESC>",
     -- quick move to next line
-    ["<c-j"] = "<ESC>o",
+    ["<C-o>"] = "<ESC>o",
+    ["<C-a>"] = "<ESC>A",
     -- navigation
     ["<A-Up>"] = "<C-\\><C-N><C-w>k",
     ["<A-Down>"] = "<C-\\><C-N><C-w>j",
