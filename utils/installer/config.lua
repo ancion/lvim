@@ -21,9 +21,9 @@ lvim.format_on_save = {
 }
 -- lvim.colorscheme = "onedarker"
 -- lvim.colorscheme = "tokyonight"
-lvim.colorscheme = "dracula"
+-- lvim.colorscheme = "dracula"
 -- lvim.colorscheme = "NeoSolarized"
--- lvim.colorscheme = "catppuccin"
+lvim.colorscheme = "catppuccin"
 
 lvim.builtin.treesitter.rainbow.enable = true
 
@@ -258,7 +258,7 @@ lvim.plugins = {
   -- colorscheme
   {
     "Mofiqul/dracula.nvim",
-    lazy = false,
+    lazy = true,
   },
   {
     "overcache/NeoSolarized",
@@ -268,7 +268,7 @@ lvim.plugins = {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    lazy = true,
+    lazy = false,
     config = function()
       vim.g.catppuccin_flavour = "mocha"
     end

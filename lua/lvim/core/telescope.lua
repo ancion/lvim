@@ -16,7 +16,7 @@ function M.config()
     --theme = "dropdown", ---@type telescope_themes
     defaults = {
       prompt_prefix = lvim.icons.ui.Telescope .. " ",
-      selection_caret = lvim.icons.ui.Forward .. " ",
+      selection_caret = lvim.icons.ui.ChevronRight .. " ",
       entry_prefix = "  ",
       initial_mode = "insert",
       selection_strategy = "reset",
@@ -33,6 +33,8 @@ function M.config()
         "--smart-case",
         "--hidden",
         "--glob=!.git/",
+        "--glob=!node_modules/",
+        "--glob=!target/",
       },
       ---@usage Mappings are fully customizable. Many familiar mapping patterns are setup as defaults.
       mappings = {
@@ -101,11 +103,12 @@ function M.config()
     },
     extensions = {
       fzf = {
-        fuzzy = true, -- false will only do exact matching
+        fuzzy = true,                   -- false will only do exact matching
         override_generic_sorter = true, -- override the generic sorter
-        override_file_sorter = true, -- override the file sorter
-        case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+        override_file_sorter = true,    -- override the file sorter
+        case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
       },
+      ["ui-select"] = {}
     },
   }
 end
@@ -157,12 +160,18 @@ function M.setup()
     lvim.builtin.telescope.on_config_done(telescope)
   end
 
-  if lvim.builtin.telescope.extensions and lvim.builtin.telescope.extensions.fzf then
-    pcall(function()
-      require("telescope").load_extension "fzf"
-    end)
+  if lvim.builtin.telescope.extensions then
+    if lvim.builtin.telescope.extensions.fzf then
+      pcall(function()
+        require("telescope").load_extension "fzf"
+      end)
+    end
+    if lvim.builtin.telescope.extensions['ui-select'] then
+      pcall(function()
+        require("telescope").load_extension "ui-select"
+      end)
+    end
   end
-  require("telescope").load_extension "ui-select"
 end
 
 return M
