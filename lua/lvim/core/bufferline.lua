@@ -56,17 +56,17 @@ M.config = function()
       },
     },
     options = {
-      numbers = "ordinal", -- can be "none" | "ordinal" | "buffer_id" | "both" | function
-      mode = "buffers", -- set to "tabs" to only show tabpages instead
+      numbers = "ordinal",            -- can be "none" | "ordinal" | "buffer_id" | "both" | function
+      mode = "buffers",               -- set to "tabs" to only show tabpages instead
       close_command = function(bufnr) -- can be a string | function, see "Mouse actions"
         M.buf_kill("bd", bufnr, false)
       end,
       right_mouse_command = "vert sbuffer %d", -- can be a string | function, see "Mouse actions"
-      left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
-      middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
+      left_mouse_command = "buffer %d",        -- can be a string | function, see "Mouse actions"
+      middle_mouse_command = nil,              -- can be a string | function, see "Mouse actions"
       indicator = {
-        icon = lvim.icons.ui.BoldLineLeft, -- this should be omitted if indicator style is not 'icon'
-        style = "icon", -- can also be 'underline'|'none',
+        icon = lvim.icons.ui.BoldLineLeft,     -- this should be omitted if indicator style is not 'icon'
+        style = "icon",                        -- can also be 'underline'|'none',
       },
       buffer_close_icon = lvim.icons.ui.Close,
       modified_icon = lvim.icons.ui.Circle,
@@ -85,7 +85,7 @@ M.config = function()
       end,
       max_name_length = 18,
       max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
-      truncate_names = true, -- whether or not tab names should be truncated
+      truncate_names = true,  -- whether or not tab names should be truncated
       tab_size = 18,
       diagnostics = "nvim_lsp",
       diagnostics_update_in_insert = false,
@@ -103,7 +103,7 @@ M.config = function()
           filetype = "NvimTree",
           text = "  - Explorer",
           text_align = "center",
-          highlight = "PanelHeading",
+          highlight = "BufferLineBackground",
           padding = 1,
         },
         {
@@ -124,7 +124,7 @@ M.config = function()
           padding = 1,
         },
       },
-      color_icons = true, -- whether or not to add the filetype icon highlights
+      color_icons = true,                 -- whether or not to add the filetype icon highlights
       show_buffer_icons = lvim.use_icons, -- disable filetype icons for buffers
       show_buffer_close_icons = lvim.use_icons,
       show_close_icon = false,
@@ -197,7 +197,8 @@ function M.buf_kill(kill_command, bufnr, force)
         end)
       elseif choice == 2 then
         force = true
-      else return
+      else
+        return
       end
     elseif api.nvim_buf_get_option(bufnr, "buftype") == "terminal" then
       choice = fn.confirm(fmt([[Close "%s"?]], bufname), "&Yes\n&No\n&Cancel")

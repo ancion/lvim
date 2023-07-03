@@ -23,7 +23,8 @@ lvim.format_on_save = {
 -- lvim.colorscheme = "tokyonight"
 -- lvim.colorscheme = "dracula"
 -- lvim.colorscheme = "NeoSolarized"
-lvim.colorscheme = "catppuccin"
+-- lvim.colorscheme = "catppuccin"
+lvim.colorscheme = "deus"
 
 lvim.builtin.treesitter.rainbow.enable = true
 
@@ -258,17 +259,20 @@ lvim.plugins = {
   -- colorscheme
   {
     "Mofiqul/dracula.nvim",
-    lazy = true,
+    lazy = false,
   },
   {
     "overcache/NeoSolarized",
     lazy = true,
   },
-
+  {
+    "theniceboy/nvim-deus",
+    lazy = false,
+  },
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    lazy = false,
+    lazy = true,
     config = function()
       vim.g.catppuccin_flavour = "mocha"
     end
@@ -293,11 +297,13 @@ lvim.plugins = {
   },
   {
     "mrjones2014/nvim-ts-rainbow",
+    event = "BufRead",
   },
   -- todo_comments
   {
     "folke/todo-comments.nvim",
     event = "BufRead",
+    lazy = true,
     config = function()
       require("todo-comments").setup({
         keywords = {
@@ -334,6 +340,7 @@ lvim.plugins = {
   {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
+    lazy = true,
     config = function()
       require("lsp_signature").on_attach()
     end,
@@ -369,9 +376,14 @@ lvim.plugins = {
         default_mapping = true, -- set to false if you will remap every key
         -- a list of key maps
         keymaps = {
-          { key = "M",          func = vim.lsp.buf.hover,                                 desc = "hover" },
-          { key = "<Leader>la", func = require("navigator.codeAction").code_action,       desc = "code_action" },
-          { key = "<Leader>lA", func = require("navigator.codeAction").range_code_action, desc = "range_code_action" },
+          { key = "M",          func = vim.lsp.buf.hover,                           desc = "hover" },
+          { key = "<Leader>la", func = require("navigator.codeAction").code_action, desc = "code_action" },
+          {
+            key = "<Leader>lA",
+            func = require("navigator.codeAction").range_code_action,
+            desc =
+            "range_code_action"
+          },
         },
         -- this kepmap gk will override "gd" mapping function declaration()  in default kepmap
         -- please check mapping.lua for all keymaps
