@@ -135,7 +135,7 @@ function M.get_sections()
       { "t", lvim.icons.ui.FindText .. "  Find Text",             "<CMD>Telescope live_grep<CR>" },
       { "n", lvim.icons.ui.File .. "  New File",                  "<CMD>ene!<CR>" },
       { "p", lvim.icons.ui.Aliens .. "  Recent Projects ",        "<CMD>Telescope projects<CR>" },
-      { "r", lvim.icons.ui.FolderOpen .. "  Recent files",        ":Telescope oldfiles <CR>" },
+      { "r", lvim.icons.ui.FolderOpen .. "  Recent files",        "<CMD>Telescope oldfiles <CR>" },
       { "q", lvim.icons.ui.Exit .. "  Quit",                      "<CMD>quit<CR>" },
       { "c", lvim.icons.ui.Gear .. "  Configuration",             "<CMD>edit " .. user_config_path .. " <CR>", },
       { "s", lvim.icons.ui.ColorPanel .. "  Choose Colorscheme ", "<CMD>Telescope colorscheme<CR>" },
