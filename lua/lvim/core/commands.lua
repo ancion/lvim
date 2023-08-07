@@ -50,16 +50,6 @@ vim.cmd [[
     endfunction
 ]]
 
--- [[ command! BufferKill lua require('lvim.core.bufferline').buf_kill('bd') ]],
--- :LvimInfo
--- [[ command! LvimInfo lua require('lvim.core.info').toggle_popup(vim.bo.filetype) ]],
--- [[ command! LvimCacheReset lua require('lvim.utils.hooks').reset_cache() ]],
--- [[ command! LvimUpdate lua require('lvim.bootstrap').update() ]],
--- [[ command! LvimSyncCorePlugins lua require('lvim.plugin-loader'):sync_core_plugins() ]],
--- [[ command! LvimReload lua require('lvim.config'):reload() ]],
--- [[ command! LvimToggleFormatOnSave lua require('lvim.core.autocmds').toggle_format_on_save() ]],
--- [[ command! LvimVersion lua require('lvim.core.telescope.custom-finders').view_lunarvim_changelog() ]],
-
 M.defaults = {
   {
     name = "BufferKill",
@@ -136,6 +126,36 @@ M.defaults = {
       vim.fn.execute("edit " .. require("lvim.core.log").get_path())
     end,
   },
+  {
+    name = "CompileAndRun",
+    fn = function()
+      vim.cmd("w")
+      local ft = vim.bo.filetype
+      if ft == "c" then
+        vim.cmd("!g++ % -o %<")
+        vim.cmd("!time ./%<")
+      elseif ft == "cpp" then
+        vim.cmd("!g++ -std=c++11 %  -Wall -o %<")
+        vim.cmd("term ./%<")
+      elseif ft == "lua" then
+        vim.cmd("TermExec cmd='lua %'")
+      elseif ft == "go" then
+        vim.cmd("TermExec cmd='go run .'")
+      elseif ft == "rust" then
+        vim.cmd("TermExec cmd='cargo run'")
+      elseif ft == "dart" then
+        vim.cmd("TermExec cmd='dart %'")
+      elseif ft == "python" then
+        vim.cmd("TermExec cmd='python3 %'")
+      elseif ft == "html" then
+        vim.cmd("TermExec cmd='live-server % &'")
+      elseif ft == "sh" then
+        vim.cmd("TermExec cmd='bash %'")
+      elseif ft == "javascript" then
+        vim.cmd("TermExec cmd='node --trace-warnings %'")
+      end
+    end,
+  }
 }
 
 function M.load(collection)
