@@ -11,14 +11,14 @@ M.config = function()
     hide_numbers = true, -- hide the number column in toggleterm buffers
     shade_filetypes = {},
     shade_terminals = true,
-    shading_factor = 2, -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+    shading_factor = 2,     -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
     start_in_insert = true,
     insert_mappings = true, -- whether or not the open mapping applies in insert mode
     persist_size = false,
     -- direction = 'vertical' | 'horizontal' | 'window' | 'float',
     direction = "float",
     close_on_exit = true, -- close the terminal window when the process exits
-    shell = nil, -- change the default shell
+    shell = nil,          -- change the default shell
     -- This field is only relevant if direction is set to 'float'
     float_opts = {
       -- The border key is *almost* the same as 'nvim_win_open'
@@ -42,8 +42,8 @@ M.config = function()
     -- TODO: pls add mappings in which key and refactor this
     execs = {
       { nil, "<M-1>", "Horizontal Terminal", "horizontal", 0.3 },
-      { nil, "<M-2>", "Vertical Terminal", "vertical", 0.4 },
-      { nil, "<M-3>", "Float Terminal", "float", nil },
+      { nil, "<M-2>", "Vertical Terminal",   "vertical",   0.4 },
+      { nil, "<M-3>", "Float Terminal",      "float",      nil },
     },
   }
 end
