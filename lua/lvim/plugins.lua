@@ -165,7 +165,7 @@ local core_plugins = {
 
   -- NvimTree
   {
-    "kyazdani42/nvim-tree.lua",
+    "nvim-tree/nvim-tree.lua",
     config = function()
       require("lvim.core.nvimtree").setup()
     end,
