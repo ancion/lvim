@@ -1,5 +1,6 @@
 local conditions = require "lvim.core.lualine.conditions"
-local colors = require "lvim.core.lualine.colors"
+local colors     = require "lvim.core.lualine.colors"
+local icons      = require "lvim.icons"
 
 local function diff_source()
   local gitsigns = vim.b.gitsigns_status_dict
@@ -35,7 +36,8 @@ return {
   mode = {
     "mode",
     fmt = function(str)
-      return " -- " .. str .. " -- "
+      -- return " -- " .. str .. " -- "
+      return icons.nvim.mode
     end,
     padding = { left = 0, right = 0 },
     color = {},
@@ -129,7 +131,7 @@ return {
         end
       end
       if copilot_active then
-        return lvim.icons.git.Octoface
+        return lvim.icons.git.Octoface .. " "
       end
     end,
     color = { fg = colors.green },
@@ -138,7 +140,7 @@ return {
     function()
       local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
       if #buf_clients == 0 then
-        return "[lsp  ]"
+        return icons.ui.lsp .. " "
       end
 
       local buf_ft = vim.bo.filetype
@@ -162,8 +164,8 @@ return {
       local supported_linters = linters.list_registered(buf_ft)
       vim.list_extend(buf_client_names, supported_linters)
 
-      local unique_client_names = table.concat(buf_client_names, ", ")
-      local language_servers = string.format("[%s]", unique_client_names)
+      local unique_client_names = table.concat(buf_client_names, " · ")
+      local language_servers = string.format(icons.ui.lsp .. "  %s", unique_client_names)
 
       return language_servers
     end,
@@ -208,7 +210,7 @@ return {
     end,
     padding = { left = 1, right = 1 },
     --    color = { fg = colors.yellow, bg = colors.bg },
-    color = "SLProgress",
+    -- color = "SLProgress",
     cond = nil,
   },
 }

@@ -94,58 +94,56 @@ styles.lvim = {
   },
   sections = {
     lualine_a = {
+      components.mode,
+    },
+    lualine_b = {
       components.branch,
       components.diagnostics,
     },
-    lualine_b = {
-      components.mode,
-    },
     lualine_c = {
-      components.filename,
+      components.filetype,
       components.diff,
       components.python_env,
     },
     lualine_x = {
-      components.filetype,
-      components.encoding,
-      components.platform,
+      components.lsp,
+      components.copilot,
     },
     lualine_y = {
-      components.treesitter,
-      components.copilot,
-      components.lsp,
+      components.encoding,
+      components.platform,
+      components.location,
+      components.progress
     },
     lualine_z = {
-      components.location,
-      components.progress,
+      components.mode,
     },
   },
   inactive_sections = {
     lualine_a = {
+      components.mode,
+    },
+    lualine_b = {
       components.branch,
       components.diagnostics,
     },
-    lualine_b = {
-      components.mode,
-    },
     lualine_c = {
-      components.filename,
+      components.filetype,
       components.diff,
       components.python_env,
     },
     lualine_x = {
-      components.filetype,
-      components.encoding,
-      components.platform,
+      components.lsp,
+      components.copilot,
     },
     lualine_y = {
-      components.treesitter,
-      components.copilot,
-      components.lsp,
+      components.encoding,
+      components.platform,
+      components.location,
+      components.progress
     },
     lualine_z = {
-      components.location,
-      components.progress,
+      components.mode,
     },
   },
   tabline = {},

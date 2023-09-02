@@ -146,6 +146,7 @@ return {
     MiddleDot               = "·",
     Aliens                  = "",
     Circular                = "",
+    lsp                     = "",
     --                    ⟦ ⟧           
   },
   diagnostics = {
@@ -172,4 +173,7 @@ return {
     Package      = "",
     CircuitBoard = "",
   },
+  nvim = {
+    mode = "  "
+  }
 }
