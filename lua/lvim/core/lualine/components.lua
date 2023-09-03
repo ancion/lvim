@@ -37,7 +37,7 @@ return {
     "mode",
     fmt = function(str)
       -- return " -- " .. str .. " -- "
-      return icons.nvim.mode
+      return " " .. icons.nvim.mode .. " "
     end,
     padding = { left = 0, right = 0 },
     color = {},
@@ -76,8 +76,8 @@ return {
       if vim.bo.filetype == "python" then
         local venv = os.getenv "CONDA_DEFAULT_ENV" or os.getenv "VIRTUAL_ENV"
         if venv then
-          local icons = require "nvim-web-devicons"
-          local py_icon, _ = icons.get_icon ".py"
+          local web_icons = require "nvim-web-devicons"
+          local py_icon, _ = web_icons.get_icon ".py"
           return string.format(" " .. py_icon .. " (%s)", utils.env_cleanup(venv))
         end
       end
@@ -106,7 +106,7 @@ return {
   },
   treesitter = {
     function()
-      return lvim.icons.ui.Tree
+      return lvim.icons.nvim.mode .. " TS"
     end,
     color = function()
       local buf = vim.api.nvim_get_current_buf()
@@ -117,7 +117,7 @@ return {
   },
   copilot = {
     function(msg)
-      local buf_clients = vim.lsp.buf_get_clients()
+      local buf_clients = vim.lsp.get_clients()
       if next(buf_clients) == nil then
         if type(msg) == "boolean" or #msg == 0 then
           return ""
@@ -131,14 +131,14 @@ return {
         end
       end
       if copilot_active then
-        return lvim.icons.git.Octoface .. " "
+        return "copilot"
       end
     end,
     color = { fg = colors.green },
   },
   lsp = {
     function()
-      local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
+      local buf_clients = vim.lsp.get_clients { bufnr = 0 }
       if #buf_clients == 0 then
         return icons.ui.lsp .. " "
       end

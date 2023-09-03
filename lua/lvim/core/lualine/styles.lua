@@ -108,10 +108,11 @@ styles.lvim = {
     lualine_x = {
       components.lsp,
       components.copilot,
+      components.treesitter
     },
     lualine_y = {
-      components.encoding,
       components.platform,
+      components.encoding,
       components.location,
       components.progress
     },
@@ -135,10 +136,11 @@ styles.lvim = {
     lualine_x = {
       components.lsp,
       components.copilot,
+      components.treesitter
     },
     lualine_y = {
-      components.encoding,
       components.platform,
+      components.encoding,
       components.location,
       components.progress
     },
