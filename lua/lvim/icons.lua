@@ -144,6 +144,7 @@ return {
     BugText                 = "",
     ColorPanel              = "",
     MiddleDot               = "·",
+    Colon                   = ":",
     Aliens                  = "",
     Circular                = "",
     lsp                     = "",

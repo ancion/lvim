@@ -82,7 +82,7 @@ styles.lvim = {
     --component_separators = { left = "", right = "" },
     --section_separators = { left = "", right = "" },
     component_separators = {
-      left = lvim.icons.ui.DividerRight,
+      left = lvim.icons.ui.Colon,
       right = lvim.icons.ui.MiddleDot,
     },
     section_separators = {
@@ -111,13 +111,12 @@ styles.lvim = {
       components.treesitter
     },
     lualine_y = {
-      components.platform,
       components.encoding,
       components.location,
       components.progress
     },
     lualine_z = {
-      components.mode,
+      components.platform
     },
   },
   inactive_sections = {
@@ -139,13 +138,12 @@ styles.lvim = {
       components.treesitter
     },
     lualine_y = {
-      components.platform,
       components.encoding,
       components.location,
       components.progress
     },
     lualine_z = {
-      components.mode,
+      components.platform
     },
   },
   tabline = {},
