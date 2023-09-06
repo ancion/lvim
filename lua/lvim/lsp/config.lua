@@ -62,33 +62,6 @@ local join_paths = require("lvim.utils").join_paths
 
 return {
   templates_dir = join_paths(get_runtime_dir(), "site", "after", "ftplugin"),
-  --   diagnostics = {
-  --     signs = {
-  --       active = true,
-  --       values = {
-  -- --        { name = "DiagnosticSignError", text = "" },
-  -- --        { name = "DiagnosticSignWarn", text = "" },
-  -- --        { name = "DiagnosticSignHint", text = " " },
-  -- --        { name = "DiagnosticSignInfo", text = " " },
-  --         { name = "DiagnosticSignError", text = lvim.icons.diagnostics.Error },
-  --         { name = "DiagnosticSignWarn", text = lvim.icons.diagnostics.Warning },
-  --         { name = "DiagnosticSignHint", text = lvim.icons.diagnostics.Hint },
-  --         { name = "DiagnosticSignInfo", text = lvim.icons.diagnostics.Information },
-  --       },
-  --     },
-  --     virtual_text = true,
-  --     update_in_insert = false,
-  --     underline = true,
-  --     severity_sort = true,
-  --     float = {
-  --       focusable = true,
-  --       style = "minimal",
-  --       border = "rounded",
-  --       source = "always",
-  --       header = "",
-  --       prefix = "",
-  --     },
-  --   },
   ---@deprecated use vim.diagnostic.config({ ... }) instead
   diagnostics = {},
   document_highlight = false,

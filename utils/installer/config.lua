@@ -8,11 +8,13 @@
 -- Linters should be filled in as strings with either, a global executable or a path to an executable
 ----------------------------------------------------------------------------------------------------
 --]]
+--
 -- [[
 ---------------------------------------------------------------------------------------------------
 -- general
 ---------------------------------------------------------------------------------------------------
 -- ]]
+--
 lvim.log.level = "warn"
 lvim.format_on_save = {
   enabled = true,
@@ -34,7 +36,7 @@ lvim.builtin.treesitter.rainbow.enable = true
 ---------------------------------------------------------------------------------------------------
 --]]
 lvim.leader = "space"
-lvim.use_icons = true;
+lvim.use_icons = true
 
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
@@ -42,7 +44,6 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- lvim.keys.normal_mode["<C-Up>"] = false
 -- edit a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
-
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
@@ -73,7 +74,6 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 --   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
 --   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
 -- }
-
 
 -- [[
 ---------------------------------------------------------------------------------------------------
@@ -140,47 +140,53 @@ lvim.builtin.treesitter.highlight.enabled = true
 ---------------------------------------------------------------------------------------------------
 -- set a formatter, this will override the language server formatting capabilities (if it exists)
 -- ------------------------------------------------------------------------------------------------
--- local formatters = require "lvim.lsp.null-ls.formatters"
--- formatters.setup {
---   { command = "black", filetypes = { "python" } },
---   { command = "isort", filetypes = { "python" } },
---   {
---     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
---     command = "prettier",
---     ---@usage arguments to pass to the formatter
---     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
---     extra_args = { "--print-with", "100" },
---     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
---     filetypes = { "typescript", "typescriptreact" },
---   },
--- }
+local formatters = require("lvim.lsp.null-ls.formatters")
+formatters.setup({
+  { command = "black",     filetypes = { "python" } },
+  { command = "isort",     filetypes = { "python" } },
+  { command = "stylua",    filetypes = { "lua" } },
+  { command = "goimports", filetypes = { "go" } },
+  {
+    -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+    command = "prettierd",
+    ---@usage arguments to pass to the formatter
+    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    extra_args = { "--print-with", "100" },
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = { "typescript", "typescriptreact" },
+  },
+})
 
+--[[
 ---------------------------------------------------------------------------------------------------
 -- -- set additional linters
 ---------------------------------------------------------------------------------------------------
--- local linters = require "lvim.lsp.null-ls.linters"
--- linters.setup {
---   { command = "flake8", filetypes = { "python" } },
---   {
---     -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
---     command = "shellcheck",
---     ---@usage arguments to pass to the formatter
---     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
---     extra_args = { "--severity", "warning" },
---   },
---   {
---     command = "codespell",
---     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
---     filetypes = { "javascript", "python" },
---   },
--- }
+---]]
 
+local linters = require("lvim.lsp.null-ls.linters")
+linters.setup({
+  { command = "luacheck", filetypes = { "lua" } },
+  { command = "flake8",   filetypes = { "python" } },
+  {
+    -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+    command = "shellcheck",
+    ---@usage arguments to pass to the formatter
+    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    extra_args = { "--severity", "warning" },
+  },
+  {
+    command = "codespell",
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = { "javascript", "python" },
+  },
+})
 
 --[[
 ---------------------------------------------------------------------------------------------------
 -- Additional Plugins
 ---------------------------------------------------------------------------------------------------
 --]]
+
 lvim.plugins = {
 
   {
@@ -204,18 +210,18 @@ lvim.plugins = {
           },
         },
         presets = {
-          bottom_search = false,        -- uses a classic bottom cmdline for search
-          command_palette = true,       -- position the cmdline and popupmenu together
+          bottom_search = false,   -- uses a classic bottom cmdline for search
+          command_palette = true,  -- position the cmdline and popupmenu together
           long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = false,           -- enables an input dialog for inc_rename.nvim
-          lsp_doc_border = true,        -- add a border to hover docs and signature help
-        }
+          inc_rename = false,      -- enables an input dialog for inc_rename.nvim
+          lsp_doc_border = true,   -- add a border to hover docs and signature help
+        },
       })
     end,
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
-    }
+    },
   },
   -- litee family
   {
@@ -225,9 +231,9 @@ lvim.plugins = {
         panel = {
           orientation = "right",
           panel_size = 50,
-        }
+        },
       })
-    end
+    end,
   },
   {
     "ldelossa/litee-calltree.nvim",
@@ -251,10 +257,10 @@ lvim.plugins = {
           help = "?",
           hide = "H",
           switch = "S",
-          focus = "f"
-        }
+          focus = "f",
+        },
       })
-    end
+    end,
   },
   -- colorscheme
   {
@@ -275,25 +281,22 @@ lvim.plugins = {
     lazy = false,
     config = function()
       vim.g.catppuccin_flavour = "mocha"
-    end
+    end,
   },
   -- colorPanel
   {
-    'norcalli/nvim-colorizer.lua',
+    "norcalli/nvim-colorizer.lua",
     config = function()
-      require("colorizer").setup(
-        { "css", "scss", "html", "javascript", "vue", "typescript", "react" },
-        {
-          RGB = true,      -- #RGB hex codes
-          RRGGBB = true,   -- #RRGGBB hex codes
-          RRGGBBAA = true, -- #RRGGBBAA hex codes
-          rgb_fn = true,   -- css rgb() and rgba() functions
-          hsl_fn = true,   -- css hsl() and hsla() functions
-          css = true,      -- Enable all CSS features : rgb_fn hsl_fn, names, RGB RRRGGBB
-          css_fn = true,   -- Enable all CSS *functions*: rgb_fn hsl_fn
-        }
-      )
-    end
+      require("colorizer").setup({ "css", "scss", "html", "javascript", "vue", "typescript", "react" }, {
+        RGB = true,  -- #RGB hex codes
+        RRGGBB = true, -- #RRGGBB hex codes
+        RRGGBBAA = true, -- #RRGGBBAA hex codes
+        rgb_fn = true, -- css rgb() and rgba() functions
+        hsl_fn = true, -- css hsl() and hsla() functions
+        css = true,  -- Enable all CSS features : rgb_fn hsl_fn, names, RGB RRRGGBB
+        css_fn = true, -- Enable all CSS *functions*: rgb_fn hsl_fn
+      })
+    end,
   },
   {
     "mrjones2014/nvim-ts-rainbow",
@@ -308,18 +311,18 @@ lvim.plugins = {
       require("todo-comments").setup({
         keywords = {
           --alt : alise
-          FIX  = { icon = " ", color = "#DC2626", alt = { "FIXME", "BUG", "FIXIT", "ISSUE", "!" } },
+          FIX = { icon = " ", color = "#DC2626", alt = { "FIXME", "BUG", "FIXIT", "ISSUE", "!" } },
           TODO = { icon = " ", color = "#2563EB" },
           HACK = { icon = " ", color = "#7C3AED" },
           WARN = { icon = " ", color = "#FBBF24", alt = { "WARNING", "XXX" } },
           PERF = { icon = " ", color = "#FC9868", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-          NOTE = { icon = " ", color = "#10B981", alt = { "INFO" } }
-        }
+          NOTE = { icon = " ", color = "#10B981", alt = { "INFO" } },
+        },
       })
-    end
+    end,
   },
 
-  { 'github/copilot.vim', lazy = true, },
+  { "github/copilot.vim", lazy = true },
   {
     "zbirenbaum/copilot.lua",
     lazy = true,
@@ -333,7 +336,7 @@ lvim.plugins = {
   {
     "zbirenbaum/copilot-cmp",
     lazy = true,
-    after = { 'copilot.lua', 'nvim-cmp' },
+    after = { "copilot.lua", "nvim-cmp" },
   },
 
   -- function signature for lsp
@@ -347,12 +350,12 @@ lvim.plugins = {
   },
   {
     "ray-x/guihua.lua",
-    build = "cd lua/fzy && make"
+    build = "cd lua/fzy && make",
   },
   {
     "ray-x/navigator.lua",
     config = function()
-      require 'navigator'.setup({
+      require("navigator").setup({
         debug = false, -- log output, set to true and log path: ~/.cache/nvim/gh.log
         width = 0.75, -- max width ratio (number of cols for the floating window) / (window width)
         height = 0.3, -- max list window height, 0.3 by default
@@ -372,7 +375,7 @@ lvim.plugins = {
         -- end,
         -- the attach code will apply to all lsp clients
 
-        ts_fold = false,        -- modified version of treesitter folding
+        ts_fold = false,    -- modified version of treesitter folding
         default_mapping = true, -- set to false if you will remap every key
         -- a list of key maps
         keymaps = {
@@ -381,21 +384,20 @@ lvim.plugins = {
           {
             key = "<Leader>lA",
             func = require("navigator.codeAction").range_code_action,
-            desc =
-            "range_code_action"
+            desc = "range_code_action",
           },
         },
         -- this kepmap gk will override "gd" mapping function declaration()  in default kepmap
         -- please check mapping.lua for all keymaps
-        treesitter_analysis = true,          -- treesitter variable context
-        treesitter_analysis_max_num = 100,   -- how many items to run treesitter_analysis
+        treesitter_analysis = true,      -- treesitter variable context
+        treesitter_analysis_max_num = 100, -- how many items to run treesitter_analysis
         treesitter_analysis_condense = true, -- condense form form treesitter_analysis
-        transparency = 70,                   -- 0 ~ 100 blur the main window, 100: fully transparent, 0: opaque,  set to nil or 100 to disable it
-        lsp_signature_help = true,           -- if you would like to hook ray-x/lsp_signature plugin in navigator
+        transparency = 70,               -- 0 ~ 100 blur the main window, 100: fully transparent, 0: opaque,  set to nil or 100 to disable it
+        lsp_signature_help = true,       -- if you would like to hook ray-x/lsp_signature plugin in navigator
         lsp_signature_cfg = nil,
         mason = true,
       })
-    end
+    end,
   },
 }
 
@@ -404,6 +406,7 @@ lvim.plugins = {
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 ---------------------------------------------------------------------------------------------------
 --]]
+
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
 -- }
