@@ -25,8 +25,8 @@ lvim.format_on_save = {
 -- lvim.colorscheme = "tokyonight"
 -- lvim.colorscheme = "dracula"
 -- lvim.colorscheme = "NeoSolarized"
--- lvim.colorscheme = "catppuccin"
-lvim.colorscheme = "deus"
+lvim.colorscheme = "catppuccin"
+-- lvim.colorscheme = "deus"
 
 lvim.builtin.treesitter.rainbow.enable = true
 
@@ -140,12 +140,13 @@ lvim.builtin.treesitter.highlight.enabled = true
 ---------------------------------------------------------------------------------------------------
 -- set a formatter, this will override the language server formatting capabilities (if it exists)
 -- ------------------------------------------------------------------------------------------------
-local formatters = require("lvim.lsp.null-ls.formatters")
-formatters.setup({
-  { command = "black",     filetypes = { "python" } },
-  { command = "isort",     filetypes = { "python" } },
-  { command = "stylua",    filetypes = { "lua" } },
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  { command = "black", filetypes = { "python" } },
+  { command = "isort", filetypes = { "python" } },
+  { command = "stylua", filetypes = { "lua" } },
   { command = "goimports", filetypes = { "go" } },
+  { command = "gofumpt", filetypes = { "go" } },
   {
     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
     command = "prettierd",
@@ -155,7 +156,7 @@ formatters.setup({
     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
     filetypes = { "typescript", "typescriptreact" },
   },
-})
+}
 
 --[[
 ---------------------------------------------------------------------------------------------------
@@ -163,10 +164,10 @@ formatters.setup({
 ---------------------------------------------------------------------------------------------------
 ---]]
 
-local linters = require("lvim.lsp.null-ls.linters")
-linters.setup({
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
   { command = "luacheck", filetypes = { "lua" } },
-  { command = "flake8",   filetypes = { "python" } },
+  { command = "flake8", filetypes = { "python" } },
   {
     -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
     command = "shellcheck",
@@ -179,7 +180,7 @@ linters.setup({
     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
     filetypes = { "javascript", "python" },
   },
-})
+}
 
 --[[
 ---------------------------------------------------------------------------------------------------
@@ -188,13 +189,12 @@ linters.setup({
 --]]
 
 lvim.plugins = {
-
   {
     "folke/noice.nvim",
     config = function()
-      require("noice").setup({
+      require("noice").setup {
         messages = {
-          enabled = false,
+          enabled = true,
         },
         lsp = {
           override = {
@@ -210,13 +210,13 @@ lvim.plugins = {
           },
         },
         presets = {
-          bottom_search = false,   -- uses a classic bottom cmdline for search
-          command_palette = true,  -- position the cmdline and popupmenu together
+          bottom_search = false, -- uses a classic bottom cmdline for search
+          command_palette = true, -- position the cmdline and popupmenu together
           long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = false,      -- enables an input dialog for inc_rename.nvim
-          lsp_doc_border = true,   -- add a border to hover docs and signature help
+          inc_rename = false, -- enables an input dialog for inc_rename.nvim
+          lsp_doc_border = true, -- add a border to hover docs and signature help
         },
-      })
+      }
     end,
     dependencies = {
       "MunifTanjim/nui.nvim",
@@ -227,18 +227,18 @@ lvim.plugins = {
   {
     "ldelossa/litee.nvim",
     config = function()
-      require("litee.lib").setup({
+      require("litee.lib").setup {
         panel = {
           orientation = "right",
           panel_size = 50,
         },
-      })
+      }
     end,
   },
   {
     "ldelossa/litee-calltree.nvim",
     config = function()
-      require("litee.calltree").setup({
+      require("litee.calltree").setup {
         -- NOTE: the plugin is in-developing
         on_open = "pannel", -- panel | popout
         hide_cursor = false,
@@ -259,7 +259,7 @@ lvim.plugins = {
           switch = "S",
           focus = "f",
         },
-      })
+      }
     end,
   },
   -- colorscheme
@@ -288,12 +288,12 @@ lvim.plugins = {
     "norcalli/nvim-colorizer.lua",
     config = function()
       require("colorizer").setup({ "css", "scss", "html", "javascript", "vue", "typescript", "react" }, {
-        RGB = true,  -- #RGB hex codes
+        RGB = true, -- #RGB hex codes
         RRGGBB = true, -- #RRGGBB hex codes
         RRGGBBAA = true, -- #RRGGBBAA hex codes
         rgb_fn = true, -- css rgb() and rgba() functions
         hsl_fn = true, -- css hsl() and hsla() functions
-        css = true,  -- Enable all CSS features : rgb_fn hsl_fn, names, RGB RRRGGBB
+        css = true, -- Enable all CSS features : rgb_fn hsl_fn, names, RGB RRRGGBB
         css_fn = true, -- Enable all CSS *functions*: rgb_fn hsl_fn
       })
     end,
@@ -308,7 +308,7 @@ lvim.plugins = {
     event = "BufRead",
     lazy = true,
     config = function()
-      require("todo-comments").setup({
+      require("todo-comments").setup {
         keywords = {
           --alt : alise
           FIX = { icon = " ", color = "#DC2626", alt = { "FIXME", "BUG", "FIXIT", "ISSUE", "!" } },
@@ -318,7 +318,7 @@ lvim.plugins = {
           PERF = { icon = " ", color = "#FC9868", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
           NOTE = { icon = " ", color = "#10B981", alt = { "INFO" } },
         },
-      })
+      }
     end,
   },
 
@@ -353,9 +353,17 @@ lvim.plugins = {
     build = "cd lua/fzy && make",
   },
   {
+    "stevearc/dressing.nvim",
+    opts = {
+      input = { default_prompt = "➤ " },
+      select = { backend = { "telescope", "builtin" } },
+    },
+    event = "VeryLazy",
+  },
+  {
     "ray-x/navigator.lua",
     config = function()
-      require("navigator").setup({
+      require("navigator").setup {
         debug = false, -- log output, set to true and log path: ~/.cache/nvim/gh.log
         width = 0.75, -- max width ratio (number of cols for the floating window) / (window width)
         height = 0.3, -- max list window height, 0.3 by default
@@ -375,11 +383,11 @@ lvim.plugins = {
         -- end,
         -- the attach code will apply to all lsp clients
 
-        ts_fold = false,    -- modified version of treesitter folding
+        ts_fold = false, -- modified version of treesitter folding
         default_mapping = true, -- set to false if you will remap every key
         -- a list of key maps
         keymaps = {
-          { key = "M",          func = vim.lsp.buf.hover,                           desc = "hover" },
+          { key = "M", func = vim.lsp.buf.hover, desc = "hover" },
           { key = "<Leader>la", func = require("navigator.codeAction").code_action, desc = "code_action" },
           {
             key = "<Leader>lA",
@@ -389,14 +397,14 @@ lvim.plugins = {
         },
         -- this kepmap gk will override "gd" mapping function declaration()  in default kepmap
         -- please check mapping.lua for all keymaps
-        treesitter_analysis = true,      -- treesitter variable context
+        treesitter_analysis = true, -- treesitter variable context
         treesitter_analysis_max_num = 100, -- how many items to run treesitter_analysis
         treesitter_analysis_condense = true, -- condense form form treesitter_analysis
-        transparency = 70,               -- 0 ~ 100 blur the main window, 100: fully transparent, 0: opaque,  set to nil or 100 to disable it
-        lsp_signature_help = true,       -- if you would like to hook ray-x/lsp_signature plugin in navigator
+        transparency = 70, -- 0 ~ 100 blur the main window, 100: fully transparent, 0: opaque,  set to nil or 100 to disable it
+        lsp_signature_help = true, -- if you would like to hook ray-x/lsp_signature plugin in navigator
         lsp_signature_cfg = nil,
         mason = true,
-      })
+      }
     end,
   },
 }
