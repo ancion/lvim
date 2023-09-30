@@ -54,6 +54,13 @@ function M.config()
     },
     indent = { enable = true, disable = { "yaml", "python" } },
     autotag = { enable = false },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        node_incremental = "v",
+        node_decremental = "V",
+      },
+    },
     textobjects = {
       swap = {
         enable = false,
