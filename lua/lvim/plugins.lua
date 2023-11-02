@@ -20,8 +20,8 @@ local core_plugins = {
     event = "User FileOpened",
     dependencies = "mason.nvim",
   },
-  { "tamago324/nlsp-settings.nvim",    cmd = "LspSettings", lazy = true },
-  { "jose-elias-alvarez/null-ls.nvim", lazy = true },
+  { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
+  { "nvimtools/none-ls.nvim", lazy = true },
   {
     "williamboman/mason.nvim",
     config = function()
