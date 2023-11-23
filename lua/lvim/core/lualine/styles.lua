@@ -79,71 +79,75 @@ styles.lvim = {
     theme = "auto",
     globalstatus = true,
     icons_enabled = lvim.use_icons,
-    --component_separators = { left = "", right = "" },
-    --section_separators = { left = "", right = "" },
-    component_separators = {
-      left = lvim.icons.ui.Colon,
-      right = lvim.icons.ui.MiddleDot,
-    },
-    section_separators = {
-      left = lvim.icons.ui.BoldDividerRight,
-      right = lvim.icons.ui.BoldDividerLeft,
-    },
+    component_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
+    -- component_separators = {
+    --   left = lvim.icons.ui.Colon,
+    --   right = lvim.icons.ui.MiddleDot,
+    -- },
+    -- section_separators = {
+    --   left = lvim.icons.ui.BoldDividerRight,
+    --   right = lvim.icons.ui.BoldDividerLeft,
+    -- },
     disabled_filetypes = { "alpha" },
     -- "NvimTree", "Outline",
   },
   sections = {
     lualine_a = {
+      components.edge,
       components.mode,
     },
     lualine_b = {
       components.branch,
-      components.diagnostics,
+      components.filetype,
     },
     lualine_c = {
-      components.filetype,
+      components.diagnostics,
       components.diff,
       components.python_env,
     },
     lualine_x = {
       components.lsp,
       components.copilot,
-      components.treesitter
+      components.treesitter,
     },
     lualine_y = {
       components.encoding,
       components.location,
-      components.progress
+      components.progress,
     },
     lualine_z = {
-      components.platform
+      components.platform,
+      components.edge,
     },
   },
   inactive_sections = {
     lualine_a = {
+      components.edge,
       components.mode,
     },
     lualine_b = {
       components.branch,
-      components.diagnostics,
+      components.filetype,
     },
     lualine_c = {
-      components.filetype,
+      components.diagnostics,
       components.diff,
       components.python_env,
     },
     lualine_x = {
       components.lsp,
       components.copilot,
-      components.treesitter
+      components.treesitter,
     },
     lualine_y = {
       components.encoding,
       components.location,
-      components.progress
+      components.progress,
     },
     lualine_z = {
-      components.platform
+      components.platform,
+      components.edge,
     },
   },
   tabline = {},
@@ -156,9 +160,9 @@ function M.get_style(style)
     local Log = require "lvim.core.log"
     Log:error(
       "Invalid lualine style"
-      .. string.format('"%s"', style)
-      .. "options are: "
-      .. string.format('"%s"', table.concat(style_keys, '", "'))
+        .. string.format('"%s"', style)
+        .. "options are: "
+        .. string.format('"%s"', table.concat(style_keys, '", "'))
     )
     Log:debug '"lvim" style is applied.'
     style = "lvim"

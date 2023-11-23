@@ -1,6 +1,6 @@
 local conditions = require "lvim.core.lualine.conditions"
-local colors     = require "lvim.core.lualine.colors"
-local icons      = require "lvim.icons"
+local colors = require "lvim.core.lualine.colors"
+local icons = require "lvim.icons"
 
 local function diff_source()
   local gitsigns = vim.b.gitsigns_status_dict
@@ -33,24 +33,30 @@ local branch = lvim.icons.git.Branch
 -- end
 
 return {
+  edge = {
+    function()
+      return icons.ui.edge
+    end,
+    color = { bg = "none", gui = "bold", fg = colors.blue },
+  },
   mode = {
     "mode",
     fmt = function(str)
       -- return " -- " .. str .. " -- "
-      return " " .. icons.nvim.mode .. " "
+      return " " .. icons.nvim.mode .. "  "
     end,
     padding = { left = 0, right = 0 },
-    color = {},
+    color = { bg = "none", gui = "bold", fg = colors.blue },
     cond = nil,
   },
   branch = {
     "b:gitsigns_head",
     icon = branch,
-    color = { gui = "bold" },
+    color = { bg = "none", gui = "bold" },
   },
   filename = {
     "filename",
-    color = {},
+    color = { bg = "none" },
     cond = nil,
   },
   diff = {
@@ -67,7 +73,7 @@ return {
       modified = { fg = colors.yellow },
       removed = { fg = colors.red },
     },
-    color = {},
+    color = { bg = "none" },
     cond = nil,
   },
   python_env = {
@@ -83,7 +89,7 @@ return {
       end
       return ""
     end,
-    color = { fg = colors.green },
+    color = { fg = colors.green, bg = "none" },
     cond = conditions.hide_in_width,
   },
   diagnostics = {
@@ -91,8 +97,8 @@ return {
     sources = { "nvim_diagnostic" },
     sections = { "error", "warn" },
     color = {
-      --bg = colors.blue,
-      gui = 'bold',
+      bg = "none",
+      gui = "bold",
     },
     colored = false,
     always_visible = true,
@@ -111,7 +117,7 @@ return {
     color = function()
       local buf = vim.api.nvim_get_current_buf()
       local ts = vim.treesitter.highlighter.active[buf]
-      return { fg = ts and not vim.tbl_isempty(ts) and colors.green or colors.red }
+      return { fg = ts and not vim.tbl_isempty(ts) and colors.green or colors.red, bg = "none" }
     end,
     cond = conditions.hide_in_width,
   },
@@ -134,7 +140,7 @@ return {
         return "copilot"
       end
     end,
-    color = { fg = colors.green },
+    color = { fg = colors.green, bg = "none" },
   },
   lsp = {
     function()
@@ -169,36 +175,47 @@ return {
 
       return language_servers
     end,
-    color = { gui = "bold" },
+    color = { gui = "bold", bg = "none" },
     cond = conditions.hide_in_width,
   },
-  -- location = { "location", cond = conditions.hide_in_width, color = {} },
-  -- progress = { "progress", cond = conditions.hide_in_width, color = {} },
-  platform = { "fileformat", cond = conditions.hide_in_width, color = {} },
-  location = { "location", color = location_color },
-  progress = {
-    "progress",
-    fmt = function()
-      return "%P/%L"
-    end,
-    color = {},
+  progress = { "progress", cond = conditions.hide_in_width, color = { bg = "none" } },
+  platform = {
+    "fileformat",
+    cond = conditions.hide_in_width,
+    color = { bg = "none", fg = colors.yellow },
   },
+  location = {
+    "location",
+    color = { bg = "none", fg = colors.cyan },
+  },
+  -- progress = {
+  --   "progress",
+  --   fmt = function()
+  --     return "%P/%L"
+  --   end,
+  --   color = { bg = "none" },
+  -- },
 
   spaces = {
     function()
       local shiftwidth = vim.api.nvim_buf_get_option(0, "shiftwidth")
       return lvim.icons.ui.Tab .. " " .. shiftwidth
     end,
+    color = { bg = "none" },
     padding = 1,
   },
   encoding = {
     "o:encoding",
     fmt = string.upper,
-    color = {},
+    color = { bg = "none" },
     cond = conditions.hide_in_width,
   },
-  --filetype = { "filetype", cond = conditions.hide_in_width, color = {} },
-  filetype = { "filetype", cond = nil, padding = { left = 1, right = 1 } },
+  filetype = {
+    "filetype",
+    cond = nil,
+    color = { bg = "none" },
+    padding = { left = 1, right = 1 },
+  },
   scrollbar = {
     function()
       local current_line = vim.fn.line "."
@@ -209,8 +226,7 @@ return {
       return chars[index]
     end,
     padding = { left = 1, right = 1 },
-    --    color = { fg = colors.yellow, bg = colors.bg },
-    -- color = "SLProgress",
+    color = { fg = colors.yellow, bg = "none" },
     cond = nil,
   },
 }

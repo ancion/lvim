@@ -148,6 +148,7 @@ return {
     Aliens                  = "",
     Circular                = "",
     lsp                     = "",
+    edge                    = "█"
     --                    ⟦ ⟧           
   },
   diagnostics = {
