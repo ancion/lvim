@@ -176,6 +176,7 @@ return {
     CircuitBoard = "",
   },
   nvim = {
-    mode = ""
+    mode = "",
+    edit = ""
   }
 }

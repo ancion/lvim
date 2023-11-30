@@ -42,8 +42,10 @@ return {
   mode = {
     "mode",
     fmt = function(str)
-      -- return " -- " .. str .. " -- "
-      return " " .. icons.nvim.mode .. "  "
+      if str == "NORMAL" then
+        return " " .. icons.nvim.mode .. "  "
+      end
+      return " " .. icons.nvim.edit .. "  "
     end,
     padding = { left = 0, right = 0 },
     color = { bg = "none", gui = "bold", fg = colors.blue },
