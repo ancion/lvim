@@ -184,7 +184,7 @@ return {
   platform = {
     "fileformat",
     cond = conditions.hide_in_width,
-    color = { bg = "none", fg = colors.yellow },
+    color = { bg = "none", fg = colors.violet },
   },
   location = {
     "location",
