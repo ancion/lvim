@@ -338,6 +338,7 @@ lvim.plugins = {
     lazy = true,
     after = { "copilot.lua", "nvim-cmp" },
   },
+  { "nvim-neotest/nvim-nio" },
 
   -- function signature for lsp
   {

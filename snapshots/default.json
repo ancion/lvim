@@ -18,10 +18,10 @@
     "commit": "3022dbc"
   },
   "cmp-cmdline": {
-    "commit": "8ee981b"
+    "commit": "d250c63"
   },
   "cmp-nvim-lsp": {
-    "commit": "44b16d1"
+    "commit": "5af77f5"
   },
   "cmp-path": {
     "commit": "91ff86c"
@@ -39,55 +39,55 @@
     "commit": "9637670"
   },
   "lazy.nvim": {
-    "commit": "9658486"
+    "commit": "31ddbea"
   },
   "lir.nvim": {
     "commit": "969e95b"
   },
   "lualine.nvim": {
-    "commit": "2248ef2"
+    "commit": "0a5a668"
   },
   "lunar.nvim": {
     "commit": "08bbc93"
   },
   "mason-lspconfig.nvim": {
-    "commit": "41674c9"
+    "commit": "4450968"
   },
   "mason.nvim": {
-    "commit": "41e75af"
+    "commit": "751b1fc"
   },
   "neodev.nvim": {
-    "commit": "1676d2c"
+    "commit": "ce9a2e8"
   },
   "nlsp-settings.nvim": {
-    "commit": "2a52e79"
+    "commit": "10a4468"
   },
   "none-ls.nvim": {
     "commit": "3a48266"
   },
   "nvim-autopairs": {
-    "commit": "0f04d78"
+    "commit": "4f41e59"
   },
   "nvim-cmp": {
-    "commit": "0b751f6"
+    "commit": "ce16de5"
   },
   "nvim-dap": {
-    "commit": "13ce59d"
+    "commit": "405df1d"
   },
   "nvim-dap-ui": {
-    "commit": "34160a7"
+    "commit": "edfa93f"
   },
   "nvim-lspconfig": {
-    "commit": "fcf153f"
+    "commit": "e25c4cd"
   },
   "nvim-navic": {
     "commit": "8649f69"
   },
   "nvim-tree.lua": {
-    "commit": "05f55c1"
+    "commit": "81eb8d5"
   },
   "nvim-treesitter": {
-    "commit": "1e64838"
+    "commit": "c16f66c"
   },
   "nvim-ts-context-commentstring": {
     "commit": "b8ff464"
@@ -99,7 +99,7 @@
     "commit": "b00dd21"
   },
   "plenary.nvim": {
-    "commit": "55d9fe8"
+    "commit": "8aad439"
   },
   "project.nvim": {
     "commit": "8c6bad7"
@@ -111,13 +111,13 @@
     "commit": "45b26a2"
   },
   "telescope-fzf-native.nvim": {
-    "commit": "6c921ca"
+    "commit": "9ef21b2"
   },
   "telescope.nvim": {
-    "commit": "d909568"
+    "commit": "5a701e9"
   },
   "toggleterm.nvim": {
-    "commit": "6b334b9"
+    "commit": "193786e"
   },
   "tokyonight.nvim": {
     "commit": "f247ee7"
