@@ -2,7 +2,7 @@ return {
   leader = "space",
   reload_config_on_save = true,
   colorscheme = "tokyonight",
-  transparency = false,
+  transparency = true,
   format_on_save = {
     ---@usage boolean: format on save (Default: false)
     enabled = false,

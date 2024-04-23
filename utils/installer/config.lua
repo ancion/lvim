@@ -18,15 +18,15 @@
 lvim.log.level = "warn"
 lvim.format_on_save = {
   enabled = true,
-  pattern = "*.lua",
+  -- pattern = "*.lua",
   timeout = 1000,
 }
 -- lvim.colorscheme = "onedarker"
 -- lvim.colorscheme = "tokyonight"
 -- lvim.colorscheme = "dracula"
 -- lvim.colorscheme = "NeoSolarized"
-lvim.colorscheme = "catppuccin"
--- lvim.colorscheme = "deus"
+-- lvim.colorscheme = "catppuccin"
+lvim.colorscheme = "deus"
 
 lvim.builtin.treesitter.rainbow.enable = true
 
@@ -121,11 +121,16 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 -- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
 -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
--- vim.list_extend(lvim.lsp.override, { "pyright" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
 
 -- ---@usage setup a server -- see: https://www.lunarvim.org/languages/#overriding-the-default-configuration
--- local opts = {} -- check the lspconfig documentation for a list of all possible options
--- require("lvim.lsp.manager").setup("pylsp", opts)
+-- -- check the lspconfig documentation for a list of all possible options
+local opts = {
+  capabilities = {
+    offsetEncoding = "utf-8",
+  },
+}
+require("lvim.lsp.manager").setup("clangd", opts)
 
 -- -- you can set a custom on_attach function that will be used for all the language servers
 -- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
@@ -222,6 +227,14 @@ lvim.plugins = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     },
+  },
+  {
+    "rcarriga/nvim-notify",
+    config = function()
+      require("notify").setup {
+        background_colour = "#000000",
+      }
+    end,
   },
   -- litee family
   {

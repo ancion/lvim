@@ -12,7 +12,7 @@
     "commit": "33eb067"
   },
   "bufferline.nvim": {
-    "commit": "1a33975"
+    "commit": "73540cb"
   },
   "cmp-buffer": {
     "commit": "3022dbc"
@@ -78,7 +78,7 @@
     "commit": "edfa93f"
   },
   "nvim-lspconfig": {
-    "commit": "e25c4cd"
+    "commit": "b3014f2"
   },
   "nvim-navic": {
     "commit": "8649f69"
