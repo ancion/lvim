@@ -147,7 +147,6 @@ require("lvim.lsp.manager").setup("clangd", opts)
 -- ------------------------------------------------------------------------------------------------
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  { command = "black", filetypes = { "python" } },
   { command = "isort", filetypes = { "python" } },
   { command = "stylua", filetypes = { "lua" } },
   { command = "goimports", filetypes = { "go" } },
@@ -171,7 +170,7 @@ formatters.setup {
 
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup {
-  { command = "luacheck", filetypes = { "lua" } },
+  { command = "selene", filetypes = { "lua" } },
   { command = "flake8", filetypes = { "python" } },
   {
     -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
