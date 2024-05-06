@@ -42,7 +42,7 @@
     "commit": "31ddbea"
   },
   "lir.nvim": {
-    "commit": "969e95b"
+    "commit": "7a9d45d"
   },
   "lualine.nvim": {
     "commit": "0a5a668"
@@ -84,7 +84,7 @@
     "commit": "8649f69"
   },
   "nvim-tree.lua": {
-    "commit": "81eb8d5"
+    "commit": "64f61e4"
   },
   "nvim-treesitter": {
     "commit": "c16f66c"
@@ -93,7 +93,7 @@
     "commit": "b8ff464"
   },
   "nvim-web-devicons": {
-    "commit": "5efb8bd"
+    "commit": "475fbcf"
   },
   "onedarker.nvim": {
     "commit": "b00dd21"
@@ -120,7 +120,7 @@
     "commit": "193786e"
   },
   "tokyonight.nvim": {
-    "commit": "f247ee7"
+    "commit": "67afeaf"
   },
   "vim-illuminate": {
     "commit": "3bd2ab6"
