@@ -12,23 +12,23 @@
 if string.match(vim.loop.os_uname().sysname, "Windows") == "Windows" then
   vim.opt.shell = "pwsh.exe -NoLogo"
   vim.opt.shellcmdflag =
-    	"-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
-  vim.cmd([[
+  "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+  vim.cmd [[
 		let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
 		let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
 		set shellquote= shellxquote=
-  ]])
+  ]]
 
   -- Set a compatible clipboard manager
   vim.g.clipboard = {
-	  copy = {
-		  ["+"] = "win32yank.exe -i --crlf",
-		  ["*"] = "win32yank.exe -i --crlf",
-	  },
-	  paste = {
-		  ["+"] = "win32yank.exe -o --lf",
-		  ["*"] = "win32yank.exe -o --lf",
-	  },
+    copy = {
+      ["+"] = "win32yank.exe -i --crlf",
+      ["*"] = "win32yank.exe -i --crlf",
+    },
+    paste = {
+      ["+"] = "win32yank.exe -o --lf",
+      ["*"] = "win32yank.exe -o --lf",
+    },
   }
 end
 
@@ -50,7 +50,7 @@ lvim.format_on_save = {
 -- lvim.colorscheme = "NeoSolarized"
 -- lvim.colorscheme = "catppuccin"
 lvim.colorscheme = "deus"
-
+lvim.transparency = true
 lvim.builtin.treesitter.rainbow.enable = true
 
 -- [[
@@ -170,10 +170,10 @@ require("lvim.lsp.manager").setup("clangd", opts)
 -- ------------------------------------------------------------------------------------------------
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  { command = "isort", filetypes = { "python" } },
-  { command = "stylua", filetypes = { "lua" } },
+  { command = "isort",     filetypes = { "python" } },
+  { command = "stylua",    filetypes = { "lua" } },
   { command = "goimports", filetypes = { "go" } },
-  { command = "gofumpt", filetypes = { "go" } },
+  { command = "gofumpt",   filetypes = { "go" } },
   {
     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
     command = "prettierd",
@@ -237,11 +237,11 @@ lvim.plugins = {
           },
         },
         presets = {
-          bottom_search = false, -- uses a classic bottom cmdline for search
-          command_palette = true, -- position the cmdline and popupmenu together
+          bottom_search = false,        -- uses a classic bottom cmdline for search
+          command_palette = true,       -- position the cmdline and popupmenu together
           long_message_to_split = true, -- long messages will be sent to a split
-          inc_rename = false, -- enables an input dialog for inc_rename.nvim
-          lsp_doc_border = true, -- add a border to hover docs and signature help
+          inc_rename = false,           -- enables an input dialog for inc_rename.nvim
+          lsp_doc_border = true,        -- add a border to hover docs and signature help
         },
       }
     end,
@@ -257,6 +257,12 @@ lvim.plugins = {
         background_colour = "#000000",
       }
     end,
+  },
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    opts = {},
   },
   -- litee family
   {
@@ -320,23 +326,66 @@ lvim.plugins = {
   },
   -- colorPanel
   {
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer").setup({ "css", "scss", "html", "javascript", "vue", "typescript", "react" }, {
-        RGB = true, -- #RGB hex codes
-        RRGGBB = true, -- #RRGGBB hex codes
-        RRGGBBAA = true, -- #RRGGBBAA hex codes
-        rgb_fn = true, -- css rgb() and rgba() functions
-        hsl_fn = true, -- css hsl() and hsla() functions
-        css = true, -- Enable all CSS features : rgb_fn hsl_fn, names, RGB RRRGGBB
-        css_fn = true, -- Enable all CSS *functions*: rgb_fn hsl_fn
-      })
+    "uga-rosa/ccc.nvim",
+    event = { "User AstroFile", "InsertEnter" },
+    cmd = { "CccPick", "CccConvert", "CccHighlighterEnable", "CccHighlighterDisable", "CccHighlighterToggle" },
+    opts = {
+      highlighter = {
+        auto_enable = true,
+        lsp = true,
+      },
+    },
+    config = function(_, opts) -- #4d4dcb
+      require("ccc").setup(opts)
+      if opts.highlighter and opts.highlighter.auto_enable then
+        vim.cmd.CccHighlighterEnable()
+        vim.keymap.set("n", "<M-c>", "<Cmd>CccHighlighterToggle<CR>", { desc = "Toggle colorizer" })
+        vim.keymap.set("n", "<M-m>", "<Cmd>CccConvert<CR>", { desc = "Convert color" })
+        vim.keymap.set("i", "<M-p>", "<Cmd>CccPick<CR>", { desc = "Pick Color" })
+      end
     end,
   },
   {
     "mrjones2014/nvim-ts-rainbow",
     event = "BufRead",
   },
+  {
+    "vhyrro/luarocks.nvim",
+    priority = 1000,
+    config = true,
+  },
+  {
+    "nvim-neorg/neorg",
+    dependencies = { "luarocks.nvim" },
+    version = "*",
+    lazy = false,
+    config = function()
+      require("neorg").setup {
+        load = {
+          ["core.export"] = {
+            config = {
+              filetype = "markdown",
+              directary = "~/codelib/notes/md/",
+            },
+          },
+          ["core.defaults"] = {},
+          ["core.concealer"] = {},
+          ["core.dirman"] = {
+            config = {
+              workspaces = {
+                notes = "~/codelib/notes",
+              },
+              default_workspace = "notes",
+            },
+          },
+        },
+      }
+
+      vim.wo.foldlevel = 99
+      vim.wo.conceallevel = 2
+    end,
+  },
+
   -- todo_comments
   {
     "folke/todo-comments.nvim",
@@ -357,7 +406,7 @@ lvim.plugins = {
     end,
   },
 
-  { "github/copilot.vim", lazy = true },
+  { "github/copilot.vim",   lazy = true },
   {
     "zbirenbaum/copilot.lua",
     lazy = true,
@@ -421,16 +470,16 @@ lvim.plugins = {
 
         ts_fold = {
           enable = false,
-          max_lines_scan_comments = 20, -- only fold when the fold  level higher than this value
+          max_lines_scan_comments = 20,                     -- only fold when the fold  level higher than this value
           disable_filetypes = { "help", "guihua", "text" }, -- list of filetypes which doesn't fold using treesitter
-        }, -- modified version of treesitter folding
+        },                                                  -- modified version of treesitter folding
 
-        default_mapping = true, -- set to false if you will remap every key
+        default_mapping = true,                             -- set to false if you will remap every key
         -- a list of key maps
         -- this kepmap gk will override "gd" mapping function declaration()  in default kepmap
         -- please check mapping.lua for all keymaps
         keymaps = {
-          { key = "M", func = vim.lsp.buf.hover, desc = "hover" },
+          { key = "M",          func = vim.lsp.buf.hover,                           desc = "hover" },
           { key = "<Leader>la", func = require("navigator.codeAction").code_action, desc = "code_action" },
           {
             key = "<Leader>lA",
@@ -438,12 +487,12 @@ lvim.plugins = {
             desc = "range_code_action",
           },
         },
-        treesitter_analysis = true, -- treesitter variable context
-        treesitter_navigation = true, -- bool false: use lsp to navigator between symbol']r/[r'
-        treesitter_analysis_max_num = 100, -- how many items to run treesitter_analysis
+        treesitter_analysis = true,          -- treesitter variable context
+        treesitter_navigation = true,        -- bool false: use lsp to navigator between symbol']r/[r'
+        treesitter_analysis_max_num = 100,   -- how many items to run treesitter_analysis
         treesitter_analysis_condense = true, -- condense form form treesitter_analysis
-        transparency = 70, -- 0 ~ 100 blur the main window, 100: fully transparent, 0: opaque,  set to nil or 100 to disable it
-        lsp_signature_help = true, -- if you would like to hook ray-x/lsp_signature plugin in navigator
+        transparency = 70,                   -- 0 ~ 100 blur the main window, 100: fully transparent, 0: opaque,  set to nil or 100 to disable it
+        lsp_signature_help = true,           -- if you would like to hook ray-x/lsp_signature plugin in navigator
         lsp_signature_cfg = nil,
         mason = true,
       }
