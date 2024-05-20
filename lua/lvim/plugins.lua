@@ -1,6 +1,6 @@
 -- local require = require("lvim.utils.require").require
 local core_plugins = {
-  { "folke/lazy.nvim",                 tag = "stable" },
+  { "folke/lazy.nvim",              tag = "stable" },
   {
     "neovim/nvim-lspconfig",
     lazy = true,
@@ -21,7 +21,7 @@ local core_plugins = {
     dependencies = "mason.nvim",
   },
   { "tamago324/nlsp-settings.nvim", cmd = "LspSettings", lazy = true },
-  { "nvimtools/none-ls.nvim", lazy = true },
+  { "nvimtools/none-ls.nvim",       lazy = true },
   {
     "williamboman/mason.nvim",
     config = function()
@@ -95,8 +95,7 @@ local core_plugins = {
       local utils = require "lvim.utils"
       local paths = {}
       if lvim.builtin.luasnip.sources.friendly_snippets then
-        paths[#paths + 1] = utils.join_paths(get_runtime_dir(), "site", "pack", "lazy", "opt",
-          "friendly-snippets")
+        paths[#paths + 1] = utils.join_paths(get_runtime_dir(), "site", "pack", "lazy", "opt", "friendly-snippets")
       end
       local user_snippets = utils.join_paths(get_config_dir(), "snippets")
       if utils.is_directory(user_snippets) then
@@ -118,7 +117,7 @@ local core_plugins = {
   {
     "rafamadriz/friendly-snippets",
     lazy = true,
-    cond = lvim.builtin.luasnip.sources.friendly_snippets
+    cond = lvim.builtin.luasnip.sources.friendly_snippets,
   },
   {
     "folke/neodev.nvim",
@@ -267,7 +266,7 @@ local core_plugins = {
   {
     "theHamsta/nvim-dap-virtual-text",
     config = function()
-      require("nvim-dap-virtual-text").setup({
+      require("nvim-dap-virtual-text").setup {
         enabled = true, -- enable this plugin (the default)
         -- create commands
         --  > DapVirtualTextEnable,
@@ -287,15 +286,15 @@ local core_plugins = {
         --- @param node userdata tree-sitter node identified as variable definition of reference (see `:h tsnode`)
         --- @return string|nil A text how the virtual text should be displayed or nil, if this variable shouldn't be displayed
         display_callback = function(variable, _buf, _stackframe, _node)
-          return variable.name .. ' = ' .. variable.value
+          return variable.name .. " = " .. variable.value
         end,
         -- experimental features:
-        virt_text_pos = 'eol',  -- position of virtual text, see `:h nvim_buf_set_extmark()`
-        all_frames = false,     -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
-        virt_lines = false,     -- show virtual lines instead of virtual text (will flicker!)
-        virt_text_win_col = nil -- position the virtual text at a fixed window column (starting from the first text column) ,
+        virt_text_pos = "eol",   -- position of virtual text, see `:h nvim_buf_set_extmark()`
+        all_frames = false,      -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
+        virt_lines = false,      -- show virtual lines instead of virtual text (will flicker!)
+        virt_text_win_col = nil, -- position the virtual text at a fixed window column (starting from the first text column) ,
         -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
-      })
+      }
     end,
   },
 
@@ -369,7 +368,6 @@ local core_plugins = {
     enabled = lvim.builtin.illuminate.active,
   },
 
-
   -- indent-blankline
   {
     "lukas-reineke/indent-blankline.nvim",
@@ -412,16 +410,12 @@ local core_plugins = {
     config = function()
       require("lvim.core.spectre").setup()
     end,
-    enabled = lvim.builtin.spectre.active
+    enabled = lvim.builtin.spectre.active,
   },
 
   -- diffview
   {
     "sindrets/diffview.nvim",
-    config = function()
-      require("lvim.core.diffview").setup()
-    end,
-    enabled = lvim.builtin.diffview.active,
   },
 
   -- outline
@@ -430,7 +424,7 @@ local core_plugins = {
     config = function()
       require("lvim.core.aerial").setup()
     end,
-    enabled = lvim.builtin.aerial.active
+    enabled = lvim.builtin.aerial.active,
   },
 }
 

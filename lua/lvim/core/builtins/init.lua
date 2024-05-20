@@ -21,7 +21,6 @@ local builtins = {
   "lvim.core.lualine",
   "lvim.core.alpha",
   "lvim.core.aerial",
-  "lvim.core.diffview",
   "lvim.core.spectre",
   "lvim.core.mason",
 }
