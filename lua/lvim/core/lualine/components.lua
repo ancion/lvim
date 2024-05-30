@@ -200,7 +200,7 @@ return {
 
   spaces = {
     function()
-      local shiftwidth = vim.api.nvim_buf_get_option(0, "shiftwidth")
+      local shiftwidth = vim.api.nvim_get_option_value("shiftwidth", { buf = 0 })
       return lvim.icons.ui.Tab .. " " .. shiftwidth
     end,
     color = { bg = "none" },
