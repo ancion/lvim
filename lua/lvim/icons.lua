@@ -140,7 +140,7 @@ return {
     TriangleShortArrowLeft  = "",
     TriangleShortArrowRight = "",
     TriangleShortArrowUp    = "",
-    Breakpoint              = "🔴",
+    Breakpoint              = "󰊳",
     BugText                 = "",
     ColorPanel              = "",
     MiddleDot               = "·",
